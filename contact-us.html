@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-title-key="meta.titleContact">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Karak Tea</title>
+  <link rel="icon" href="Assests/brand/karak-new.png" type="image/png">
+  <link rel="apple-touch-icon" href="Assests/brand/karak-new.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,600;0,14..32,700;1,14..32,300;1,14..32,500&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-contact">
+
+  <!-- ══════════════ NAV ══════════════ -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <a href="Karak.html#hero" class="nav-logo-link">
+        <img src="Assests/brand/karak-new.png" alt="">
+        <span class="nav-brand-text" data-i18n="hero.brand">Karak Tea</span>
+      </a>
+    </div>
+    <div class="nav-end">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn is-active" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+      </div>
+      <button type="button" class="nav-toggle" id="navToggle" data-i18n-aria="nav.open" aria-expanded="false" aria-controls="navMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu nav-menu--desktop">
+        <ul class="nav-links">
+          <li><a href="Karak.html#hero" data-i18n="nav.home">Home</a></li>
+          <li><a href="Karak.html#story" data-i18n="nav.story">Our Story</a></li>
+          <li><a href="Karak.html#products" data-i18n="nav.products">Products</a></li>
+          <li><a href="Karak.html#flavors" data-i18n="nav.flavors">Flavors</a></li>
+          <li><a href="Karak.html#preparation" data-i18n="nav.preparation">Preparation</a></li>
+          <li><a href="Karak.html#faq" data-i18n="nav.faq">FAQs</a></li>
+          <li><a href="contact-us.html" class="is-active" aria-current="page" data-i18n="nav.contact">Contact us</a></li>
+        </ul>
+        <a href="https://thiafa.com/en/products?tagsIds=48&page=1" data-thiafa-path="/products?tagsIds=48&page=1" class="btn btn-plum nav-cta" data-i18n="nav.cta" target="_blank" rel="noopener noreferrer">Shop Now</a>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" hidden></div>
+  <div class="nav-menu nav-menu--mobile" id="navMenu" aria-hidden="true">
+    <ul class="nav-links">
+      <li><a href="Karak.html#hero" data-i18n="nav.home">Home</a></li>
+      <li><a href="Karak.html#story" data-i18n="nav.story">Our Story</a></li>
+      <li><a href="Karak.html#products" data-i18n="nav.products">Products</a></li>
+      <li><a href="Karak.html#flavors" data-i18n="nav.flavors">Flavors</a></li>
+      <li><a href="Karak.html#preparation" data-i18n="nav.preparation">Preparation</a></li>
+      <li><a href="Karak.html#faq" data-i18n="nav.faq">FAQs</a></li>
+      <li><a href="contact-us.html" class="is-active" aria-current="page" data-i18n="nav.contact">Contact us</a></li>
+    </ul>
+    <a href="https://thiafa.com/en/products?tagsIds=48&page=1" data-thiafa-path="/products?tagsIds=48&page=1" class="btn btn-plum nav-cta" data-i18n="nav.cta" target="_blank" rel="noopener noreferrer">Shop Now</a>
+  </div>
+
+  <main class="contact-page-main">
+    <section class="cta-strip cta-strip--page" id="contact">
+      <div class="contact-page-wrap reveal visible">
+        <header class="contact-page-head">
+          <h2 class="cta-h2" data-i18n="contact.h2">Get in Touch</h2>
+          <p class="contact-lead" data-i18n="contact.lead">We would love to hear from you — orders, partnerships, or questions.</p>
+        </header>
+
+        <section class="contact-form-section" aria-labelledby="contactFormTitle">
+          <h3 id="contactFormTitle" class="contact-block-title" data-i18n="contact.formTitle">Send a message</h3>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="contact-form-panel">
+              <div class="form-row form-row--split">
+                <div class="form-field">
+                  <label for="contactName"><span data-i18n="contact.name">Full name</span> <span class="req" aria-hidden="true">*</span></label>
+                  <input type="text" id="contactName" name="name" autocomplete="name" required data-i18n-placeholder="contact.namePh">
+                </div>
+                <div class="form-field">
+                  <label for="contactEmail"><span data-i18n="contact.email">Email</span> <span class="req" aria-hidden="true">*</span></label>
+                  <input type="email" id="contactEmail" name="email" autocomplete="email" required data-i18n-placeholder="contact.emailPh">
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="contactPhone" data-i18n="contact.phone">Phone</label>
+                <input type="tel" id="contactPhone" name="phone" autocomplete="tel" data-i18n-placeholder="contact.phonePh">
+              </div>
+              <div class="form-field">
+                <label for="contactMessage" data-i18n="contact.message">Your message</label>
+                <textarea id="contactMessage" name="message" rows="4" data-i18n-placeholder="contact.messagePh"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <p class="form-note"><span class="req">*</span> <span data-i18n="contact.requiredNote">Required fields</span></p>
+              <button type="submit" class="contact-submit" data-i18n="contact.submit">Send Message</button>
+              <p class="form-status" id="contactStatus" role="status" aria-live="polite" hidden></p>
+            </div>
+          </form>
+        </section>
+
+        <section class="contact-hq" aria-labelledby="contactHqTitle">
+          <h3 id="contactHqTitle" class="contact-block-title" data-i18n="contact.hqTitle">Headquarters</h3>
+          <p class="contact-hq-location" data-i18n="contact.hqLocation">Kuwait</p>
+          <ul class="contact-hq-list">
+            <li>
+              <a href="tel:+96522204332" class="contact-region-link">
+                <svg class="contact-region-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+                </svg>
+                <span>+965 2220 4332</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@karaktea.com" class="contact-region-link">
+                <svg class="contact-region-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="M3 7l9 6 9-6"/>
+                </svg>
+                <span>info@karaktea.com</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="contact-regions" aria-labelledby="contactRegionsTitle">
+          <h3 id="contactRegionsTitle" class="contact-block-title" data-i18n="contact.regionsTitle">Regional Contacts</h3>
+          <ul class="contact-region-grid">
+            <li class="contact-region-card">
+              <img src="Assests/flags/uk.png" alt="" data-i18n-alt="contact.region.uk" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.uk">United Kingdom</span>
+                <a href="tel:+447766794724" class="contact-region-phone">+44 7766794724</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:sales@alasala.co.uk">sales@alasala.co.uk</a>
+                  <a href="https://alasala.co.uk/" target="_blank" rel="noopener noreferrer">alasala.co.uk</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/jordan.png" alt="" data-i18n-alt="contact.region.canada" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.canada">Canada</span>
+                <a href="tel:+962777665297" class="contact-region-phone">+962 777665297</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:sales@salembrotherscanada.com">sales@salembrotherscanada.com</a>
+                  <a href="https://www.salembrothers.ca/contact-us" target="_blank" rel="noopener noreferrer">salembrothers.ca</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/usa.png" alt="" data-i18n-alt="contact.region.usa" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.usa">United States</span>
+                <a href="tel:+13138880295" class="contact-region-phone">+1 3138880295</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:alazizi@redseaimports.com">alazizi@redseaimports.com</a>
+                  <a href="https://redseaimports.com" target="_blank" rel="noopener noreferrer">redseaimports.com</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/egypt.png" alt="" data-i18n-alt="contact.region.egypt" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.egypt">Egypt</span>
+                <a href="tel:+201119549495" class="contact-region-phone">+20 1119549495</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:alsafwa55.eg@gmail.com">alsafwa55.eg@gmail.com</a>
+                  <a href="https://egy.karaktea.com/" target="_blank" rel="noopener noreferrer">egy.karaktea.com</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/uae.png" alt="" data-i18n-alt="contact.region.uae" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.uae">United Arab Emirates</span>
+                <a href="tel:+971542800666" class="contact-region-phone">+971 542800666</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:aboheesin940@gmail.com">aboheesin940@gmail.com</a>
+                  <a href="https://www.alhayattrading.ae/" target="_blank" rel="noopener noreferrer">alhayattrading.ae</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/bahrain.png" alt="" data-i18n-alt="contact.region.bahrain" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.bahrain">Bahrain</span>
+                <a href="tel:+97332189911" class="contact-region-phone">+973 32189911</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:info@plus965trading.com">info@plus965trading.com</a>
+                  <a href="http://plus965trading.com" target="_blank" rel="noopener noreferrer">plus965trading.com</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/qatar.png" alt="" data-i18n-alt="contact.region.qatar" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.qatar">Qatar</span>
+                <a href="tel:+97450779779" class="contact-region-phone">+974 50779779</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:ahmed.belasi@healthylife.com.qa">ahmed.belasi@healthylife.com.qa</a>
+                  <a href="https://healthylife.com.qa/" target="_blank" rel="noopener noreferrer">healthylife.com.qa</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/jordan2.png" alt="" data-i18n-alt="contact.region.jordan" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.jordan">Jordan</span>
+                <a href="tel:+96264892220" class="contact-region-phone">+962 64892220</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:murad@malayoislands.com">murad@malayoislands.com</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/iraq.png" alt="" data-i18n-alt="contact.region.iraq" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.iraq">Iraq</span>
+                <a href="tel:+9647729994010" class="contact-region-phone">+964 7729994010</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:omar.alkarkhi@alnadir.com">omar.alkarkhi@alnadir.com</a>
+                  <a href="https://www.alnadir.com/" target="_blank" rel="noopener noreferrer">alnadir.com</a>
+                </div>
+              </div>
+            </li>
+            <li class="contact-region-card">
+              <img src="Assests/flags/southafrica.png" alt="" data-i18n-alt="contact.region.southafrica" class="contact-region-flag" width="300" height="202" loading="lazy">
+              <div class="contact-region-body">
+                <span class="contact-region-country" data-i18n="contact.region.southafrica">South Africa</span>
+                <a href="tel:+270118374904" class="contact-region-phone">+27 0118374904</a>
+                <div class="contact-region-meta">
+                  <a href="mailto:mo_gardee@yahoo.com">mo_gardee@yahoo.com</a>
+                  <a href="https://www.karaktea.co.za/order-form" target="_blank" rel="noopener noreferrer">karaktea.co.za</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <img src="Assests/brand/karak-new.png" alt="Karak Tea" class="f-logo">
+        <p class="f-tagline" data-i18n="footer.tagline" data-i18n-html>Authentic Gulf karak tea,<br>crafted for the modern world.</p>
+      </div>
+      <div>
+        <div class="f-col-title" data-i18n="footer.products">Products</div>
+        <ul class="f-list">
+          <li><a href="Karak.html#products" data-i18n="footer.sticks">Individual Sticks</a></li>
+          <li><a href="Karak.html#products" data-i18n="footer.gifts">Gift Boxes</a></li>
+          <li><a href="Karak.html#products" data-i18n="footer.bulk">Bulk Pouches</a></li>
+          <li><a href="Karak.html#vending" data-i18n="footer.vending">Vending Machines</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title" data-i18n="footer.flavors">Flavors</div>
+        <ul class="f-list">
+          <li><a href="Karak.html#flavors" data-i18n="footer.original">Original</a></li>
+          <li><a href="Karak.html#flavors" data-i18n="footer.cardamom">Cardamom</a></li>
+          <li><a href="Karak.html#flavors" data-i18n="footer.saffron">Saffron</a></li>
+          <li><a href="Karak.html#flavors" data-i18n="footer.unsweet">Unsweetened</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title" data-i18n="footer.contact">Contact</div>
+        <ul class="f-list f-list--contact">
+          <li>
+            <a href="tel:+96522204332" class="f-contact-link">
+              <svg class="f-contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+              </svg>
+              <span>+965 2220 4332</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:info@karaktea.com" class="f-contact-link">
+              <svg class="f-contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="M3 7l9 6 9-6"/>
+              </svg>
+              <span>info@karaktea.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="f-copy" data-i18n="footer.copy1">© 2026 Karak Tea · شاي كرك. All rights reserved.</div>
+      <div class="f-copy" data-i18n="footer.copy2">100% Natural · Instant Premix</div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

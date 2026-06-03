@@ -1,234 +1,564 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Welcome to Karak Tea — premium instant karak tea premixes across the Gulf region."
-    />
-    <title>Home - Karak Tea</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  </head>
-  <body id="page" class="page-wrap" data-page="home">
-    <header id="header" class="thisHome">
-      <div class="container header-row">
-        <div class="logo-wrap">
-          <a href="index.html" class="logo">
-            <img
-              src="assets/images/brand/karak-new.png"
-              alt="Karak Tea"
-              data-i18n-alt="logo.alt"
-            />
-          </a>
-          <div class="logo-text">
-            <img
-              src="assets/images/brand/logo-text.png"
-              alt=""
-            />
-          </div>
-        </div>
-        <button type="button" class="hamburger" aria-label="Menu">☰</button>
-        <div class="desktop-nav">
-          <ul class="navbar-nav">
-            <li><a href="index.html" data-nav="home" data-i18n="nav.home">Home</a></li>
-            <li><a href="products.html" data-nav="products" data-i18n="nav.products">Products</a></li>
-            <li>
-              <a href="preparation.html" data-nav="preparation" data-i18n="nav.preparation"
-                >Preparation</a
-              >
-            </li>
-            <li>
-              <a href="vending-machine.html" data-nav="vending" data-i18n="nav.vending"
-                >Vending Machine</a
-              >
-            </li>
-            <li><a href="faqs.html" data-nav="faqs" data-i18n="nav.faqs">FAQs</a></li>
-            <li><a href="contact.html" data-nav="contact" data-i18n="nav.contact">Contact us</a></li>
-          </ul>
-          <ul class="menu-end">
-            <li>
-              <a
-                href="https://thiafa.com/en/"
-                class="btn-default"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n="nav.order"
-                >Order Now</a
-              >
-            </li>
-            <li>
-              <div class="lang-switcher" role="group" aria-label="Language">
-                <button type="button" data-lang="en" class="active" aria-pressed="true">EN</button>
-                <button type="button" data-lang="ar" aria-pressed="false">ع</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
-
-    <div id="menu-overlay" class="menu-overlay" aria-hidden="true">
-      <button type="button" class="closebtn" aria-label="Close">×</button>
-      <div class="overlay-content">
-        <a href="index.html" class="logo">
-          <img src="assets/images/brand/karak-new.png" alt="Karak Tea" />
-        </a>
-        <ul class="overlay-nav">
-          <li><a href="index.html" data-nav="home" data-i18n="nav.home">Home</a></li>
-          <li><a href="products.html" data-nav="products" data-i18n="nav.products">Products</a></li>
-          <li>
-            <a href="preparation.html" data-nav="preparation" data-i18n="nav.preparation"
-              >Preparation</a
-            >
-          </li>
-          <li>
-            <a href="vending-machine.html" data-nav="vending" data-i18n="nav.vending"
-              >Vending Machine</a
-            >
-          </li>
-          <li><a href="faqs.html" data-nav="faqs" data-i18n="nav.faqs">FAQs</a></li>
-          <li><a href="contact.html" data-nav="contact" data-i18n="nav.contact">Contact us</a></li>
-          <li>
-            <a href="https://thiafa.com/en/" target="_blank" rel="noopener noreferrer" data-i18n="nav.order"
-              >Order Now</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <main>
-      <div id="wrap-slider">
-        <ul class="rslides"></ul>
-      </div>
-
-      <section id="wrap-section" class="wrap-section half-background1">
-        <div class="container">
-          <div class="split-row">
-            <div class="split-col split-col-img">
-              <img
-                src="assets/images/home/1.webp"
-                alt="Karak Tea"
-                loading="lazy"
-              />
-            </div>
-            <div class="split-col split-col-text split-col-dark">
-              <h2 class="txt-white" data-i18n="story.title">Karak Tea</h2>
-              <span class="line line-white" aria-hidden="true"></span>
-              <p class="txt-white" data-i18n="story.p1"></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="wrap-section" class="wrap-section half-background2">
-        <div class="container">
-          <div class="split-row split-row--pink">
-            <div class="split-col split-col-text">
-              <h2 class="txt-purple1" data-i18n="product.title">Karak Tea Product</h2>
-              <span class="line" aria-hidden="true"></span>
-              <ul class="checked">
-                <li data-i18n="product.b1"></li>
-                <li data-i18n="product.b2"></li>
-              </ul>
-            </div>
-            <div class="split-col split-col-img">
-              <img
-                data-home-img="section2"
-                src="assets/images/home/2-eng.webp"
-                alt=""
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="wrap-section" class="wrap-section half-background1">
-        <div class="container">
-          <div class="split-row">
-            <div class="split-col split-col-img">
-              <img
-                src="assets/images/home/3.webp"
-                alt=""
-                loading="lazy"
-              />
-            </div>
-            <div class="split-col split-col-text split-col-dark">
-              <h2 class="txt-white" data-i18n="journey.title">Our Journey</h2>
-              <span class="line line-white" aria-hidden="true"></span>
-              <p class="txt-white" data-i18n="journey.p"></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="wrap-section" class="wrap-section half-background2">
-        <div class="container">
-          <div class="split-row split-row--pink">
-            <div class="split-col split-col-text">
-              <h2 class="txt-purple1" data-i18n="about.title">About Us</h2>
-              <span class="line" aria-hidden="true"></span>
-              <ul class="checked">
-                <li data-i18n="about.b1"></li>
-                <li data-i18n="about.b2"></li>
-                <li data-i18n="about.b3"></li>
-              </ul>
-            </div>
-            <div class="split-col split-col-img">
-              <img
-                data-home-img="section4"
-                src="assets/images/home/4-eng.webp"
-                alt=""
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <div class="footer-row footer-row-top">
-          <div class="footer-col footer-col-start">
-            <p class="txt-purple1">
-              <i class="fa fa-mobile fa-normal" aria-hidden="true"></i>
-              <a href="tel:+96522204332">+965 2220 4332</a>
-            </p>
-            <p class="txt-purple1">
-              <i class="fa fa-envelope-o fa-normal" aria-hidden="true"></i>
-              <a href="mailto:info@karaktea.com">info@karaktea.com</a>
-            </p>
-          </div>
-          <div class="footer-col footer-col-center">
-            <h4 class="txt-purple1" data-i18n="footer.hashtag">#ForEveryMoment</h4>
-          </div>
-          <div class="footer-col footer-col-end">
-            <p class="footer-social">
-              <a href="https://www.facebook.com/Karak-Tea-1646050772339040" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
-              <a href="https://www.twitter.com/karakteaom/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
-              <a href="https://www.instagram.com/karakteakw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-              <a href="https://wa.me/96522204332" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a>
-            </p>
-          </div>
-        </div>
-        <div class="footer-row footer-row-bottom">
-          <p class="footer-copy" data-i18n="footer.copyright">© 2026 Karak Tea. All rights reserved.</p>
-          <p class="footer-top">
-            <a href="#page" aria-label="Back to top"><i class="material-icons fa-normal">arrow_upward</i></a>
-          </p>
-        </div>
-      </div>
-    </footer>
-
-    <script src="js/assets.js"></script>
-    <script src="js/i18n.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/slider.js"></script>
-  </body>
-</html>
-
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karak Tea — شاي كرك | Authentic Gulf Tea</title>
+  <link rel="icon" href="Assests/brand/karak-new.png" type="image/png">
+  <link rel="apple-touch-icon" href="Assests/brand/karak-new.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,600;0,14..32,700;1,14..32,300;1,14..32,500&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ══════════════ NAV ══════════════ -->
+  <nav id="nav">
+    <div class="nav-logo">
+      <a href="#hero" class="nav-logo-link">
+        <img src="Assests/brand/karak-new.png" alt="">
+        <span class="nav-brand-text" data-i18n="hero.brand">Karak Tea</span>
+      </a>
+    </div>
+    <div class="nav-end">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" class="lang-btn is-active" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+      </div>
+      <button type="button" class="nav-toggle" id="navToggle" data-i18n-aria="nav.open" aria-expanded="false" aria-controls="navMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu nav-menu--desktop">
+        <ul class="nav-links">
+          <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+          <li><a href="#story" data-i18n="nav.story">Our Story</a></li>
+          <li><a href="#products" data-i18n="nav.products">Products</a></li>
+          <li><a href="#flavors" data-i18n="nav.flavors">Flavors</a></li>
+          <li><a href="#preparation" data-i18n="nav.preparation">Preparation</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">FAQs</a></li>
+          <li><a href="contact-us.html" data-i18n="nav.contact">Contact us</a></li>
+        </ul>
+        <a href="https://thiafa.com/en/products?tagsIds=48&page=1" data-thiafa-path="/products?tagsIds=48&page=1" class="btn btn-plum nav-cta" data-i18n="nav.cta" target="_blank" rel="noopener noreferrer">Shop Now</a>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="navBackdrop" aria-hidden="true" hidden></div>
+  <div class="nav-menu nav-menu--mobile" id="navMenu" aria-hidden="true">
+    <ul class="nav-links">
+      <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+      <li><a href="#story" data-i18n="nav.story">Our Story</a></li>
+      <li><a href="#products" data-i18n="nav.products">Products</a></li>
+      <li><a href="#flavors" data-i18n="nav.flavors">Flavors</a></li>
+      <li><a href="#preparation" data-i18n="nav.preparation">Preparation</a></li>
+      <li><a href="#faq" data-i18n="nav.faq">FAQs</a></li>
+      <li><a href="contact-us.html" data-i18n="nav.contact">Contact us</a></li>
+    </ul>
+    <a href="https://thiafa.com/en/products?tagsIds=48&page=1" data-thiafa-path="/products?tagsIds=48&page=1" class="btn btn-plum nav-cta" data-i18n="nav.cta" target="_blank" rel="noopener noreferrer">Shop Now</a>
+  </div>
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="hero-wrapper" id="hero">
+    <div class="hero-pin">
+
+      <!-- 3-D wrinkled parchment paper -->
+      <div class="paper-bg" aria-hidden="true"></div>
+
+      <!-- Ghost Arabic watermark -->
+      <div class="hero-ghost" aria-hidden="true"><span>شاي كرك</span></div>
+
+      <div class="hero-grid">
+
+        <!-- LEFT: Text steps -->
+        <div class="hero-left">
+          <div class="hero-eyebrow" data-i18n="hero.eyebrow">100% Natural · Instant Premix</div>
+
+          <div class="text-steps">
+            <!-- Step 0 — hero -->
+            <div class="text-step active" data-s="0">
+              <div class="hero-headlines">
+                <div class="hero-ar" data-i18n="hero.brand">شاي كرك</div>
+                <div class="hero-en" data-i18n="hero.en" data-i18n-html>A best selling tea<br>across gulf region</div>
+              </div>
+              <p class="hero-p" data-i18n="hero.p">Aromatic, authentic, and ready in seconds. Karak Tea brings the rich heritage of Gulf chai — with cardamom, saffron, and tradition in every sip.</p>
+              <div class="hero-ctas">
+                <a href="#products" class="btn btn-plum" data-i18n="hero.cta1">Explore Products</a>
+                <a href="#story" class="btn btn-ghost" data-i18n="hero.cta2">Our Story</a>
+              </div>
+            </div>
+
+            <!-- Step 1 — Individual Sticks -->
+            <div class="text-step" data-s="1">
+              <div class="prod-tag" data-i18n="hero.s1.tag">On the Go</div>
+              <div class="prod-name i18n-en">Individual Sticks</div>
+              <div class="prod-ar i18n-ar">أكياس فردية</div>
+              <p class="prod-p" data-i18n="hero.s1.p">Single-serve instant sachets. Pocket-sized, brewed in 60 seconds. The authentic Gulf karak — anywhere, any time.</p>
+              <a href="#products" class="btn btn-plum" data-i18n="hero.s1.cta">Shop Sticks</a>
+            </div>
+
+            <!-- Step 2 — Gift Box -->
+            <div class="text-step" data-s="2">
+              <div class="prod-tag" data-i18n="hero.s2.tag">Gift &amp; Share</div>
+              <div class="prod-name i18n-en">Gift Box · 10 Sticks</div>
+              <div class="prod-ar i18n-ar">علبة هدية · ١٠ أكياس</div>
+              <p class="prod-p" data-i18n="hero.s2.p">A beautifully packaged box of 10 sticks. The perfect Gulf hospitality gift for family, friends, or colleagues.</p>
+              <a href="#products" class="btn btn-plum" data-i18n="hero.s2.cta">Shop Gift Boxes</a>
+            </div>
+
+            <!-- Step 3 — Vending Machine -->
+            <div class="text-step" data-s="3">
+              <div class="prod-tag" data-i18n="hero.s3.tag">For Business</div>
+              <div class="prod-name i18n-en" data-i18n="hero.s3.name">Karak Vending Machine</div>
+              <div class="prod-ar i18n-ar">آلة بيع كرك</div>
+              <p class="prod-p" data-i18n="hero.s3.p">Authentic karak at the touch of a button — for offices, hotels, co-working spaces, and corporate venues across the Gulf.</p>
+              <a href="contact-us.html" class="btn btn-plum" data-i18n="hero.s3.cta">Inquire for Business</a>
+            </div>
+          </div>
+
+          <!-- Progress dots -->
+          <div class="step-dots">
+            <button class="s-dot active" data-s="0" data-i18n-aria="hero.dot0" aria-label="Home"></button>
+            <button class="s-dot" data-s="1" data-i18n-aria="hero.dot1" aria-label="Individual Sticks"></button>
+            <button class="s-dot" data-s="2" data-i18n-aria="hero.dot2" aria-label="Gift Box"></button>
+            <button class="s-dot" data-s="3" data-i18n-aria="hero.dot3" aria-label="Bulk Pouches"></button>
+          </div>
+        </div>
+
+        <!-- RIGHT: 3-D rotating product carousel -->
+        <div class="hero-right">
+          <div class="c-scene">
+            <div class="c-ring" id="cRing">
+              <div class="c-face c-face-0">
+                <img src="Assests/heroImages/1.webp" alt="Karak Tea — aromatic chai with cardamom">
+              </div>
+              <div class="c-face c-face-1">
+                <img src="Assests/heroImages/slide01b.jpg" alt="Individual sticks — on the go">
+              </div>
+              <div class="c-face c-face-2">
+                <img src="Assests/heroImages/2-eng.webp" alt="Gift box 10 sticks">
+              </div>
+              <div class="c-face c-face-3">
+                <img src="Assests/home/3.webp" alt="Karak Tea vending machine">
+              </div>
+            </div>
+          </div>
+          <div class="c-shadow"></div>
+
+          <div class="scroll-hint" id="scrollHint">
+            <p data-i18n="hero.scroll">Scroll to explore</p>
+            <div class="scroll-arrow">↓</div>
+          </div>
+        </div>
+
+      </div><!-- .hero-grid -->
+    </div><!-- .hero-pin -->
+  </section>
+
+  <!-- Divider: parchment → plum-deep (above Our Story) -->
+  <div class="torn torn--jagged torn--section-wave" aria-hidden="true" style="background:var(--parchment)">
+    <svg class="torn__svg--desk" viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" height="70" preserveAspectRatio="none">
+      <path d="M0 70 L0 40 L48 24 L90 44 L132 20 L180 42 L220 14 L268 36 L310 18 L360 40 L400 12 L450 34 L492 18 L542 40 L582 10 L630 32 L672 16 L722 38 L764 20 L812 42 L854 16 L902 38 L944 20 L992 44 L1040 22 L1082 46 L1128 16 L1170 40 L1218 20 L1268 44 L1312 26 L1362 48 L1400 26 L1440 44 L1440 70 Z" fill="var(--plum-deep)"/>
+    </svg>
+    <svg class="torn__svg--mob" viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" height="56" preserveAspectRatio="none">
+      <path d="M0 56 L0 44 L220 6 L400 38 L580 4 L760 36 L940 8 L1120 34 L1300 6 L1440 28 L1440 56 Z" fill="var(--plum-deep)"/>
+    </svg>
+  </div>
+
+  <!-- ════════════ STORY ════════════ -->
+  <section class="story" id="story">
+    <div class="story-inner">
+      <div class="reveal">
+        <div class="story-label" data-i18n="story.label">Our Story · قصتنا</div>
+        <h2 class="story-h2" data-i18n="story.h2" data-i18n-html>A tradition<br><strong>reimagined.</strong></h2>
+        <p class="story-body" data-i18n="story.body">This type of tea is different than any other known conventional teas. Karak is a word that represents the process of repeating the Tea-Boiling process to come up with a strong tea. It is an indian “Urdu” term that was known later on by the people from the Gulf region through intensive business trading with India while Gulf traders journeyed to India to bring various goods. From that time the journey of Karak Tea has begun spreading to the Gulf countries.</p>
+        <p class="story-ar bilingual-secondary">هذا النوع من الشاي يختلف عن أي شاي تقليدي معروف آخر. «كرك» كلمة تمثل عملية تكرار غلي الشاي للحصول على شاي قوي. وهو مصطلح هندي «أوردو» عُرف لاحقاً لدى أهل منطقة الخليج عبر التجارة المكثفة مع الهند، إذ كان تجار الخليج يسافرون إلى الهند لجلب بضائع متنوعة. منذ ذلك الوقت بدأت رحلة شاي كرك في الانتشار إلى دول الخليج.</p>
+        <a href="#products" class="btn btn-cream" data-i18n="story.cta">Discover Our Range</a>
+      </div>
+      <div class="story-img-wrap reveal d2">
+        <img src="Assests/heroImages/slide01b.jpg" alt="Karak Tea — a moment of calm" class="story-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider: plum-deep → parch-mid (below Our Story) -->
+  <div class="torn torn--jagged torn--section-wave" aria-hidden="true" style="background:var(--plum-deep)">
+    <svg class="torn__svg--desk" viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" height="70" preserveAspectRatio="none">
+      <path d="M0 70 L0 36 L52 52 L98 22 L148 44 L196 24 L244 50 L298 16 L346 38 L394 22 L444 46 L492 18 L542 42 L590 26 L640 48 L688 20 L738 44 L788 26 L838 50 L888 22 L938 46 L984 28 L1038 52 L1088 22 L1138 46 L1186 28 L1236 50 L1284 20 L1340 44 L1390 28 L1440 48 L1440 70 Z" fill="var(--parch-mid)"/>
+    </svg>
+    <svg class="torn__svg--mob" viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" height="56" preserveAspectRatio="none">
+      <path d="M0 56 L0 44 L220 6 L400 38 L580 4 L760 36 L940 8 L1120 34 L1300 6 L1440 28 L1440 56 Z" fill="var(--parch-mid)"/>
+    </svg>
+  </div>
+
+  <!-- ════════════ PRODUCTS ════════════ -->
+  <section class="products" id="products">
+    <div class="sec-head reveal">
+      <div class="sec-label" data-i18n="products.label">Our Full Range</div>
+      <h2 class="sec-h2" data-i18n="products.h2" data-i18n-html>A blend for <em>every</em> moment</h2>
+      <div class="sec-ar bilingual-secondary">مزيج لكل لحظة</div>
+    </div>
+
+    <!-- Category filter -->
+    <div class="prod-filter reveal">
+      <button class="pf-btn active" data-cat="all"><span data-i18n="filter.all">All</span> <span class="pf-count">15</span></button>
+      <button class="pf-btn" data-cat="premix"><span data-i18n="filter.premix">Instant Premix</span> <span class="pf-count">9</span></button>
+      <button class="pf-btn" data-cat="bulk"><span data-i18n="filter.bulk">Bulk Packs</span> <span class="pf-count">4</span></button>
+      <button class="pf-btn" data-cat="rtd"><span data-i18n="filter.rtd">Ready-to-Drink</span> <span class="pf-count">1</span></button>
+      <button class="pf-btn" data-cat="capsules"><span data-i18n="filter.capsules">Capsules</span> <span class="pf-count">1</span></button>
+    </div>
+
+    <!-- Editorial mosaic -->
+    <div class="prod-mosaic">
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/cardamom.webp" alt="Cardamom 10 Sticks" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f1">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Cardamom Karak</div>
+          <div class="pm-name-ar i18n-ar">شاي هيل · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d1" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/cinnamon.webp" alt="Cinnamon" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f2">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Cinnamon Karak</div>
+          <div class="pm-name-ar i18n-ar">شاي قرفة · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d2" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/coffee.webp" alt="Coffee" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f3">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Coffee Karak</div>
+          <div class="pm-name-ar i18n-ar">شاي قهوة · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/ginger.webp" alt="Ginger" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f4">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Ginger Karak</div>
+          <div class="pm-name-ar i18n-ar">شاي زنجبيل · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d1" data-cat="bulk">
+        <div class="pm-img-wrap"><img src="Assests/products/cardamom-1kg.webp" alt="Cardamom 1kg" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f5">Bulk Pack · 1kg Pouch</div>
+          <div class="pm-name i18n-en">Cardamom · 1kg</div>
+          <div class="pm-name-ar i18n-ar">هيل · ١ كيلو</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d2" data-cat="capsules">
+        <div class="pm-img-wrap"><img src="Assests/products/gusto-capsules.webp" alt="Capsules" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f6">Capsules · 16 Caps</div>
+          <div class="pm-name i18n-en">Karak Capsules</div>
+          <div class="pm-name-ar i18n-ar">كبسولات كرك · ١٦</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/cardamom-unsweet.webp" alt="Cardamom Unsweetened" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f7">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Cardamom Unsweetened</div>
+          <div class="pm-name-ar i18n-ar">هيل بدون سكر · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d1" data-cat="bulk">
+        <div class="pm-img-wrap"><img src="Assests/products/cardamom-unsweet-500g.webp" alt="Cardamom Unsweet 500g" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f8">Bulk Pack · 500g Pouch</div>
+          <div class="pm-name i18n-en">Cardamom Unsweet · 500g</div>
+          <div class="pm-name-ar i18n-ar">هيل بدون سكر · ٥٠٠ غرام</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d2" data-cat="rtd">
+        <div class="pm-img-wrap"><img src="Assests/products/iced.webp" alt="Iced Karak Tea" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f9">Ready-to-Drink · 200ml</div>
+          <div class="pm-name i18n-en">Iced Karak Tea</div>
+          <div class="pm-name-ar i18n-ar">شاي كرك مثلج · ٢٠٠ مل</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/original.webp" alt="Original Karak 10 Sticks" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f10">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Original Karak</div>
+          <div class="pm-name-ar i18n-ar">كرك سادة · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d1" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/saffron.webp" alt="Saffron Karak 10 Sticks" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f11">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Saffron Karak</div>
+          <div class="pm-name-ar i18n-ar">شاي زعفران · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d2" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/zafran-unsweet.webp" alt="Saffron Unsweetened 10 Sticks" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f12">Instant Premix · 10 Sticks</div>
+          <div class="pm-name i18n-en">Saffron Unsweetened</div>
+          <div class="pm-name-ar i18n-ar">زعفران بدون سكر · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal" data-cat="premix">
+        <div class="pm-img-wrap"><img src="Assests/products/karak-box-10.webp" alt="Karak Tea Gift Box 10 Sticks" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f13">Gift Box · 10 Sticks</div>
+          <div class="pm-name i18n-en">Karak Gift Box</div>
+          <div class="pm-name-ar i18n-ar">علبة هدية كرك · ١٠ أظرف</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d1" data-cat="bulk">
+        <div class="pm-img-wrap"><img src="Assests/products/saffron-1kg.webp" alt="Saffron Karak 1kg" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f14">Bulk Pack · 1kg Pouch</div>
+          <div class="pm-name i18n-en">Saffron · 1kg</div>
+          <div class="pm-name-ar i18n-ar">زعفران · ١ كيلو</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+      <a href="https://thiafa.com/en/products?categoryId=5" data-thiafa-path="/products?categoryId=5" target="_blank" rel="noopener noreferrer" class="pm-card reveal d2" data-cat="bulk">
+        <div class="pm-img-wrap"><img src="Assests/products/saffron-unsweet-500g.webp" alt="Saffron Unsweetened 500g" class="pm-img"></div>
+        <div class="pm-body">
+          <div class="pm-format" data-i18n="pm.f15">Bulk Pack · 500g Pouch</div>
+          <div class="pm-name i18n-en">Saffron Unsweet · 500g</div>
+          <div class="pm-name-ar i18n-ar">زعفران بدون سكر · ٥٠٠ غرام</div>
+          <span class="pm-cta" data-i18n="pm.cta">Shop Now →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ════════════ FLAVORS ════════════ -->
+  <section class="flavors" id="flavors">
+    <div class="sec-head reveal">
+      <div class="sec-label" data-i18n="flavors.label">Explore Varieties</div>
+      <h2 class="sec-h2" data-i18n="flavors.h2" data-i18n-html>Find your <em>blend</em></h2>
+      <div class="sec-ar bilingual-secondary">اختر مزيجك المفضل</div>
+    </div>
+    <div class="flavors-inner">
+      <div class="flavor-tabs" role="tablist">
+        <button class="ftab active" data-fl="original"><span class="fe">Original</span><span class="fa">سادة</span></button>
+        <button class="ftab" data-fl="cardamom"><span class="fe">Cardamom</span><span class="fa">هيل</span></button>
+        <button class="ftab" data-fl="saffron"><span class="fe">Saffron</span><span class="fa">زعفران</span></button>
+        <button class="ftab" data-fl="plain"><span class="fe">Unsweetened</span><span class="fa">بدون سكر</span></button>
+      </div>
+      <div class="flavor-display">
+        <div class="f-img-wrap reveal">
+          <img id="fImg" src="Assests/heroImages/1.webp" alt="Karak Tea flavor" class="f-img">
+          <div class="f-seal"><div class="f-seal-txt" id="fSeal">١٠٠٪<br>طبيعي</div></div>
+        </div>
+        <div class="reveal d2">
+          <div class="f-en" id="fEn">Original</div>
+          <div class="f-ar-title" id="fAr">سادة</div>
+          <p class="f-desc" id="fDesc">The quintessential karak — a warm, full-bodied blend of black tea and creamer. Bold, smooth, and deeply satisfying. The cup that started every morning in the Gulf for generations.</p>
+          <div class="f-badges" id="fBadges">
+            <span class="fbadge">Black Tea</span>
+            <span class="fbadge">Creamy</span>
+            <span class="fbadge">100% Natural</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ PREPARATION ════════════ -->
+  <section class="preparation" id="preparation">
+    <div class="sec-head reveal">
+      <div class="sec-label" data-i18n="prep.label">Preparation</div>
+      <h2 class="sec-h2" data-i18n="prep.h2" data-i18n-html>Simple &amp; <em>easy</em></h2>
+    </div>
+    <div class="prep-inner reveal d1">
+      <div class="prep-media">
+        <figure class="prep-figure prep-figure--visual">
+          <img
+            id="prepImg"
+            src="Assests/preparation/easy-en.webp"
+            alt="How to prepare Karak Tea"
+            class="prep-img"
+            data-i18n-alt="prep.imgAlt"
+            width="1200"
+            height="675"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
+        <figure class="prep-figure prep-figure--video">
+          <div class="prep-video">
+            <iframe
+              id="prepVideo"
+              src="https://www.youtube.com/embed/0DdPepASq1w?rel=0"
+              title="How to prepare Karak Tea"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+          <figcaption class="prep-video-caption" data-i18n="prep.videoCaption">Watch how to prepare</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider: preparation → plum-deep (above For Business) -->
+  <div class="torn torn--jagged torn--section-wave" aria-hidden="true" style="background:var(--parch-mid)">
+    <svg class="torn__svg--desk" viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" height="70" preserveAspectRatio="none">
+      <path d="M0 70 L0 46 L44 28 L88 48 L130 20 L178 44 L220 24 L268 46 L310 16 L356 40 L398 22 L446 46 L490 18 L538 42 L580 26 L626 48 L668 20 L716 44 L758 26 L806 48 L850 18 L896 42 L940 24 L988 46 L1030 28 L1076 50 L1120 20 L1166 44 L1208 26 L1256 48 L1300 28 L1350 52 L1396 30 L1440 50 L1440 70 Z" fill="var(--plum-deep)"/>
+    </svg>
+    <svg class="torn__svg--mob" viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" height="56" preserveAspectRatio="none">
+      <path d="M0 56 L0 44 L220 6 L400 38 L580 4 L760 36 L940 8 L1120 34 L1300 6 L1440 28 L1440 56 Z" fill="var(--plum-deep)"/>
+    </svg>
+  </div>
+
+  <!-- ════════════ VENDING ════════════ -->
+  <section class="vending" id="vending">
+    <div class="vending-inner">
+      <div class="reveal">
+        <img src="Assests/vending/english.webp" alt="Karak Tea vending machine" class="v-img">
+      </div>
+      <div class="reveal d2">
+        <div class="v-label" data-i18n="vending.label">For Business · للأعمال</div>
+        <h2 class="v-h2" data-i18n="vending.h2" data-i18n-html>Karak,<br><strong>wherever you are.</strong></h2>
+        <p class="v-body" data-i18n="vending.body">Bring the authentic Karak experience to offices, hotels, co-working spaces, and corporate events. Our vending machines and bulk supply solutions deliver real karak at scale.</p>
+        <div class="v-ctas">
+          <a href="contact-us.html" class="btn btn-cream" data-i18n="vending.cta1">Inquire for Business</a>
+          <a href="https://thiafa.com/en/products?tagsIds=5" data-thiafa-path="/products?tagsIds=5" class="btn btn-ol" data-i18n="vending.cta2" target="_blank" rel="noopener noreferrer">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ FAQs ════════════ -->
+  <section class="faq" id="faq">
+    <div class="sec-head reveal">
+      <div class="sec-label" data-i18n="faq.label">FAQs</div>
+      <h2 class="sec-h2" data-i18n="faq.h2" data-i18n-html>Questions &amp; <em>answers</em></h2>
+    </div>
+    <div class="faq-list reveal d1">
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q1">Where is your main location?</summary>
+        <div class="faq-a" data-i18n="faq.a1" data-i18n-html>Our headquarters is located in <strong>Kuwait</strong>. For international inquiries or additional information, please contact us at <a href="mailto:info@karaktea.com">info@karaktea.com</a>.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q2">Which countries are you available in?</summary>
+        <div class="faq-a" data-i18n="faq.a2" data-i18n-html>We proudly serve customers in the following regions:</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q3">Where can I find your products and prices?</summary>
+        <div class="faq-a" data-i18n="faq.a3" data-i18n-html>All products and pricing details are available on our official website.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q4">Do you provide delivery inside and outside Kuwait?</summary>
+        <div class="faq-a" data-i18n="faq.a4" data-i18n-html>Yes. We offer delivery services within Kuwait and international shipping to the countries listed above.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q5">How long does delivery and shipping takes?</summary>
+        <div class="faq-a" data-i18n="faq.a5" data-i18n-html>Kuwait delivery and international shipping information.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q6">What are your products?</summary>
+        <div class="faq-a" data-i18n="faq.a6" data-i18n-html>You can explore all available products in the <a href="#products">Products</a> section.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q" data-i18n="faq.q7">What is the best way to prepare your products?</summary>
+        <div class="faq-a" data-i18n="faq.a7" data-i18n-html>You can find the best preparation methods in the <a href="#preparation">Preparation</a> section.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <img src="Assests/brand/karak-new.png" alt="Karak Tea" class="f-logo">
+        <p class="f-tagline" data-i18n="footer.tagline" data-i18n-html>Authentic Gulf karak tea,<br>crafted for the modern world.</p>
+      </div>
+      <div>
+        <div class="f-col-title" data-i18n="footer.products">Products</div>
+        <ul class="f-list">
+          <li><a href="#products" data-i18n="footer.sticks">Individual Sticks</a></li>
+          <li><a href="#products" data-i18n="footer.gifts">Gift Boxes</a></li>
+          <li><a href="#products" data-i18n="footer.bulk">Bulk Pouches</a></li>
+          <li><a href="#vending" data-i18n="footer.vending">Vending Machines</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title" data-i18n="footer.flavors">Flavors</div>
+        <ul class="f-list">
+          <li><a href="#flavors" data-i18n="footer.original">Original</a></li>
+          <li><a href="#flavors" data-i18n="footer.cardamom">Cardamom</a></li>
+          <li><a href="#flavors" data-i18n="footer.saffron">Saffron</a></li>
+          <li><a href="#flavors" data-i18n="footer.unsweet">Unsweetened</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title" data-i18n="footer.contact">Contact</div>
+        <ul class="f-list f-list--contact">
+          <li>
+            <a href="tel:+96522204332" class="f-contact-link">
+              <svg class="f-contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>
+              </svg>
+              <span>+965 2220 4332</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:info@karaktea.com" class="f-contact-link">
+              <svg class="f-contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="M3 7l9 6 9-6"/>
+              </svg>
+              <span>info@karaktea.com</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="f-copy" data-i18n="footer.copy1">© 2026 Karak Tea · شاي كرك. All rights reserved.</div>
+      <div class="f-copy" data-i18n="footer.copy2">100% Natural · Instant Premix</div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
