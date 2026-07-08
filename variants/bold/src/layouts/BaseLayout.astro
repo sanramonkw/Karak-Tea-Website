@@ -1,0 +1,157 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'en' | 'ar';
+  /** path of this page, e.g. "/products/" */
+  path: string;
+  /** path of the same page in the other language (for hreflang), if any */
+  alternatePath?: string;
+  ogImage?: string;
+  /** extra JSON-LD blocks (already-serializable objects) */
+  jsonLd?: object[];
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  path,
+  alternatePath,
+  ogImage = '/images/branding/Karak_New.png',
+  jsonLd = [],
+} = Astro.props;
+
+const dir = lang === 'ar' ? 'rtl' : 'ltr';
+const canonical = new URL(path, SITE.url).href;
+const ogImageAbs = new URL(ogImage, SITE.url).href;
+const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
+const orderLabel = lang === 'ar' ? 'اطلب الان' : 'Order Now';
+const orderHref = lang === 'ar' ? SITE.shop.ar : SITE.shop.en;
+const skipLabel = lang === 'ar' ? 'تخطى إلى المحتوى' : 'Skip to content';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#organization`,
+  name: 'Karak Tea',
+  alternateName: 'شاي كرك',
+  url: `${SITE.url}/`,
+  logo: {
+    '@type': 'ImageObject',
+    url: new URL('/images/branding/Karak_New.png', SITE.url).href,
+  },
+  email: SITE.email,
+  telephone: SITE.phoneDisplay,
+  address: { '@type': 'PostalAddress', addressCountry: 'KW' },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: SITE.phoneDisplay,
+    email: SITE.email,
+    contactType: 'customer service',
+    availableLanguage: ['en', 'ar'],
+  },
+  sameAs: [
+    SITE.social.facebook,
+    SITE.social.twitter,
+    SITE.social.instagram,
+  ],
+  brand: { '@type': 'Brand', name: 'Karak Tea' },
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'San Ramon General Trading',
+    url: 'https://sanramonkw.com/en/',
+  },
+};
+---
+
+<!doctype html>
+<html lang={lang} dir={dir} class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+
+    {/* hreflang alternates */}
+    <link rel="alternate" href={canonical} hreflang={lang} />
+    {alternatePath && (
+      <link
+        rel="alternate"
+        href={new URL(alternatePath, SITE.url).href}
+        hreflang={lang === 'en' ? 'ar' : 'en'}
+      />
+    )}
+
+    {/* Open Graph */}
+    <meta property="og:locale" content={lang === 'ar' ? 'ar_AR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'ar' ? 'en_US' : 'ar_AR'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={ogImageAbs} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    {jsonLd.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{skipLabel}</a>
+    <Header lang={lang} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    {/* sticky bold CTA — same destination as the nav "Order Now" link */}
+    <a
+      href={orderHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="sticky-cta"
+    >
+      {orderLabel}
+    </a>
+
+    {/* scroll-triggered reveals: tiny IntersectionObserver, reduced-motion safe */}
+    <script>
+      const els = document.querySelectorAll('[data-reveal]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -36px 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

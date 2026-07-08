@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="page-hero-luxe">
+  <div class="leaf-veil text-champagne" data-parallax aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-[1280px] px-5 md:px-10">
+    <span class="eyebrow mb-5 text-champagne" aria-hidden="true"></span>
+    <h1 class="display">{title}</h1>
+    <hr class="rule-luxe mt-10" />
+  </div>
+</section>

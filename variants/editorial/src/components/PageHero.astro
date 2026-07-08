@@ -1,0 +1,14 @@
+---
+/** Editorial page opener: accent rule + oversized quiet headline, start-aligned. */
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section class="page-opener">
+  <div class="mx-auto max-w-[1360px] px-5 md:px-10">
+    <span class="rule-accent" aria-hidden="true"></span>
+    <h1>{title}</h1>
+  </div>
+</section>

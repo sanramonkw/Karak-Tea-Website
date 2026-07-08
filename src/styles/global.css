@@ -1,0 +1,446 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Karak Tea brand fonts — self-hosted, pulled from the original WordPress
+   theme (wp-content/themes/karaktea/fonts/).
+   Original theme font stack:
+     headings  -> 'Font-Bold'    = Bahij Janna Bold
+     medium    -> 'Font-Medium'  = Bahij Janna Regular
+     body      -> 'Font-Regular' = Helvetica Arabic
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Helvetica Arabic";
+  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
+   Design tokens — REAL values extracted from the original theme style.css
+--------------------------------------------------------------------------- */
+@theme {
+  /* brand purples (txt-purple1/2/3 in the WP theme) */
+  --color-brand: #96358e;
+  --color-brand-deep: #b91877;
+  --color-brand-light: #e7b2d6;
+  --color-brand-pale: #deb8d7;
+  /* slider overlay tint: rgba(141,50,121,…) */
+  --color-brand-overlay: #8d3279;
+  /* accent red used by .theme-red gradient */
+  --color-accent: #be1622;
+  --color-accent-bright: #ff0033;
+  /* neutrals from the theme */
+  --color-ink: #2e3131;
+  --color-body: #000000;
+  --color-muted: #404040;
+  --color-hairline: #f2f2f2;
+  --color-card-border: #eeeeee;
+
+  --font-heading: "Bahij Janna", "Helvetica Arabic", sans-serif;
+  --font-body: "Helvetica Arabic", Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Base — kept in @layer base so Tailwind utilities (text-white, text-brand…)
+   can override these defaults (unlayered CSS would always win otherwise).
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--color-body);
+    background: #fff;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Header shrink on scroll (port of the WP "#header.shrinked" behavior,
+   toggled by Header.astro's scroll listener at scrollY > 25)
+--------------------------------------------------------------------------- */
+#site-header .logo-main,
+#site-header .logo-text {
+  transition: 0.3s;
+}
+#site-header.shrinked {
+  background: rgb(255 255 255 / 0.97);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#site-header.shrinked .logo-main {
+  width: 70px;
+  margin: 10px 0;
+}
+#site-header.shrinked .logo-text {
+  width: 80px;
+  margin-top: 26px;
+}
+
+/* ---------------------------------------------------------------------------
+   Recurring patterns ported from the WP theme
+--------------------------------------------------------------------------- */
+
+/* .btn-default in the original theme */
+.btn-brand {
+  display: inline-block;
+  border: 1px solid var(--color-brand);
+  background: var(--color-brand);
+  color: #fff;
+  padding: 18px 40px;
+  font-size: 18px;
+  text-align: center;
+  transition: 0.3s;
+}
+.btn-brand:hover,
+.btn-brand:focus {
+  background: #fff;
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+/* .btn-white variant used on the hero slider */
+.btn-brand.btn-outline-white {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+.btn-brand.btn-outline-white:hover {
+  background: #fff;
+  color: var(--color-brand);
+}
+/* ".mobile-only .btn-white" variant — purple outline on the mobile hero block */
+.btn-brand.btn-outline-brand {
+  background: transparent;
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+  padding: 15px 30px;
+}
+.btn-brand.btn-outline-brand:hover {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* #wrap-section.half-background1 — leaves pattern over purple/white split */
+.half-bg-1 {
+  background:
+    url("/images/branding/leaves-pattern.png") repeat,
+    linear-gradient(to left, var(--color-brand) 50%, #fff 50%);
+  background-position: center;
+}
+/* #wrap-section.half-background2 — leaves pattern over white/light-purple split */
+.half-bg-2 {
+  background:
+    url("/images/branding/leaves-pattern.png") repeat,
+    linear-gradient(to left, #fff 50%, var(--color-brand-light) 50%);
+  background-position: center;
+  color: #282828;
+}
+[dir="rtl"] .half-bg-1 {
+  background:
+    url("/images/branding/leaves-pattern.png") repeat,
+    linear-gradient(to right, var(--color-brand) 50%, #fff 50%);
+}
+[dir="rtl"] .half-bg-2 {
+  background:
+    url("/images/branding/leaves-pattern.png") repeat,
+    linear-gradient(to right, #fff 50%, var(--color-brand-light) 50%);
+}
+
+/* ".line.line-white" divider (#wrap-section .line in the theme) */
+.brand-line {
+  display: inline-block;
+  height: 4px;
+  background: #fff;
+  width: 100px;
+  margin: 15px 0 20px;
+  border-radius: 10px;
+}
+
+/* ul.checked — check bullet list (check.png / check-white.png from theme) */
+.checked-list {
+  list-style: none;
+  padding: 0;
+}
+.checked-list li {
+  background: url("/images/branding/check-white.png") no-repeat left 5px;
+  background-size: 24px;
+  line-height: 25px;
+  padding-left: 40px;
+  margin-bottom: 20px;
+}
+[dir="rtl"] .checked-list li {
+  background-position: right 5px;
+  padding-left: 0;
+  padding-right: 40px;
+}
+
+/* #wrap-pagehero — inner page hero with leaves pattern bottom-left */
+.page-hero {
+  padding-top: 140px;
+  padding-bottom: 20px;
+  background: url("/images/branding/leaves-pattern.png") no-repeat left bottom #fcfcfc;
+}
+.page-hero h1 {
+  font-size: 48px;
+  color: var(--color-brand);
+  margin: 0;
+  padding: 20px 0;
+}
+
+/* .panel-service — product card */
+.card-product {
+  display: block;
+  border: 1px solid var(--color-card-border);
+  padding: 15px;
+  margin-bottom: 30px;
+  background: transparent;
+  transition: 0.4s;
+}
+.card-product:hover {
+  background: var(--color-brand-pale);
+  border-color: var(--color-brand-pale);
+  transform: scale(1.05);
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
+}
+.card-product h2,
+.card-product h3 {
+  color: var(--color-brand);
+  font-size: 1.2em;
+  padding-bottom: 40px;
+  margin: 0;
+  text-align: center;
+}
+.card-product:hover h2,
+.card-product:hover h3 {
+  color: #000;
+}
+
+/* .panel-location — distributor card on Contact page */
+.card-location {
+  border: 1px solid var(--color-card-border);
+  padding: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+  transition: 0.4s;
+}
+.card-location img {
+  width: 100%;
+  height: auto;
+  margin: 0 0 30px;
+}
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand);
+  background: #eee;
+  border: 1px solid #eee;
+  border-radius: 100%;
+  width: 36px;
+  height: 36px;
+  transition: 0.3s;
+}
+.icon-circle:hover {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+.icon-circle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* footer icon circles (larger, white bg) */
+.icon-circle-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand);
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 0.2);
+  border-radius: 100%;
+  width: 42px;
+  height: 42px;
+  transition: 0.3s;
+}
+.icon-circle-lg:hover {
+  color: #fff;
+  border-color: var(--color-brand);
+  background: var(--color-brand);
+}
+.icon-circle-lg svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* FAQ accordion (details/summary port of the .accordion/.panel-faq pattern) */
+.faq details {
+  border-bottom: 1px solid var(--color-hairline);
+}
+.faq summary {
+  cursor: pointer;
+  padding: 18px;
+  font-weight: 600;
+  list-style: none;
+  transition: 0.4s;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "+";
+  float: right;
+  color: var(--color-brand);
+  font-weight: 700;
+}
+[dir="rtl"] .faq summary::after {
+  float: left;
+}
+.faq details[open] summary::after {
+  content: "\2212";
+}
+.faq summary:hover,
+.faq details[open] summary {
+  background-color: #eee;
+}
+.faq .faq-answer {
+  padding: 12px 18px 18px;
+  background: #fff;
+}
+.faq .faq-answer a {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
+
+/* contact form — ported from the CF7 styling */
+.contact-form input,
+.contact-form textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #000;
+  padding: 15px 0;
+  width: 100%;
+  color: #000;
+  border-radius: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #000;
+  opacity: 1;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  color: var(--color-brand);
+  border-bottom-color: var(--color-brand);
+}
+.contact-form button[type="submit"] {
+  border: 1px solid var(--color-brand);
+  background: var(--color-brand);
+  color: #fff;
+  width: 100%;
+  padding: 18px 40px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contact-form button[type="submit"]:hover {
+  background: #fff;
+  color: var(--color-brand);
+}
+
+/* hero slider (#wrap-slider: margin-top -30px tucks it under the fixed header) */
+.hero-slider {
+  position: relative;
+  min-height: 860px;
+  overflow: hidden;
+  background: #999;
+  margin-top: -30px;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.hero-slide.is-active {
+  opacity: 1;
+}
+.hero-slide .slide-content {
+  margin-top: 360px;
+  padding: 20px;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(141 50 121 / 0.7),
+    rgb(141 50 121 / 0.9)
+  );
+  border-radius: 2px;
+  color: #fff;
+}
+.hero-slide .slide-content h1 {
+  color: #fff;
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+/* slider CTA is bold in the theme (.rslides .slider-cont .btn-default) */
+.hero-slide .slide-content .btn-brand {
+  font-weight: 700;
+}
+/* .rslides_tabs — dots sit ~70px above the slider bottom edge */
+.hero-pager {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+.hero-pager button {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  background: #222;
+  border: 0;
+  cursor: pointer;
+}
+.hero-pager button.is-active {
+  background: var(--color-brand-deep);
+}
+@media (max-width: 767px) {
+  .hero-slider {
+    min-height: 420px;
+  }
+  .hero-slide .slide-content {
+    display: none;
+  }
+}

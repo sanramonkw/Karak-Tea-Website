@@ -1,0 +1,78 @@
+---
+/**
+ * Home hero slider — port of the WP responsiveSlides carousel.
+ * Same three background photos, same copy on each slide.
+ */
+interface Slide {
+  image: string;
+  title: string;
+  text: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+interface Props {
+  slides: Slide[];
+}
+const { slides } = Astro.props;
+---
+
+<section class="hero-slider" aria-label={slides[0]?.title}>
+  {slides.map((slide, i) => (
+    <div
+      class:list={['hero-slide', { 'is-active': i === 0 }]}
+      style={`background-image: url('${slide.image}');`}
+    >
+      <div class="mx-auto flex h-full max-w-7xl px-4">
+        <div class="slide-content w-full self-start md:w-1/2">
+          {i === 0 ? <h1>{slide.title}</h1> : <p class="font-[family-name:var(--font-heading)] text-[40px] font-bold leading-tight">{slide.title}</p>}
+          <p class="mb-5">{slide.text}</p>
+          <p>
+            <a class="btn-brand btn-outline-white" href={slide.ctaHref} target="_blank" rel="noopener noreferrer">
+              {slide.ctaLabel}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  ))}
+  <div class="hero-pager" role="tablist" aria-label="Slides">
+    {slides.map((_, i) => (
+      <button type="button" data-slide={i} class:list={[{ 'is-active': i === 0 }]} aria-label={`Slide ${i + 1}`} />
+    ))}
+  </div>
+</section>
+
+<!-- Mobile: slider copy shown as a plain section (matches the original .mobile-only block) -->
+<section class="mx-auto max-w-7xl px-[30px] py-10 md:hidden">
+  <h2 class="mb-3 text-[30px] text-brand">{slides[0]?.title}</h2>
+  <p class="mb-5">{slides[0]?.text}</p>
+  <p>
+    <a class="btn-brand btn-outline-brand" href={slides[0]?.ctaHref} target="_blank" rel="noopener noreferrer">
+      {slides[0]?.ctaLabel}
+    </a>
+  </p>
+</section>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.hero-pager button'));
+  let index = 0;
+  let timer: ReturnType<typeof setInterval> | undefined;
+
+  function show(i: number) {
+    index = i % slides.length;
+    slides.forEach((s, j) => s.classList.toggle('is-active', j === index));
+    dots.forEach((d, j) => d.classList.toggle('is-active', j === index));
+  }
+  function start() {
+    timer = setInterval(() => show(index + 1), 3600);
+  }
+  dots.forEach((d, i) =>
+    d.addEventListener('click', () => {
+      if (timer) clearInterval(timer);
+      show(i);
+      start();
+    }),
+  );
+  if (slides.length > 1) start();
+</script>

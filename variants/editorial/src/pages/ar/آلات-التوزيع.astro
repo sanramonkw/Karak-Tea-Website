@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/site';
+---
+
+<BaseLayout
+  title="آلات التوزيع - شاي كرك"
+  description="آلات توزيع شاي كرك — قدّم شاي كرك الأصيل في أي مكان. تصفح واطلب آلات التوزيع وعبوات إعادة التعبئة."
+  lang="ar"
+  path="/ar/آلات-التوزيع/"
+  alternatePath="/vending-machine/"
+>
+  <div id="top"></div>
+  <PageHero title="آلات التوزيع" />
+
+  <section class="py-14 md:py-20">
+    <div class="mx-auto max-w-4xl px-5 md:px-10">
+      <a href={SITE.shop.vendingTagAr} target="_blank" rel="noopener noreferrer" class="plate">
+        <img
+          src="/images/Arabic-scaled.webp"
+          alt="آلة توزيع شاي كرك"
+          width="960"
+          height="774"
+          class="w-full"
+        />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

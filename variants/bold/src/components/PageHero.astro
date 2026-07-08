@@ -1,0 +1,21 @@
+---
+/**
+ * Inner-page hero — full-bleed electric gradient banner with oversized
+ * display type and the brand leaves pattern as a quiet texture veil.
+ */
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const isAr = Astro.url.pathname.startsWith('/ar');
+const hashtag = isAr ? SITE.hashtagAr : SITE.hashtagEn;
+---
+
+<section class="page-hero mesh-dark cut-bottom leaves-veil">
+  <div class="mx-auto max-w-7xl px-5">
+    <p class="hero-tag mb-3">{hashtag}</p>
+    <h1>{title}</h1>
+  </div>
+</section>

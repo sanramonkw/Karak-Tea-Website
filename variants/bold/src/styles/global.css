@@ -1,0 +1,969 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   KARAK TEA — "ELECTRIC KARAK" bold-innovation variant.
+   Brand fonts (self-hosted, from the original WordPress theme) are unchanged:
+     headings -> Bahij Janna Bold   body -> Helvetica Arabic
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Helvetica Arabic";
+  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
+   Design tokens — brand palette preserved (#96358e / #b91877 / #e7b2d6),
+   extended with complementary deep-plum + cream shades for the bold variant.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-brand: #96358e;
+  --color-brand-deep: #b91877;
+  --color-brand-light: #e7b2d6;
+  --color-brand-pale: #deb8d7;
+  --color-brand-overlay: #8d3279;
+  --color-accent: #be1622;
+  --color-accent-bright: #ff0033;
+  /* variant shades (derived from the brand purples) */
+  --color-plum: #2a0b28;        /* near-black plum — dark fields, footer   */
+  --color-plum-soft: #45123f;   /* raised surfaces on plum                 */
+  --color-cream: #fdf7fb;       /* warm paper tint for light sections      */
+  --color-ink: #2e3131;
+  --color-body: #1c0e1b;
+  --color-muted: #404040;
+  --color-hairline: #f2e4ef;
+  --color-card-border: #eeeeee;
+
+  --font-heading: "Bahij Janna", "Helvetica Arabic", sans-serif;
+  --font-body: "Helvetica Arabic", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-body);
+    background: #fff;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.15;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand-deep);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Gradient fields — the variant's signature surfaces
+--------------------------------------------------------------------------- */
+/* deep electric mesh: plum base with purple/magenta glows */
+.mesh-dark {
+  background:
+    radial-gradient(52rem 32rem at 82% -12%, rgb(185 24 119 / 0.55), transparent 62%),
+    radial-gradient(44rem 30rem at -8% 34%, rgb(150 53 142 / 0.65), transparent 60%),
+    radial-gradient(36rem 26rem at 58% 118%, rgb(231 178 214 / 0.28), transparent 58%),
+    linear-gradient(160deg, #3b1038 0%, var(--color-plum) 55%, #1d071c 100%);
+  color: #fff;
+}
+/* light mesh: cream base with pale brand tints */
+.mesh-light {
+  background:
+    radial-gradient(42rem 26rem at 110% 8%, rgb(231 178 214 / 0.4), transparent 60%),
+    radial-gradient(38rem 26rem at -12% 92%, rgb(150 53 142 / 0.12), transparent 55%),
+    var(--color-cream);
+}
+/* tiled leaves pattern from the brand kit, used as a quiet texture layer */
+.leaves-veil {
+  position: relative;
+}
+.leaves-veil::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/images/branding/leaves-pattern.png") repeat center;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.leaves-veil > * {
+  position: relative;
+}
+
+/* diagonal section edges */
+.cut-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - clamp(2rem, 5vw, 4.5rem)), 0 100%);
+}
+.cut-both {
+  clip-path: polygon(0 clamp(2rem, 5vw, 4.5rem), 100% 0, 100% calc(100% - clamp(2rem, 5vw, 4.5rem)), 0 100%);
+}
+
+/* gradient display text */
+.text-electric {
+  background: linear-gradient(100deg, var(--color-brand) 10%, var(--color-brand-deep) 55%, var(--color-brand) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-electric-bright {
+  background: linear-gradient(100deg, var(--color-brand-light) 0%, #fff 45%, var(--color-brand-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* hollow outline display type (watermarks, giant hashtag) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(231 178 214 / 0.55);
+}
+/* stronger outline on light backgrounds (marquee band) */
+.hashtag-band .text-outline {
+  -webkit-text-stroke: 2px rgb(150 53 142 / 0.45);
+}
+
+.display-hero {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 9.5vw, 8.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.display-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+--------------------------------------------------------------------------- */
+.btn-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 1rem 2.4rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  background: linear-gradient(115deg, var(--color-brand) 0%, var(--color-brand-deep) 100%);
+  background-size: 160% 100%;
+  background-position: 0% 0%;
+  box-shadow: 0 10px 30px rgb(185 24 119 / 0.35);
+  border: 0;
+  cursor: pointer;
+  transition: background-position 0.35s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-glow:hover,
+.btn-glow:focus-visible {
+  background-position: 100% 0%;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgb(185 24 119 / 0.5);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.95rem 2.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  background: transparent;
+  border: 2px solid rgb(255 255 255 / 0.65);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: #fff;
+  color: var(--color-brand);
+  transform: translateY(-2px);
+}
+.btn-ghost.btn-ghost-brand {
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.btn-ghost.btn-ghost-brand:hover,
+.btn-ghost.btn-ghost-brand:focus-visible {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* sticky bold CTA (all pages) */
+.sticky-cta {
+  position: fixed;
+  inset-block-end: 1.25rem;
+  inset-inline-end: 1.25rem;
+  z-index: 45;
+  border-radius: 999px;
+  padding: 0.85rem 1.7rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(115deg, var(--color-brand-deep), var(--color-brand));
+  box-shadow: 0 12px 32px rgb(42 11 40 / 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.sticky-cta:hover,
+.sticky-cta:focus-visible {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 16px 40px rgb(42 11 40 / 0.55);
+}
+
+/* ---------------------------------------------------------------------------
+   Header — floating glass pill nav
+--------------------------------------------------------------------------- */
+#site-header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 50;
+  padding: 0.75rem 1rem;
+}
+#site-header .header-shell {
+  margin-inline: auto;
+  max-width: 80rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  background: rgb(255 255 255 / 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgb(150 53 142 / 0.16);
+  box-shadow: 0 8px 30px rgb(42 11 40 / 0.12);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+#site-header.scrolled .header-shell {
+  background: rgb(255 255 255 / 0.97);
+  box-shadow: 0 12px 34px rgb(42 11 40 / 0.2);
+}
+.nav-link {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-plum);
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.nav-link:hover {
+  color: var(--color-brand-deep);
+  background: rgb(231 178 214 / 0.3);
+}
+.nav-link[aria-current="page"] {
+  color: #fff;
+  background: linear-gradient(115deg, var(--color-brand), var(--color-brand-deep));
+}
+.nav-order {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(115deg, var(--color-brand), var(--color-brand-deep));
+  background-size: 160% 100%;
+  border-radius: 999px;
+  padding: 0.55rem 1.3rem;
+  box-shadow: 0 6px 18px rgb(185 24 119 / 0.35);
+  transition: background-position 0.3s ease, transform 0.2s ease;
+}
+.nav-order:hover,
+.nav-order:focus-visible {
+  background-position: 100% 0%;
+  transform: translateY(-1px);
+}
+
+/* mobile overlay */
+#mobile-nav a {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+#mobile-nav a:hover {
+  transform: translateX(4px);
+}
+[dir="rtl"] #mobile-nav a:hover {
+  transform: translateX(-4px);
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveals — transform/opacity only, disabled for reduced motion.
+   BaseLayout's IntersectionObserver adds .is-in.
+--------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+[data-reveal="left"] {
+  transform: translateX(-34px);
+}
+[data-reveal="right"] {
+  transform: translateX(34px);
+}
+[data-reveal="zoom"] {
+  transform: scale(0.92);
+}
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+/* no-JS safety: without the observer script, keep everything visible */
+html.no-js [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero — gradient field + oversized type + crossfading photo deck
+--------------------------------------------------------------------------- */
+.hero-field {
+  position: relative;
+  overflow: hidden;
+}
+.hero-watermark {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: clamp(0.5rem, 3vw, 2.5rem);
+  width: 100%;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(3rem, 11vw, 9rem);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.55;
+}
+.hero-deck {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 620px;
+  width: 100%;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgb(0 0 0 / 0.45);
+  transform: rotate(2.5deg);
+}
+[dir="rtl"] .hero-deck {
+  transform: rotate(-2.5deg);
+}
+.hero-deck::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  pointer-events: none;
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.hero-slide.is-active {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: none;
+  }
+}
+.hero-cta-slot .hero-cta {
+  display: none;
+}
+.hero-cta-slot .hero-cta.is-active {
+  display: inline-flex;
+}
+.hero-pager {
+  display: flex;
+  gap: 0.5rem;
+}
+.hero-pager button {
+  width: 2.4rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  background: rgb(255 255 255 / 0.3);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.hero-pager button:hover {
+  background: rgb(255 255 255 / 0.55);
+}
+.hero-pager button.is-active {
+  background: linear-gradient(90deg, var(--color-brand-light), #fff);
+  transform: scaleY(1.4);
+}
+
+/* ---------------------------------------------------------------------------
+   Hashtag marquee band — transform-only, paused under reduced motion
+--------------------------------------------------------------------------- */
+.hashtag-band {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hashtag-track {
+  display: inline-flex;
+  gap: 3rem;
+  padding-inline-end: 3rem;
+  animation: hashtag-scroll 26s linear infinite;
+  will-change: transform;
+}
+@keyframes hashtag-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+[dir="rtl"] .hashtag-track {
+  animation-name: hashtag-scroll-rtl;
+}
+@keyframes hashtag-scroll-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hashtag-track {
+    animation: none;
+  }
+}
+.hashtag-band span {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  line-height: 1.2;
+}
+
+/* ---------------------------------------------------------------------------
+   Story sections (home) — asymmetric, overlapping image cards
+--------------------------------------------------------------------------- */
+.story-index {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(4.5rem, 11vw, 9rem);
+  line-height: 0.8;
+  pointer-events: none;
+  user-select: none;
+}
+.story-img {
+  border-radius: 1.75rem;
+  box-shadow: 0 26px 60px rgb(42 11 40 / 0.35);
+  transform: rotate(-2deg);
+  transition: transform 0.4s ease;
+}
+[dir="rtl"] .story-img {
+  transform: rotate(2deg);
+}
+.story-img:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+  .story-img,
+  .story-img:hover {
+    transform: none;
+    transition: none;
+  }
+}
+.title-swash {
+  display: block;
+  width: 6.5rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  margin-block: 1rem 1.5rem;
+  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-brand-light));
+}
+
+/* check-bullet lists — gradient chip bullets (brand check icon preserved) */
+.checked-list {
+  list-style: none;
+  padding: 0;
+}
+.checked-list li {
+  position: relative;
+  padding-inline-start: 3.2rem;
+  margin-bottom: 1.4rem;
+}
+.checked-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.8rem;
+  background:
+    url("/images/branding/check-white.png") no-repeat center / 1.15rem,
+    linear-gradient(135deg, var(--color-brand), var(--color-brand-deep));
+  box-shadow: 0 6px 16px rgb(185 24 119 / 0.35);
+}
+
+/* ---------------------------------------------------------------------------
+   Page hero (inner pages) — full-bleed gradient banner, giant type
+--------------------------------------------------------------------------- */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(8.5rem, 16vw, 11.5rem) clamp(4.5rem, 9vw, 7rem);
+}
+.page-hero h1 {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: #fff;
+  margin: 0;
+}
+.page-hero .hero-tag {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-brand-light);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Bento product cards
+--------------------------------------------------------------------------- */
+.bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  padding: 1.4rem;
+  background: #fff;
+  border: 1px solid rgb(150 53 142 / 0.14);
+  box-shadow: 0 6px 22px rgb(42 11 40 / 0.06);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 0.9, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.bento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(18rem 14rem at 85% -10%, rgb(231 178 214 / 0.55), transparent 60%),
+    radial-gradient(16rem 12rem at -10% 110%, rgb(150 53 142 / 0.18), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.bento-card:hover,
+.bento-card:focus-visible {
+  transform: translateY(-8px) rotate(-0.6deg);
+  box-shadow: 0 24px 50px rgb(150 53 142 / 0.25);
+  border-color: rgb(185 24 119 / 0.4);
+}
+[dir="rtl"] .bento-card:hover,
+[dir="rtl"] .bento-card:focus-visible {
+  transform: translateY(-8px) rotate(0.6deg);
+}
+.bento-card:hover::before,
+.bento-card:focus-visible::before {
+  opacity: 1;
+}
+.bento-card img {
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+.bento-card:hover img {
+  transform: scale(1.06) rotate(1deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-card,
+  .bento-card img,
+  .bento-card::before {
+    transition: none;
+  }
+  .bento-card:hover,
+  .bento-card:focus-visible {
+    transform: none;
+  }
+  .bento-card:hover img {
+    transform: none;
+  }
+}
+.bento-card h2 {
+  position: relative;
+  font-size: 1.05rem;
+  color: var(--color-plum);
+  margin: 0;
+}
+.bento-card .card-cta {
+  position: relative;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-deep);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.bento-card:hover .card-cta,
+.bento-card:focus-visible .card-cta {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce), (hover: none) {
+  .bento-card .card-cta {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Preparation — brew timeline
+--------------------------------------------------------------------------- */
+.brew-timeline {
+  position: relative;
+}
+.brew-timeline::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 1.35rem;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--color-brand), var(--color-brand-deep), var(--color-brand-light));
+}
+@media (min-width: 768px) {
+  .brew-timeline::before {
+    inset-inline-start: 50%;
+    margin-inline-start: -2px;
+  }
+}
+.brew-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-deep));
+  box-shadow: 0 0 0 6px rgb(231 178 214 / 0.45), 0 10px 24px rgb(185 24 119 / 0.4);
+}
+
+/* ---------------------------------------------------------------------------
+   FAQ accordion — bold cards, native <details> preserved
+--------------------------------------------------------------------------- */
+.faq {
+  counter-reset: faq;
+}
+.faq details {
+  counter-increment: faq;
+  border: 1px solid rgb(150 53 142 / 0.18);
+  border-radius: 1.25rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.faq details:hover {
+  border-color: rgb(185 24 119 / 0.45);
+  box-shadow: 0 12px 30px rgb(150 53 142 / 0.12);
+}
+.faq details[open] {
+  border-color: var(--color-brand-deep);
+  box-shadow: 0 16px 40px rgb(150 53 142 / 0.16);
+}
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.4rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.08rem;
+  color: var(--color-plum);
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::before {
+  content: counter(faq, decimal-leading-zero);
+  flex: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-deep));
+  border-radius: 0.7rem;
+  padding: 0.35rem 0.6rem;
+}
+.faq summary::after {
+  content: "+";
+  margin-inline-start: auto;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-brand);
+  color: var(--color-brand);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+  background: var(--color-brand);
+  color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq summary::after {
+    transition: none;
+  }
+  .faq details[open] summary::after {
+    content: "\2212";
+    transform: none;
+  }
+}
+.faq .faq-answer {
+  padding: 0.25rem 1.4rem 1.4rem;
+  padding-inline-start: 4.4rem;
+}
+.faq .faq-answer a {
+  color: var(--color-brand-deep);
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------------
+   Contact — dark gradient form panel + distributor cards
+--------------------------------------------------------------------------- */
+.contact-panel {
+  border-radius: 1.75rem;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 24px 60px rgb(42 11 40 / 0.35);
+}
+.contact-form input,
+.contact-form textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid rgb(255 255 255 / 0.4);
+  padding: 0.9rem 0;
+  width: 100%;
+  color: #fff;
+  border-radius: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgb(255 255 255 / 0.85);
+  opacity: 1;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-brand-light);
+}
+.contact-form button[type="submit"] {
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 1rem 2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-plum);
+  background: linear-gradient(115deg, #fff, var(--color-brand-light));
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.contact-form button[type="submit"]:hover,
+.contact-form button[type="submit"]:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgb(0 0 0 / 0.35);
+}
+
+.card-location {
+  border: 1px solid rgb(150 53 142 / 0.16);
+  border-radius: 1.5rem;
+  padding: 1.1rem;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 6px 20px rgb(42 11 40 / 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-location:hover {
+  transform: translateY(-6px);
+  border-color: rgb(185 24 119 / 0.4);
+  box-shadow: 0 18px 40px rgb(150 53 142 / 0.18);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-location {
+    transition: none;
+  }
+  .card-location:hover {
+    transform: none;
+  }
+}
+.card-location img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand);
+  background: rgb(231 178 214 / 0.3);
+  border: 1px solid transparent;
+  border-radius: 100%;
+  width: 38px;
+  height: 38px;
+  transition: 0.3s;
+}
+.icon-circle:hover,
+.icon-circle:focus-visible {
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-deep));
+  color: #fff;
+}
+.icon-circle svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* footer icon circles — glass on plum */
+.icon-circle-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 100%;
+  width: 46px;
+  height: 46px;
+  transition: 0.3s;
+}
+.icon-circle-lg:hover,
+.icon-circle-lg:focus-visible {
+  color: var(--color-plum);
+  border-color: #fff;
+  background: #fff;
+  transform: translateY(-3px);
+}
+.icon-circle-lg svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+@media (prefers-reduced-motion: reduce) {
+  .icon-circle-lg {
+    transition: none;
+  }
+  .icon-circle-lg:hover {
+    transform: none;
+  }
+}
+
+/* media frame (vending / preparation imagery) */
+.media-frame {
+  display: block;
+  border-radius: 1.75rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-deep), var(--color-brand-light));
+  box-shadow: 0 24px 60px rgb(150 53 142 / 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+a.media-frame:hover,
+a.media-frame:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 70px rgb(150 53 142 / 0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .media-frame {
+    transition: none;
+  }
+  a.media-frame:hover {
+    transform: none;
+  }
+}
+.media-frame img,
+.media-frame iframe {
+  border-radius: 1.35rem;
+  display: block;
+  width: 100%;
+}
+
+/* skip link */
+.skip-link {
+  position: fixed;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 100;
+  background: var(--color-plum);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  transform: translateY(-300%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: none;
+}

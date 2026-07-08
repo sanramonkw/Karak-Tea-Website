@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="التحضير - شاي كرك"
+  description="طريقة تحضير شاي كرك — سهل التحضير في أقل من دقيقة. دليل التحضير بالخطوات مع فيديو توضيحي."
+  lang="ar"
+  path="/ar/التحضير/"
+  alternatePath="/preparation/"
+>
+  <div id="top"></div>
+  <PageHero title="التحضير" />
+
+  <section class="mesh-light py-20 md:py-28">
+    <div class="mx-auto max-w-6xl px-5">
+      <div class="brew-timeline space-y-20 py-6 md:space-y-28">
+        {/* الخطوة ١ — دليل التحضير */}
+        <div class="relative ps-16 md:ps-0" data-reveal>
+          <span
+            class="brew-node absolute top-0 start-0 md:start-1/2 ltr:md:-translate-x-1/2 rtl:md:translate-x-1/2"
+            aria-hidden="true"
+          >
+            1
+          </span>
+          <div class="md:grid md:grid-cols-2 md:gap-20">
+            <div class="md:pt-14">
+              <div class="media-frame">
+                <img
+                  src="/images/Easy-to-prepare-arabic-scaled.webp"
+                  alt="خطوات تحضير شاي كرك — سهل التحضير"
+                  width="2560"
+                  height="1707"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="hidden md:block"></div>
+          </div>
+        </div>
+
+        {/* الخطوة ٢ — شاهد طريقة التحضير */}
+        <div class="relative ps-16 md:ps-0" data-reveal>
+          <span
+            class="brew-node absolute top-0 start-0 md:start-1/2 ltr:md:-translate-x-1/2 rtl:md:translate-x-1/2"
+            aria-hidden="true"
+          >
+            2
+          </span>
+          <div class="md:grid md:grid-cols-2 md:gap-20">
+            <div class="hidden md:block"></div>
+            <div class="md:pt-14">
+              <div class="media-frame">
+                <div class="aspect-video w-full overflow-hidden rounded-[1.35rem]">
+                  <iframe
+                    title="مشغل فيديو يوتيوب"
+                    src="https://www.youtube.com/embed/0DdPepASq1w?si=CeroOMH-d9klONzD"
+                    width="100%"
+                    height="435"
+                    class="h-full w-full"
+                    frameborder="0"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

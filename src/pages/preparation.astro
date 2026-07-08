@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Karak Tea - Preparation"
+  description="How to prepare Karak Tea instant premix — easy to prepare in less than a minute. Step-by-step preparation guide and video."
+  lang="en"
+  path="/preparation/"
+  alternatePath="/ar/التحضير/"
+>
+  <div id="top"></div>
+  <PageHero title="Preparation" />
+
+  <section class="py-20">
+    <div class="mx-auto max-w-5xl px-4 text-center">
+      <img
+        src="/images/Easy-to-prepare-English-scaled.webp"
+        alt="Karak Tea preparation steps — easy to prepare"
+        class="mx-auto mb-10 w-full"
+      />
+      <div class="aspect-video w-full overflow-hidden">
+        <iframe
+          title="YouTube video player"
+          src="https://www.youtube.com/embed/0DdPepASq1w?si=CeroOMH-d9klONzD"
+          width="100%"
+          height="435"
+          class="h-full w-full"
+          frameborder="0"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

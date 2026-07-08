@@ -1,0 +1,79 @@
+---
+/**
+ * EDITORIAL variant of the home hero.
+ * Same slide data as the master's carousel, recomposed as a magazine cover:
+ * slide 1 = cover story (huge quiet headline, standfirst, full-bleed photo),
+ * slides 2–3 = a photographic diptych, each keeping its own Shop Now link.
+ * Zero JavaScript.
+ */
+import { SITE } from '../data/site';
+
+interface Slide {
+  image: string;
+  title: string;
+  text: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+interface Props {
+  slides: Slide[];
+  lang?: 'en' | 'ar';
+}
+const { slides, lang = 'en' } = Astro.props;
+const [cover, ...plates] = slides;
+const hashtag = lang === 'ar' ? SITE.hashtagAr : SITE.hashtagEn;
+---
+
+<section aria-label={cover?.title}>
+  {/* cover typography */}
+  <div class="mx-auto max-w-[1360px] px-5 pb-12 pt-14 md:px-10 md:pt-20">
+    <p class="eyebrow">{hashtag}</p>
+    <div class="mt-4 grid gap-10 lg:grid-cols-12 lg:gap-6">
+      <h1 class="text-[clamp(4rem,11vw,9.5rem)] lg:col-span-7">
+        {cover?.title}
+      </h1>
+      <div class="flex flex-col justify-end gap-8 lg:col-span-4 lg:col-start-9">
+        <p class="max-w-[46ch] font-[family-name:var(--font-display)] text-[1.15rem] leading-[1.65] text-ink-soft rtl:font-[family-name:var(--font-body)]">
+          {cover?.text}
+        </p>
+        <p>
+          <a class="link-cta" href={cover?.ctaHref} target="_blank" rel="noopener noreferrer">
+            {cover?.ctaLabel}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* full-bleed cover photograph */}
+  <figure class="m-0">
+    <img
+      src={cover?.image}
+      alt={cover?.title}
+      class="h-[52vh] w-full object-cover md:h-[74vh]"
+      fetchpriority="high"
+    />
+    <figcaption class="mx-auto max-w-[1360px] px-5 md:px-10">
+      {cover?.title} — {hashtag}
+    </figcaption>
+  </figure>
+
+  {/* diptych: remaining slides as captioned plates, links preserved */}
+  {plates.length > 0 && (
+    <div class="mx-auto grid max-w-[1360px] gap-10 px-5 pb-4 pt-16 sm:grid-cols-2 md:px-10 md:pt-24">
+      {plates.map((slide) => (
+        <figure class="m-0">
+          <a href={slide.ctaHref} target="_blank" rel="noopener noreferrer" class="plate" aria-label={`${slide.title} — ${slide.ctaLabel}`}>
+            <img src={slide.image} alt={slide.title} loading="lazy" class="aspect-[4/3] object-cover" />
+          </a>
+          <figcaption class="flex items-baseline justify-between gap-4">
+            <span>{slide.title}</span>
+            <a class="link-cta" href={slide.ctaHref} target="_blank" rel="noopener noreferrer">
+              {slide.ctaLabel}
+            </a>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  )}
+</section>

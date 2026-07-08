@@ -1,0 +1,164 @@
+---
+import { NAV_EN, NAV_AR, SITE } from '../data/site';
+
+interface Props {
+  lang?: 'en' | 'ar';
+}
+const { lang = 'en' } = Astro.props;
+const nav = lang === 'ar' ? NAV_AR : NAV_EN;
+const homeHref = lang === 'ar' ? '/ar/' : '/';
+const langSwitch = lang === 'ar'
+  ? { label: 'EN', href: '/' }
+  : { label: 'العربية', href: '/ar/' };
+const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/' || currentPath === '/ar/';
+// last nav item is the external "Order Now" — rendered as a filled pill CTA
+const links = nav.filter((item) => !item.external);
+const orderItem = nav.find((item) => item.external);
+---
+
+<header id="site-header">
+  <div class="header-shell">
+    <a href={homeHref} title={siteName} rel="home" class="flex shrink-0 items-center gap-2 ps-1">
+      <img
+        src="/images/branding/Karak_New.png"
+        alt={siteName}
+        class="h-auto w-[56px]"
+        width="220"
+        height="204"
+      />
+      <img
+        src="/images/branding/logo-text.png"
+        alt=""
+        aria-hidden="true"
+        class="hidden h-auto w-[84px] xl:block"
+      />
+    </a>
+
+    <nav aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'} class="hidden lg:block">
+      <ul class="flex items-center gap-0.5">
+        {links.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={currentPath === item.href && !isHome ? 'page' : undefined}
+              class="nav-link"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a
+            href={langSwitch.href}
+            lang={lang === 'ar' ? 'en' : 'ar'}
+            class="nav-link"
+          >
+            {langSwitch.label}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      {orderItem && (
+        <a
+          href={orderItem.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-order hidden lg:inline-block"
+        >
+          {orderItem.label}
+        </a>
+      )}
+      <button
+        id="mobile-nav-open"
+        type="button"
+        class="pe-2 text-3xl leading-none text-brand lg:hidden"
+        aria-label={lang === 'ar' ? 'افتح القائمة' : 'Open menu'}
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+      >
+        &#9776;
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile overlay nav — full-screen electric field -->
+<div
+  id="mobile-nav"
+  class="mesh-dark fixed inset-0 z-[60] hidden flex-col justify-center gap-2 px-10 text-start"
+>
+  <button
+    id="mobile-nav-close"
+    type="button"
+    class="absolute top-6 text-4xl text-white ltr:right-8 rtl:left-8"
+    aria-label={lang === 'ar' ? 'أغلق القائمة' : 'Close menu'}
+  >
+    &times;
+  </button>
+  <img src="/images/branding/Karak_New.png" alt={siteName} class="mb-8 h-16 w-auto self-start" />
+  <nav aria-label={lang === 'ar' ? 'قائمة الجوال' : 'Mobile navigation'}>
+    <ul class="space-y-3">
+      {links.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="inline-block font-[family-name:var(--font-heading)] text-4xl font-bold text-white"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      {orderItem && (
+        <li class="pt-3">
+          <a
+            href={orderItem.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-glow"
+          >
+            {orderItem.label}
+          </a>
+        </li>
+      )}
+      <li class="pt-1">
+        <a
+          href={langSwitch.href}
+          lang={lang === 'ar' ? 'en' : 'ar'}
+          class="inline-block font-[family-name:var(--font-heading)] text-2xl font-bold text-brand-light"
+        >
+          {langSwitch.label}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  const openBtn = document.getElementById('mobile-nav-open');
+  const closeBtn = document.getElementById('mobile-nav-close');
+  const overlay = document.getElementById('mobile-nav');
+  openBtn?.addEventListener('click', () => {
+    overlay?.classList.remove('hidden');
+    overlay?.classList.add('flex');
+    openBtn.setAttribute('aria-expanded', 'true');
+  });
+  closeBtn?.addEventListener('click', () => {
+    overlay?.classList.add('hidden');
+    overlay?.classList.remove('flex');
+    openBtn?.setAttribute('aria-expanded', 'false');
+  });
+
+  // deepen the floating pill's shadow once the page scrolls
+  const header = document.getElementById('site-header');
+  window.addEventListener(
+    'scroll',
+    () => {
+      header?.classList.toggle('scrolled', window.scrollY > 25);
+    },
+    { passive: true },
+  );
+</script>

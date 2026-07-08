@@ -1,0 +1,146 @@
+---
+import { NAV_EN, NAV_AR, SITE } from '../data/site';
+
+interface Props {
+  lang?: 'en' | 'ar';
+}
+const { lang = 'en' } = Astro.props;
+const nav = lang === 'ar' ? NAV_AR : NAV_EN;
+const homeHref = lang === 'ar' ? '/ar/' : '/';
+const langSwitch = lang === 'ar'
+  ? { label: 'EN', href: '/' }
+  : { label: 'العربية', href: '/ar/' };
+const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
+const currentPath = Astro.url.pathname;
+// Editorial masthead: understated small-caps text links; active page = purple.
+const navLinkBase =
+  'inline-block py-2 font-[family-name:var(--font-body)] text-[11px] font-bold uppercase tracking-[0.18em] rtl:tracking-[0.03em] rtl:text-[13px] transition-colors duration-200 hover:text-brand';
+---
+
+<header id="site-header" class="border-b border-hairline bg-paper">
+  {/* top hairline band: masthead */}
+  <div class="mx-auto flex max-w-[1360px] items-center justify-between gap-6 px-5 py-4 md:px-10">
+    <a href={homeHref} title={siteName} rel="home" class="flex shrink-0 items-center gap-3">
+      <img
+        src="/images/branding/Karak_New.png"
+        alt={siteName}
+        class="h-auto w-[54px]"
+        width="220"
+        height="204"
+      />
+      <img
+        src="/images/branding/logo-text.png"
+        alt=""
+        aria-hidden="true"
+        class="mt-1 hidden h-auto w-[84px] sm:block"
+      />
+    </a>
+
+    <nav aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'} class="hidden lg:block">
+      <ul class="flex items-center gap-7">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+              class:list={
+                item.external
+                  ? ['link-cta', 'text-[11px]']
+                  : [
+                      navLinkBase,
+                      currentPath === item.href
+                        ? 'text-brand underline underline-offset-8 decoration-1'
+                        : 'text-ink',
+                    ]
+              }
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li aria-hidden="true" class="h-4 w-px bg-hairline"></li>
+        <li>
+          <a
+            href={langSwitch.href}
+            lang={lang === 'ar' ? 'en' : 'ar'}
+            class:list={[navLinkBase, 'text-ink-soft']}
+          >
+            {langSwitch.label}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <button
+      id="mobile-nav-open"
+      type="button"
+      class="p-2 text-2xl leading-none text-ink lg:hidden"
+      aria-label={lang === 'ar' ? 'افتح القائمة' : 'Open menu'}
+      aria-controls="mobile-nav"
+      aria-expanded="false"
+    >
+      &#9776;
+    </button>
+  </div>
+</header>
+
+<!-- mobile overlay nav — full-page paper index -->
+<div
+  id="mobile-nav"
+  class="fixed inset-0 z-[60] hidden flex-col justify-center bg-paper px-8 text-start"
+>
+  <button
+    id="mobile-nav-close"
+    type="button"
+    class="absolute top-5 p-2 text-4xl leading-none text-ink ltr:right-6 rtl:left-6"
+    aria-label={lang === 'ar' ? 'أغلق القائمة' : 'Close menu'}
+  >
+    &times;
+  </button>
+  <img src="/images/branding/Karak_New.png" alt={siteName} class="mb-8 h-16 w-auto self-start" />
+  <nav aria-label={lang === 'ar' ? 'قائمة الجوال' : 'Mobile navigation'}>
+    <ul class="divide-y divide-hairline border-y border-hairline">
+      {nav.map((item, i) => (
+        <li>
+          <a
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+            class="flex items-baseline gap-4 py-4 font-[family-name:var(--font-display)] text-2xl text-ink"
+          >
+            <span class="folio-no" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={langSwitch.href}
+          lang={lang === 'ar' ? 'en' : 'ar'}
+          class="flex items-baseline gap-4 py-4 font-[family-name:var(--font-display)] text-2xl text-brand"
+        >
+          <span class="folio-no" aria-hidden="true">{String(nav.length + 1).padStart(2, '0')}</span>
+          {langSwitch.label}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  const openBtn = document.getElementById('mobile-nav-open');
+  const closeBtn = document.getElementById('mobile-nav-close');
+  const overlay = document.getElementById('mobile-nav');
+  openBtn?.addEventListener('click', () => {
+    overlay?.classList.remove('hidden');
+    overlay?.classList.add('flex');
+    openBtn.setAttribute('aria-expanded', 'true');
+  });
+  closeBtn?.addEventListener('click', () => {
+    overlay?.classList.add('hidden');
+    overlay?.classList.remove('flex');
+    openBtn?.setAttribute('aria-expanded', 'false');
+  });
+</script>

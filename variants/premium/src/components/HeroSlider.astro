@@ -1,0 +1,100 @@
+---
+/**
+ * Premium home hero — immersive full-viewport slider.
+ * Same three photographs and verbatim copy as the master build; the
+ * treatment is new: layered plum scrims, a champagne leaf veil, serif
+ * display title, hairline ghost CTA and line-style pager.
+ */
+interface Slide {
+  image: string;
+  title: string;
+  text: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+interface Props {
+  slides: Slide[];
+}
+const { slides } = Astro.props;
+---
+
+<section class="hero-luxe" aria-label={slides[0]?.title}>
+  {slides.map((slide, i) => (
+    <div class:list={['hero-slide', { 'is-active': i === 0 }]}>
+      {/* only the first slide's photo loads eagerly; the rest are applied by
+          the slider script after window load (they can only ever show via JS) */}
+      <div
+        class="slide-media"
+        style={i === 0 ? `background-image: url('${slide.image}');` : undefined}
+        data-bg={i === 0 ? undefined : slide.image}
+      ></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="leaf-veil text-champagne" data-parallax aria-hidden="true"></div>
+
+      <div class="relative z-[3] mx-auto flex min-h-svh max-w-[1280px] items-end px-5 pb-32 pt-40 md:px-10 md:pb-40">
+        <div class="max-w-2xl">
+          {i === 0 ? (
+            <h1 class="display hero-title reveal">{slide.title}</h1>
+          ) : (
+            <p class="display hero-title">{slide.title}</p>
+          )}
+          <hr class="rule-luxe my-7 max-w-md" />
+          <p class:list={['mb-9 max-w-xl text-[0.95rem] leading-[1.9] text-cream/85 md:text-base', i === 0 && 'reveal reveal-1']}>
+            {slide.text}
+          </p>
+          <p class:list={[i === 0 && 'reveal reveal-2']}>
+            <a class="btn-luxe btn-luxe-ghost" href={slide.ctaHref} target="_blank" rel="noopener noreferrer">
+              {slide.ctaLabel}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <div class="hero-pager" role="tablist" aria-label="Slides">
+    {slides.map((_, i) => (
+      <button type="button" data-slide={i} class:list={[{ 'is-active': i === 0 }]} aria-label={`Slide ${i + 1}`} />
+    ))}
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.hero-pager button'));
+  const motionOK = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  let index = 0;
+  let timer: ReturnType<typeof setInterval> | undefined;
+
+  function show(i: number) {
+    index = i % slides.length;
+    slides.forEach((s, j) => s.classList.toggle('is-active', j === index));
+    dots.forEach((d, j) => d.classList.toggle('is-active', j === index));
+  }
+  function start() {
+    // respect reduced motion: no auto-advancing carousel
+    if (!motionOK.matches) return;
+    timer = setInterval(() => show(index + 1), 7000);
+  }
+  dots.forEach((d, i) =>
+    d.addEventListener('click', () => {
+      if (timer) clearInterval(timer);
+      show(i);
+      start();
+    }),
+  );
+
+  // hydrate deferred slide backgrounds once the page has loaded
+  const hydrate = () => {
+    document.querySelectorAll<HTMLElement>('.slide-media[data-bg]').forEach((m) => {
+      m.style.backgroundImage = `url('${m.dataset.bg}')`;
+      delete m.dataset.bg;
+    });
+  };
+  if (document.readyState === 'complete') hydrate();
+  else window.addEventListener('load', hydrate, { once: true });
+
+  if (slides.length > 1) start();
+</script>

@@ -1,0 +1,62 @@
+---
+/**
+ * Premium re-imagining of the master's split sections: numbered editorial
+ * "chapters". Variant 1 = deep aubergine band, variant 2 = cream band.
+ * Same props/content as master; the visual system is new — chapter numeral,
+ * eyebrow rule, serif display heading, framed photography, leaf veil.
+ */
+interface Props {
+  variant: 1 | 2; // 1 = dark plum chapter, 2 = cream chapter
+  image: string;
+  imageAlt?: string;
+  title: string;
+}
+const { variant, image, imageAlt = '', title } = Astro.props;
+const dark = variant === 1;
+---
+
+<section class:list={['chapter', dark ? 'chapter-dark' : 'chapter-cream']}>
+  {dark && <div class="leaf-veil text-champagne" data-parallax aria-hidden="true"></div>}
+  {!dark && <div class="leaf-veil text-brand" data-parallax aria-hidden="true" style="opacity:0.045"></div>}
+
+  <div class="relative mx-auto grid max-w-[1280px] items-center gap-y-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-x-0">
+    <div
+      class:list={[
+        'reveal',
+        dark
+          ? 'lg:order-1 lg:col-span-5'
+          : 'lg:order-2 lg:col-span-5 lg:col-start-8',
+      ]}
+    >
+      <figure class:list={['framed', !dark && 'framed-plum']}>
+        <img src={image} alt={imageAlt} loading="lazy" width="800" height="800" />
+      </figure>
+    </div>
+
+    <div
+      class:list={[
+        'reveal reveal-1',
+        dark
+          ? 'lg:order-2 lg:col-span-6 lg:col-start-7'
+          : 'lg:order-1 lg:col-span-6',
+      ]}
+    >
+      <span class="chapter-num" aria-hidden="true"></span>
+      <span
+        class:list={['eyebrow mb-4 mt-2', dark ? 'text-champagne' : 'text-brand']}
+        aria-hidden="true"
+      ></span>
+      <h2 class="display mb-8">{title}</h2>
+      <div
+        class:list={[
+          'max-w-[56ch] space-y-5',
+          dark
+            ? 'text-cream/85 [&_a]:text-brand-light [&_a]:underline [&_a]:underline-offset-4'
+            : '[&_a]:font-bold [&_a]:text-brand [&_a]:underline [&_a]:underline-offset-4',
+        ]}
+      >
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>

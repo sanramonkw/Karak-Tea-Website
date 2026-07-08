@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Vending Machine - Karak Tea"
+  description="Karak Tea vending machines — serve authentic karak tea anywhere. Browse and order vending machines and refills."
+  lang="en"
+  path="/vending-machine/"
+  alternatePath="/ar/آلات-التوزيع/"
+>
+  <div id="top"></div>
+  <PageHero title="Vending Machine" />
+
+  <section class="py-16 md:py-24">
+    <div class="mx-auto max-w-5xl px-5 text-center md:px-10">
+      <a href={SITE.shop.vendingTagEn} target="_blank" rel="noopener noreferrer" class="framed framed-plum reveal block">
+        <img
+          src="/images/English-scaled.webp"
+          alt="Karak Tea vending machine"
+          width="960"
+          height="774"
+          class="mx-auto w-full cursor-pointer"
+          loading="lazy"
+        />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

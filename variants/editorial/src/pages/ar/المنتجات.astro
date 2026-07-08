@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { SITE } from '../../data/site';
+
+const shop = SITE.shop.productsTagAr;
+const products = [
+  { name: 'سادة', image: '/images/karak-box-7.webp' },
+  { name: 'هيل', image: '/images/karak-box2.webp' },
+  { name: 'هيل بدون سكر', image: '/images/karak-box-1.webp' },
+  { name: 'زعفران', image: '/images/karak-box-10.webp' },
+  { name: 'زنجبيل', image: '/images/karak-box5.webp' },
+  { name: 'قهوة', image: '/images/karak-box-4.webp' },
+  { name: 'كرك زعفران 1 كيلو', image: '/images/karak-box-16.webp' },
+  { name: 'كرك زعفران بدون سكر 500 جرام', image: '/images/karak-box-18.webp' },
+  { name: 'كرك هيل 1 كيلو', image: '/images/karak-box-15.webp' },
+  { name: 'كرك هيل بدون سكر 500 جرام', image: '/images/karak-box-17.webp' },
+  { name: 'كرك زعفران بدون سكر', image: '/images/karak-box-9.webp' },
+  { name: 'آيس شاي كرك', image: '/images/karak-box-20.webp' },
+  { name: '"شاي كرك "كبسولات دولسي جوستو', image: '/images/karak-box-19.webp' },
+  { name: 'قرفة', image: '/images/karak-box3.webp' },
+];
+---
+
+<BaseLayout
+  title="المنتجات - شاي كرك"
+  description="اكتشف خلطات شاي كرك سريعة التحضير: سادة، هيل، زعفران، زنجبيل، قهوة وقرفة — محلاة أو بدون سكر — بالإضافة إلى آيس كرك وكبسولات دولسي جوستو."
+  lang="ar"
+  path="/ar/المنتجات/"
+  alternatePath="/products/"
+>
+  <div id="top"></div>
+  <PageHero title="المنتجات" />
+
+  <section class="py-14 md:py-20">
+    <div class="mx-auto max-w-[1360px] px-5 md:px-10">
+      <div class="plates grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {products.map((p) => (
+          <ProductCard name={p.name} image={p.image} href={shop} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

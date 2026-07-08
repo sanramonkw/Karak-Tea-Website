@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const faqs = [
+  {
+    q: 'Where is your main location?',
+    aHtml:
+      'Our headquarters is located in <strong>Kuwait</strong>. For international inquiries or additional information, please contact us at <strong><a href="mailto:info@karaktea.com">info@karaktea.com</a></strong>.',
+    aText:
+      'Our headquarters is located in Kuwait. For international inquiries or additional information, please contact us at info@karaktea.com.',
+  },
+  {
+    q: 'Which countries are you available in?',
+    aHtml:
+      '<p>We proudly serve customers in the following regions:</p><p><strong>Middle East: </strong>Kuwait, Qatar, Bahrain, United Arab Emirates, Oman, Saudi Arabia, Jordan, Palestine, Iraq</p><p><strong>International: </strong>Canada, United States, United Kingdom, Egypt, South Africa</p>',
+    aText:
+      'We proudly serve customers in the following regions: Middle East: Kuwait, Qatar, Bahrain, United Arab Emirates, Oman, Saudi Arabia, Jordan, Palestine, Iraq. International: Canada, United States, United Kingdom, Egypt, South Africa.',
+  },
+  {
+    q: 'Where can I find your products and prices?',
+    aHtml:
+      'All products and pricing details are available on our official website: <strong><a href="https://thiafa.com/en" target="_blank" rel="noopener">www.thiafa.com</a></strong><br />You can also find our products in <strong>cooperatives and major supermarkets</strong>.',
+    aText:
+      'All products and pricing details are available on our official website: www.thiafa.com. You can also find our products in cooperatives and major supermarkets.',
+  },
+  {
+    q: 'Do you provide delivery inside and outside Kuwait?',
+    aHtml:
+      'Yes. We offer delivery services within Kuwait and international shipping to the countries listed above.',
+    aText:
+      'Yes. We offer delivery services within Kuwait and international shipping to the countries listed above.',
+  },
+  {
+    q: 'How long does delivery and shipping takes?',
+    aHtml:
+      '<p>Kuwait: Orders are delivered within 24 hour.<br />International: Shipping typically takes 3–5 working days, depending on destination and courier procedures.</p><p>For retail orders you can visit our webstore: <a href="https://thiafa.com/en" target="_blank" rel="noopener">www.thiafa.com</a><br />For unlisted countries please reach us at <a href="mailto:info@karaktea.com">info@karaktea.com</a> for more information.</p>',
+    aText:
+      'Kuwait: Orders are delivered within 24 hour. International: Shipping typically takes 3–5 working days, depending on destination and courier procedures. For retail orders you can visit our webstore: www.thiafa.com. For unlisted countries please reach us at info@karaktea.com for more information.',
+  },
+  {
+    q: 'What are your products?',
+    aHtml:
+      'You can explore all available products in the <strong><a href="/products/"><u>Products</u></a></strong> section.',
+    aText: 'You can explore all available products in the Products section.',
+  },
+  {
+    q: 'What is the best way to prepare your products?',
+    aHtml:
+      'You can find the best preparation methods in the <a href="/preparation/"><strong><u>Preparation</u></strong></a> section.',
+    aText: 'You can find the best preparation methods in the Preparation section.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.aText },
+  })),
+};
+---
+
+<BaseLayout
+  title="FAQs - Karak Tea"
+  description="Frequently asked questions about Karak Tea — locations, available countries, where to buy, delivery, shipping times and preparation."
+  lang="en"
+  path="/faqs/"
+  alternatePath="/ar/أسئلة-مكررة/"
+  jsonLd={[faqSchema]}
+>
+  <div id="top"></div>
+  <PageHero title="FAQs" />
+
+  <section class="py-16 md:py-24">
+    <div class="faq reveal mx-auto max-w-3xl px-5 md:px-10">
+      {faqs.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <div class="faq-answer space-y-3" set:html={f.aHtml} />
+        </details>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

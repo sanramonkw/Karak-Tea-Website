@@ -1,0 +1,561 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   KARAK TEA — EDITORIAL MINIMAL variant
+   "A tea culture journal": warm paper field, ink typography, brand purple
+   used only as a precise accent (numerals, rules, links). Brand fonts kept
+   (Bahij Janna + Helvetica Arabic); ONE added complementary face:
+   Newsreader (editorial serif, self-hosted woff2, roman variable + italic).
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Helvetica Arabic";
+  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* Newsreader — editorial serif (Latin); Arabic glyphs fall through to Bahij */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-Var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
+   Design tokens — brand colors preserved verbatim from the master;
+   new neutral "paper & ink" field for the editorial variant.
+--------------------------------------------------------------------------- */
+@theme {
+  /* brand purples (unchanged from master) */
+  --color-brand: #96358e;
+  --color-brand-deep: #b91877;
+  --color-brand-light: #e7b2d6;
+  --color-brand-pale: #deb8d7;
+  --color-brand-overlay: #8d3279;
+  --color-accent: #be1622;
+  --color-accent-bright: #ff0033;
+
+  /* editorial neutrals */
+  --color-paper: #f7f3ec;
+  --color-paper-deep: #efe9dd;
+  --color-ink: #1b161b;
+  --color-ink-soft: #57505a;
+  --color-hairline: #d9d1c3;
+
+  --font-display: "Newsreader", "Bahij Janna", Georgia, serif;
+  --font-heading: "Bahij Janna", "Helvetica Arabic", sans-serif;
+  --font-body: "Helvetica Arabic", Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-ink);
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  /* Arabic display type = brand face Bahij Janna Bold */
+  [dir="rtl"] :is(h1, h2, h3, h4, h5, h6) {
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Editorial primitives
+--------------------------------------------------------------------------- */
+
+/* small-caps kicker label */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+/* Arabic has no case; wide tracking hurts joined script */
+[dir="rtl"] .eyebrow {
+  letter-spacing: 0.04em;
+  font-size: 13px;
+}
+
+/* hairline rules */
+.rule {
+  border: 0;
+  border-top: 1px solid var(--color-hairline);
+}
+.rule-ink {
+  border: 0;
+  border-top: 2px solid var(--color-ink);
+}
+.rule-accent {
+  display: block;
+  width: 3.5rem;
+  height: 2px;
+  background: var(--color-brand);
+}
+
+/* big section numeral, e.g. "01" */
+.folio-no {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--color-brand);
+  letter-spacing: 0.08em;
+}
+[dir="rtl"] .folio-no {
+  font-style: normal;
+}
+
+/* understated editorial text-link CTA */
+.link-cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6em;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding-block: 0.35em;
+  border-bottom: 1px solid var(--color-ink);
+  transition: color 0.25s, border-color 0.25s;
+}
+.link-cta::after {
+  content: "\2197"; /* ↗ */
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  color: var(--color-brand);
+  transition: transform 0.25s;
+}
+.link-cta:hover,
+.link-cta:focus-visible {
+  color: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.link-cta:hover::after {
+  transform: translate(2px, -2px);
+}
+[dir="rtl"] .link-cta {
+  letter-spacing: 0.04em;
+  font-size: 14px;
+}
+[dir="rtl"] .link-cta::after {
+  content: "\2196"; /* ↖ mirrored for RTL */
+}
+[dir="rtl"] .link-cta:hover::after {
+  transform: translate(-2px, -2px);
+}
+
+/* photographic plate: image mounted on white with hairline mat */
+.plate {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--color-hairline);
+  padding: 10px;
+}
+.plate img {
+  display: block;
+  width: 100%;
+}
+figcaption,
+.caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  margin-top: 0.75rem;
+}
+[dir="rtl"] figcaption,
+[dir="rtl"] .caption {
+  font-style: normal;
+}
+
+/* body copy links */
+.prose-links a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s;
+}
+.prose-links a:hover {
+  color: var(--color-brand-deep);
+}
+
+/* ---------------------------------------------------------------------------
+   Numbered feature sections (home) — counter lives on the features wrapper
+--------------------------------------------------------------------------- */
+.features {
+  counter-reset: feature;
+}
+.feature {
+  counter-increment: feature;
+}
+.feature .feature-no::before {
+  content: counter(feature, decimal-leading-zero);
+}
+
+/* checked-list (markup kept verbatim from master pages) → editorial index
+   list: hairline-separated entries with a small brand em-rule marker */
+.checked-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.checked-list li {
+  position: relative;
+  padding-block: 1.1rem;
+  padding-inline-start: 2.4rem;
+  border-top: 1px solid var(--color-hairline);
+}
+.checked-list li:first-child {
+  border-top: 0;
+  padding-block-start: 0.25rem;
+}
+.checked-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 1.85rem;
+  width: 1.4rem;
+  height: 2px;
+  background: var(--color-brand);
+}
+.checked-list li:first-child::before {
+  top: 1rem;
+}
+.checked-list a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   Page opener (inner pages)
+--------------------------------------------------------------------------- */
+.page-opener {
+  padding-block: 4.5rem 3rem;
+  border-bottom: 1px solid var(--color-hairline);
+}
+.page-opener h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  margin: 0.75rem 0 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Product plates — magazine catalogue grid with hairline dividers
+--------------------------------------------------------------------------- */
+.plates {
+  counter-reset: plate;
+  border-top: 1px solid var(--color-hairline);
+  border-inline-start: 1px solid var(--color-hairline);
+}
+.card-product {
+  counter-increment: plate;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-hairline);
+  border-inline-end: 1px solid var(--color-hairline);
+  text-decoration: none;
+  background: transparent;
+  transition: background-color 0.3s;
+}
+.card-product:hover,
+.card-product:focus-visible {
+  background: #fffdf8;
+}
+.card-product .plate-no::before {
+  content: counter(plate, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--color-brand);
+}
+[dir="rtl"] .card-product .plate-no::before {
+  font-style: normal;
+}
+.card-product img {
+  background: #fff;
+  border: 1px solid var(--color-hairline);
+  padding: 8px;
+  transition: border-color 0.3s;
+}
+.card-product:hover img {
+  border-color: var(--color-brand-light);
+}
+.card-product h2 {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  line-height: 1.5;
+  margin: 0;
+  transition: color 0.3s;
+}
+[dir="rtl"] .card-product h2 {
+  letter-spacing: 0.02em;
+  font-size: 15px;
+  font-family: var(--font-heading);
+}
+.card-product:hover h2 {
+  color: var(--color-brand);
+}
+
+/* ---------------------------------------------------------------------------
+   Distributor entries (contact) — quiet directory cells
+--------------------------------------------------------------------------- */
+.card-location {
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid var(--color-hairline);
+  border-inline-end: 1px solid var(--color-hairline);
+  text-align: center;
+}
+.card-location img {
+  width: 70%;
+  max-width: 190px;
+  height: auto;
+  margin: 0 auto 1.25rem;
+  border: 1px solid var(--color-hairline);
+}
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--color-ink-soft);
+  border: 1px solid var(--color-hairline);
+  border-radius: 999px;
+  transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+}
+.icon-circle:hover,
+.icon-circle:focus-visible {
+  color: #fff;
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+}
+.icon-circle svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* footer social links — bare glyphs, ink → purple */
+.icon-circle-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-ink);
+  transition: color 0.25s;
+}
+.icon-circle-lg:hover,
+.icon-circle-lg:focus-visible {
+  color: var(--color-brand);
+}
+.icon-circle-lg svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* ---------------------------------------------------------------------------
+   FAQ — numbered editorial question list (details/summary kept)
+--------------------------------------------------------------------------- */
+.faq {
+  counter-reset: faq;
+  border-top: 1px solid var(--color-hairline);
+}
+.faq details {
+  border-bottom: 1px solid var(--color-hairline);
+  counter-increment: faq;
+}
+.faq summary {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr auto;
+  align-items: baseline;
+  gap: 1rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 1.6rem 0.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  line-height: 1.35;
+  transition: color 0.25s;
+}
+[dir="rtl"] .faq summary {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::before {
+  content: counter(faq, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--color-brand);
+}
+[dir="rtl"] .faq summary::before {
+  font-style: normal;
+}
+.faq summary::after {
+  content: "+";
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-brand);
+}
+.faq details[open] summary::after {
+  content: "\2212";
+}
+.faq summary:hover {
+  color: var(--color-brand);
+}
+.faq .faq-answer {
+  padding: 0 0.25rem 1.75rem;
+  margin-inline-start: 4.25rem;
+  max-width: 60ch;
+  color: var(--color-ink-soft);
+}
+.faq .faq-answer a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .faq summary {
+    grid-template-columns: 2.5rem 1fr auto;
+  }
+  .faq .faq-answer {
+    margin-inline-start: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Contact form — hairline fields on paper
+--------------------------------------------------------------------------- */
+.contact-form input,
+.contact-form textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-ink);
+  padding: 14px 0;
+  width: 100%;
+  color: var(--color-ink);
+  border-radius: 0;
+  margin-bottom: 14px;
+  font-size: 16px;
+  font-family: var(--font-body);
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--color-ink-soft);
+  opacity: 1;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  color: var(--color-brand);
+  border-bottom-color: var(--color-brand);
+}
+.contact-form button[type="submit"] {
+  width: 100%;
+  border: 1px solid var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 16px 40px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+[dir="rtl"] .contact-form button[type="submit"] {
+  letter-spacing: 0.04em;
+  font-size: 15px;
+}
+.contact-form button[type="submit"]:hover,
+.contact-form button[type="submit"]:focus-visible {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}

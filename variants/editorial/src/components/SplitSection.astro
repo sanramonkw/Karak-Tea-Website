@@ -1,0 +1,49 @@
+---
+/**
+ * EDITORIAL variant of the master's split sections:
+ * numbered magazine features on an asymmetric 12-col grid.
+ * variant 1 → photograph leads (inline-start), copy trails;
+ * variant 2 → copy leads, photograph trails.
+ * The running number ("01"…) comes from a CSS counter on the .features wrapper.
+ */
+interface Props {
+  variant: 1 | 2;
+  image: string;
+  imageAlt?: string;
+  title: string;
+}
+const { variant, image, imageAlt = '', title } = Astro.props;
+---
+
+<section class="feature border-t border-hairline">
+  <article class="mx-auto grid max-w-[1360px] gap-x-6 gap-y-10 px-5 py-16 md:px-10 md:py-24 lg:grid-cols-12">
+    {/* copy first in DOM (headline reaches readers before the photo);
+        desktop asymmetry set with explicit grid placement, mirrors in RTL */}
+    <div
+      class:list={[
+        'lg:row-start-1 lg:pt-10',
+        variant === 1 ? 'lg:col-span-4 lg:col-start-9' : 'lg:col-span-4 lg:col-start-2',
+      ]}
+    >
+      <p class="flex items-center gap-4" aria-hidden="true">
+        <span class="feature-no folio-no"></span>
+        <span class="rule-accent"></span>
+      </p>
+      <h2 class="mb-8 mt-4 text-[clamp(2.4rem,4.5vw,3.6rem)]">{title}</h2>
+      <div class="prose-links space-y-5 leading-[1.85] text-ink-soft [&_strong]:font-bold [&_strong]:text-ink">
+        <slot />
+      </div>
+    </div>
+    <figure
+      class:list={[
+        'm-0 lg:row-start-1',
+        variant === 1 ? 'lg:col-span-7 lg:col-start-1' : 'lg:col-span-6 lg:col-start-7',
+      ]}
+    >
+      <span class="plate">
+        <img src={image} alt={imageAlt} loading="lazy" width="1200" height="900" />
+      </span>
+      {imageAlt && <figcaption>{imageAlt}</figcaption>}
+    </figure>
+  </article>
+</section>

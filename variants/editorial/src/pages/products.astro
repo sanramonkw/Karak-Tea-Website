@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { SITE } from '../data/site';
+
+const shop = SITE.shop.productsTagEn;
+const products = [
+  { name: 'Original Flavor', image: '/images/karak-box-7.webp' },
+  { name: 'Cardamom Flavor', image: '/images/cardamom.png' },
+  { name: 'Cardamom Unsweetened', image: '/images/cardamom-unsweetened.png' },
+  { name: 'Saffron Flavor', image: '/images/saffron.png' },
+  { name: 'Ginger Flavor', image: '/images/ginger.png' },
+  { name: 'Coffee Flavor', image: '/images/coffee.png' },
+  { name: 'Saffron Flavor 1kg', image: '/images/saffron-1kg.png' },
+  { name: 'Saffron Unsweetened 500g', image: '/images/saffron-unsweetened-500g.png' },
+  { name: 'Cardamom Flavor 1kg', image: '/images/cardamom-1kg.png' },
+  { name: 'Cardamom Unsweetened 500g', image: '/images/cardamom-unsweetened-500g.png' },
+  { name: 'Zafran Flavor unsweetened', image: '/images/saffron-unsweetened.png' },
+  { name: 'ICED Karak Tea', image: '/images/iced-karak.png' },
+  { name: 'Karak Tea Flavor “GUSTO CAPSULES”', image: '/images/gusto-capsules.png' },
+  { name: 'Cinnamon Flavor', image: '/images/cinnamon.png' },
+];
+
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Karak Tea Products',
+  itemListElement: products.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: p.name,
+      image: new URL(p.image, SITE.url).href,
+      brand: { '@type': 'Brand', name: 'Karak Tea' },
+      url: shop,
+    },
+  })),
+};
+---
+
+<BaseLayout
+  title="Products - Karak Tea"
+  description="Explore Karak Tea instant premixes: Original, Cardamom, Saffron, Ginger, Coffee and Cinnamon flavors — sweetened or unsweetened — plus iced karak and Dolce Gusto compatible capsules."
+  lang="en"
+  path="/products/"
+  alternatePath="/ar/المنتجات/"
+  jsonLd={[itemListSchema]}
+>
+  <div id="top"></div>
+  <PageHero title="Products" />
+
+  <section class="py-14 md:py-20">
+    <div class="mx-auto max-w-[1360px] px-5 md:px-10">
+      <div class="plates grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {products.map((p) => (
+          <ProductCard name={p.name} image={p.image} href={shop} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

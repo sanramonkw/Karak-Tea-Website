@@ -1,0 +1,972 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   KARAK TEA — PREMIUM VARIANT  ·  "Maison Karak"
+   A luxury tea-house expression of the brand: deep aubergine atmospheres
+   drawn from the brand purple #96358e, warm cream/champagne neutrals,
+   hairline rules, serif display accents (Cormorant Garamond, latin-only,
+   falls back to Bahij Janna for Arabic), glass panels, generous space.
+   Brand tokens are preserved verbatim from the master build.
+=========================================================================== */
+
+/* --- Brand fonts (self-hosted, from the original WP theme) --------------- */
+@font-face {
+  font-family: "Helvetica Arabic";
+  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bahij Janna";
+  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* --- Complementary display serif (latin subset, variable weight) --------- */
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("/fonts/CormorantGaramond-var.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("/fonts/CormorantGaramond-Italic-var.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --- Design tokens -------------------------------------------------------- */
+@theme {
+  /* brand palette — unchanged from master (do not alter) */
+  --color-brand: #96358e;
+  --color-brand-deep: #b91877;
+  --color-brand-light: #e7b2d6;
+  --color-brand-pale: #deb8d7;
+  --color-brand-overlay: #8d3279;
+  --color-accent: #be1622;
+  --color-accent-bright: #ff0033;
+
+  /* premium extensions — aubergine depths derived from the brand purple */
+  --color-plum-950: #1c0a1a;
+  --color-plum-900: #2b1128;
+  --color-plum-800: #3f1a3b;
+  --color-plum-700: #572650;
+
+  /* warm neutrals — cream / champagne complements */
+  --color-cream: #f7f1e6;
+  --color-cream-soft: #fbf7ef;
+  --color-champagne: #d8bd93;
+  --color-ink: #2b1526;
+  --color-ink-soft: #59404f;
+
+  --font-heading: "Bahij Janna", "Helvetica Arabic", sans-serif;
+  --font-body: "Helvetica Arabic", Arial, sans-serif;
+  --font-display: "Cormorant Garamond", "Bahij Janna", Georgia, serif;
+}
+
+/* --- Base ------------------------------------------------------------------
+   Kept in @layer base so Tailwind utilities can override. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-ink);
+    background: var(--color-cream);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-cream);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-deep);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+}
+
+/* ===========================================================================
+   TYPE SYSTEM
+=========================================================================== */
+
+/* Latin serif display moments; Arabic gracefully falls back to Bahij Janna */
+.display {
+  font-family: var(--font-display);
+  font-weight: 520;
+  letter-spacing: 0.01em;
+}
+.display em,
+.display i {
+  font-style: italic;
+  font-weight: 480;
+}
+/* Bahij Janna carries Arabic display type at a heavier optical weight */
+[dir="rtl"] .display {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* Small-caps kicker line above headings */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.55;
+  flex: none;
+}
+/* Arabic script must never be letter-spaced (breaks letter joining) */
+[dir="rtl"] .eyebrow {
+  letter-spacing: 0;
+  font-size: 0.85rem;
+}
+
+/* Hairline gradient rule */
+.rule-luxe {
+  display: block;
+  height: 1px;
+  width: 100%;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--color-champagne) 55%, transparent) 18%,
+    color-mix(in srgb, var(--color-champagne) 55%, transparent) 82%,
+    transparent
+  );
+}
+
+/* ===========================================================================
+   SURFACES · TEXTURE · GLASS
+=========================================================================== */
+
+/* Leaves pattern recolored via mask so it works on any surface */
+.leaf-veil {
+  position: absolute;
+  inset: -14% 0;
+  pointer-events: none;
+  background-color: currentColor;
+  -webkit-mask-image: url("/images/branding/leaves-pattern.png");
+  mask-image: url("/images/branding/leaves-pattern.png");
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 760px auto;
+  mask-size: 760px auto;
+  opacity: 0.05;
+  will-change: transform;
+}
+
+/* Restrained glass panel for content floating over imagery */
+.glass-panel {
+  background: color-mix(in srgb, var(--color-plum-950) 42%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  box-shadow: 0 24px 60px -24px rgb(0 0 0 / 0.55);
+}
+
+/* Framed imagery: hairline champagne offset frame */
+.framed {
+  position: relative;
+  display: block;
+}
+.framed img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.framed::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  translate: 14px 14px;
+  border: 1px solid color-mix(in srgb, var(--color-champagne) 60%, transparent);
+  z-index: 0;
+}
+[dir="rtl"] .framed::before {
+  translate: -14px 14px;
+}
+.framed-plum::before {
+  border-color: color-mix(in srgb, var(--color-brand) 45%, transparent);
+}
+
+/* ===========================================================================
+   BUTTONS — hairline luxury rectangles, GPU-friendly hover
+=========================================================================== */
+.btn-luxe {
+  position: relative;
+  display: inline-block;
+  padding: 1.05rem 2.9rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px solid;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.35s ease, border-color 0.35s ease;
+}
+[dir="rtl"] .btn-luxe {
+  letter-spacing: 0;
+  font-size: 0.95rem;
+}
+/* sliding fill layer — transform only */
+.btn-luxe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+}
+[dir="rtl"] .btn-luxe::before {
+  transform-origin: 0% 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn-luxe::before {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+.btn-luxe:hover::before,
+.btn-luxe:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: 0% 50%;
+}
+[dir="rtl"] .btn-luxe:hover::before,
+[dir="rtl"] .btn-luxe:focus-visible::before {
+  transform-origin: 100% 50%;
+}
+
+/* ghost on dark surfaces */
+.btn-luxe-ghost {
+  color: var(--color-cream);
+  border-color: color-mix(in srgb, var(--color-cream) 55%, transparent);
+}
+.btn-luxe-ghost::before {
+  background: var(--color-cream);
+}
+.btn-luxe-ghost:hover,
+.btn-luxe-ghost:focus-visible {
+  color: var(--color-plum-950);
+  border-color: var(--color-cream);
+}
+
+/* filled plum on cream surfaces */
+.btn-luxe-plum {
+  color: var(--color-cream);
+  background: var(--color-plum-900);
+  border-color: var(--color-plum-900);
+}
+.btn-luxe-plum::before {
+  background: var(--color-brand);
+}
+.btn-luxe-plum:hover,
+.btn-luxe-plum:focus-visible {
+  border-color: var(--color-brand);
+}
+
+/* quiet outline on cream surfaces */
+.btn-luxe-outline {
+  color: var(--color-brand);
+  border-color: color-mix(in srgb, var(--color-brand) 45%, transparent);
+}
+.btn-luxe-outline::before {
+  background: var(--color-brand);
+}
+.btn-luxe-outline:hover,
+.btn-luxe-outline:focus-visible {
+  color: var(--color-cream);
+  border-color: var(--color-brand);
+}
+
+/* ===========================================================================
+   HEADER — floating, condenses to glass on scroll
+=========================================================================== */
+#site-header {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 50;
+  padding-block: 1.4rem;
+  transition: padding 0.4s ease, background-color 0.4s ease,
+    border-color 0.4s ease, box-shadow 0.4s ease;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+}
+#site-header .logo-main {
+  width: 74px;
+  transition: width 0.4s ease;
+  filter: drop-shadow(0 2px 10px rgb(0 0 0 / 0.35));
+}
+#site-header.shrinked {
+  padding-block: 0.5rem;
+  background: color-mix(in srgb, var(--color-plum-950) 85%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom-color: rgb(255 255 255 / 0.08);
+  box-shadow: 0 10px 40px -18px rgb(0 0 0 / 0.6);
+}
+#site-header.shrinked .logo-main {
+  width: 52px;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.6rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  transition: color 0.3s ease;
+}
+[dir="rtl"] .nav-link {
+  letter-spacing: 0;
+  font-size: 0.9rem;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--color-champagne);
+  transform: scaleX(0);
+  transform-origin: 50% 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nav-link::after {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+.nav-link:hover,
+.nav-link[aria-current="page"] {
+  color: var(--color-brand-light);
+}
+
+/* the external "Order Now" item becomes a bordered chip */
+.nav-cta {
+  border: 1px solid color-mix(in srgb, var(--color-champagne) 60%, transparent);
+  padding: 0.55rem 1.3rem;
+  color: var(--color-champagne);
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.nav-cta::after {
+  display: none;
+}
+.nav-cta:hover,
+.nav-cta:focus-visible {
+  background: var(--color-champagne);
+  border-color: var(--color-champagne);
+  color: var(--color-plum-950);
+}
+
+/* mobile overlay nav */
+#mobile-nav {
+  background: color-mix(in srgb, var(--color-plum-950) 93%, transparent);
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+}
+
+/* skip link */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  inset-inline-start: 0.75rem;
+  z-index: 100;
+  transform: translateY(-300%);
+  background: var(--color-cream);
+  color: var(--color-plum-950);
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ===========================================================================
+   HERO — immersive full-viewport slider
+=========================================================================== */
+.hero-luxe {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--color-plum-950);
+  color: var(--color-cream);
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-slide {
+    transition: opacity 1.4s ease-in-out, visibility 0s linear 1.4s;
+  }
+  .hero-slide.is-active {
+    transition: opacity 1.4s ease-in-out;
+  }
+}
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+.hero-slide .slide-media {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: 68% center;
+  background-repeat: no-repeat;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-slide.is-active .slide-media {
+    animation: hero-drift 10s ease-out both;
+  }
+}
+@keyframes hero-drift {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+/* layered scrim: side wash for copy + top wash for the nav + bottom anchor */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgb(28 10 26 / 0.75), transparent 28%),
+    linear-gradient(to top, rgb(28 10 26 / 0.9) 10%, transparent 48%),
+    linear-gradient(to right, rgb(28 10 26 / 0.93) 0%, rgb(28 10 26 / 0.7) 34%, rgb(28 10 26 / 0.14) 68%, rgb(28 10 26 / 0.4) 100%);
+}
+[dir="rtl"] .hero-scrim {
+  background:
+    linear-gradient(to bottom, rgb(28 10 26 / 0.75), transparent 28%),
+    linear-gradient(to top, rgb(28 10 26 / 0.9) 10%, transparent 48%),
+    linear-gradient(to left, rgb(28 10 26 / 0.93) 0%, rgb(28 10 26 / 0.7) 34%, rgb(28 10 26 / 0.14) 68%, rgb(28 10 26 / 0.4) 100%);
+}
+/* small screens: copy spans the full width, so the wash must too */
+@media (max-width: 767px) {
+  .hero-scrim,
+  [dir="rtl"] .hero-scrim {
+    background:
+      linear-gradient(to bottom, rgb(28 10 26 / 0.78), rgb(28 10 26 / 0.42) 30%, rgb(28 10 26 / 0.55) 55%, rgb(28 10 26 / 0.92) 88%);
+  }
+}
+.hero-title {
+  font-size: clamp(3.4rem, 9.5vw, 7.5rem);
+  line-height: 1.02;
+  color: var(--color-cream);
+  margin: 0;
+}
+/* thin line-style pager */
+.hero-pager {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.9rem;
+  z-index: 10;
+}
+.hero-pager button {
+  position: relative;
+  width: 3rem;
+  height: 20px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.hero-pager button::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 9px;
+  height: 2px;
+  background: color-mix(in srgb, var(--color-cream) 36%, transparent);
+  transition: background-color 0.3s ease;
+}
+.hero-pager button.is-active::after {
+  background: var(--color-champagne);
+}
+/* decorative scroll cue */
+.scroll-cue {
+  position: absolute;
+  bottom: 0;
+  inset-inline-end: clamp(1.5rem, 5vw, 4rem);
+  z-index: 5;
+  width: 1px;
+  height: 5.5rem;
+  background: color-mix(in srgb, var(--color-cream) 30%, transparent);
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 40%;
+    background: var(--color-champagne);
+    animation: cue-fall 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+}
+@keyframes cue-fall {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(260%);
+  }
+}
+
+/* ===========================================================================
+   PAGE HERO (inner pages) — deep plum band
+=========================================================================== */
+.page-hero-luxe {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 160% at 15% -20%, var(--color-plum-800), transparent 60%),
+    radial-gradient(110% 140% at 90% 120%, color-mix(in srgb, var(--color-brand) 28%, transparent), transparent 55%),
+    var(--color-plum-950);
+  color: var(--color-cream);
+  padding-top: clamp(8.5rem, 16vh, 12rem);
+  padding-bottom: clamp(3.5rem, 8vh, 6rem);
+}
+.page-hero-luxe h1 {
+  color: var(--color-cream);
+  font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+/* ===========================================================================
+   CHAPTERS (home split sections) — numbered editorial bands
+=========================================================================== */
+main {
+  counter-reset: chapter;
+}
+.chapter {
+  position: relative;
+  overflow: hidden;
+  counter-increment: chapter;
+  padding-block: clamp(5rem, 12vh, 9rem);
+}
+.chapter-dark {
+  background:
+    radial-gradient(90% 130% at 85% 0%, color-mix(in srgb, var(--color-brand) 22%, transparent), transparent 55%),
+    linear-gradient(165deg, var(--color-plum-900), var(--color-plum-950) 70%);
+  color: color-mix(in srgb, var(--color-cream) 88%, transparent);
+}
+.chapter-dark h2 {
+  color: var(--color-cream);
+}
+.chapter-cream {
+  background: var(--color-cream);
+  color: var(--color-ink-soft);
+}
+.chapter-cream h2 {
+  color: var(--color-plum-900);
+}
+.chapter-cream + .chapter-cream {
+  border-top: 1px solid color-mix(in srgb, var(--color-brand) 14%, transparent);
+}
+.chapter-num::before {
+  content: counter(chapter, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-weight: 420;
+  font-style: italic;
+  font-size: clamp(4rem, 7vw, 6.5rem);
+  line-height: 1;
+  display: block;
+  opacity: 0.18;
+}
+.chapter-dark .chapter-num::before {
+  color: var(--color-champagne);
+}
+.chapter-cream .chapter-num::before {
+  color: var(--color-brand);
+  opacity: 0.25;
+}
+.chapter h2 {
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 1.08;
+}
+.chapter strong {
+  font-weight: 700;
+}
+.chapter-dark strong {
+  color: var(--color-cream);
+}
+.chapter-cream strong {
+  color: var(--color-ink);
+}
+
+/* refined check list */
+.checked-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+.checked-list li {
+  position: relative;
+  padding-inline-start: 2.4rem;
+}
+.checked-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.42em;
+  width: 1.05em;
+  height: 1.05em;
+  background-color: var(--color-champagne);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 12.8l5.4 5.4L20.5 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 12.8l5.4 5.4L20.5 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.chapter-cream .checked-list li::before {
+  background-color: var(--color-brand);
+}
+
+/* ===========================================================================
+   CARDS
+=========================================================================== */
+.card-luxe {
+  position: relative;
+  display: block;
+  background: var(--color-cream-soft);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 16%, transparent);
+  padding: 2rem 1.5rem 1.75rem;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-luxe {
+    transition: border-color 0.35s ease, box-shadow 0.35s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-luxe:hover,
+  .card-luxe:focus-visible {
+    transform: translateY(-8px);
+  }
+}
+.card-luxe:hover,
+.card-luxe:focus-visible {
+  border-color: color-mix(in srgb, var(--color-brand) 45%, transparent);
+  box-shadow: 0 30px 50px -30px color-mix(in srgb, var(--color-plum-900) 50%, transparent);
+}
+/* top hairline accent that draws on hover */
+.card-luxe::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-brand), var(--color-brand-deep));
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+}
+[dir="rtl"] .card-luxe::before {
+  transform-origin: 100% 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-luxe::before {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+.card-luxe:hover::before,
+.card-luxe:focus-visible::before {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-luxe img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-luxe:hover img {
+    transform: scale(1.045);
+  }
+}
+/* product shots with baked-in white backgrounds melt into the cream card */
+.card-luxe img,
+.card-location-luxe img {
+  mix-blend-mode: multiply;
+}
+.card-luxe h2,
+.card-luxe h3 {
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-brand);
+  margin: 0 0 1.25rem;
+  transition: color 0.3s ease;
+}
+[dir="rtl"] .card-luxe h2,
+[dir="rtl"] .card-luxe h3 {
+  letter-spacing: 0;
+  font-size: 1.05rem;
+}
+.card-luxe:hover h2,
+.card-luxe:hover h3 {
+  color: var(--color-brand-deep);
+}
+
+/* distributor card */
+.card-location-luxe {
+  background: var(--color-cream-soft);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 16%, transparent);
+  padding: 1.4rem 1.1rem;
+  text-align: center;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-location-luxe {
+    transition: border-color 0.35s ease, box-shadow 0.35s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-location-luxe:hover {
+    transform: translateY(-6px);
+  }
+}
+.card-location-luxe:hover {
+  border-color: color-mix(in srgb, var(--color-brand) 40%, transparent);
+  box-shadow: 0 26px 44px -28px color-mix(in srgb, var(--color-plum-900) 45%, transparent);
+}
+.card-location-luxe img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.25rem;
+}
+
+/* round ghost icon buttons */
+.icon-circle,
+.icon-circle-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  color: var(--color-brand);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-brand) 38%, transparent);
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.icon-circle {
+  width: 38px;
+  height: 38px;
+}
+.icon-circle-lg {
+  width: 44px;
+  height: 44px;
+  color: var(--color-champagne);
+  border-color: color-mix(in srgb, var(--color-champagne) 42%, transparent);
+}
+.icon-circle:hover,
+.icon-circle:focus-visible {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+.icon-circle-lg:hover,
+.icon-circle-lg:focus-visible {
+  background: var(--color-champagne);
+  border-color: var(--color-champagne);
+  color: var(--color-plum-950);
+}
+.icon-circle svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+.icon-circle-lg svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* ===========================================================================
+   FAQ — hairline editorial accordion
+=========================================================================== */
+.faq details {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-brand) 20%, transparent);
+}
+.faq details:first-of-type {
+  border-top: 1px solid color-mix(in srgb, var(--color-brand) 20%, transparent);
+}
+.faq summary {
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  padding-block: 1.6rem;
+  padding-inline-end: 3rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.12rem;
+  color: var(--color-ink);
+  transition: color 0.3s ease;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary:hover,
+.faq details[open] summary {
+  color: var(--color-brand);
+}
+/* plus that rotates into a close mark */
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  inset-inline-end: 0.4rem;
+  top: 50%;
+  width: 1em;
+  margin-top: -0.85em;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.7em;
+  line-height: 1.7em;
+  color: var(--color-brand);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .faq summary::after {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq .faq-answer {
+  padding-block: 0 1.9rem;
+  max-width: 62ch;
+  color: var(--color-ink-soft);
+}
+.faq .faq-answer a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.faq .faq-answer strong {
+  color: var(--color-ink);
+}
+
+/* ===========================================================================
+   CONTACT FORM — underline fields on a cream card
+=========================================================================== */
+.contact-form input,
+.contact-form textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 35%, transparent);
+  padding: 0.9rem 0;
+  width: 100%;
+  color: var(--color-ink);
+  border-radius: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  transition: border-color 0.3s ease;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--color-ink-soft);
+  opacity: 1;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-brand);
+}
+.contact-form button[type="submit"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ===========================================================================
+   SCROLL REVEAL — opacity/transform only, JS-gated, reduced-motion-safe
+=========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  html.js .reveal.in-view {
+    opacity: 1;
+    transform: none;
+  }
+  html.js .reveal-1 { transition-delay: 0.1s; }
+  html.js .reveal-2 { transition-delay: 0.22s; }
+  html.js .reveal-3 { transition-delay: 0.34s; }
+}
+
+/* ===========================================================================
+   FOOTER
+=========================================================================== */
+.footer-luxe {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 150% at 50% 135%, color-mix(in srgb, var(--color-brand) 24%, transparent), transparent 60%),
+    var(--color-plum-950);
+  color: color-mix(in srgb, var(--color-cream) 82%, transparent);
+}
+.footer-luxe a:not(.icon-circle-lg) {
+  transition: color 0.3s ease;
+}
+.footer-luxe a:not(.icon-circle-lg):hover {
+  color: var(--color-brand-light);
+}

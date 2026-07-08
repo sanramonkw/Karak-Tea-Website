@@ -1,0 +1,17 @@
+---
+/**
+ * Decorative oversized-type marquee of the brand hashtag.
+ * Transform-only animation, frozen under prefers-reduced-motion.
+ */
+import { SITE } from '../data/site';
+const isAr = Astro.url.pathname.startsWith('/ar');
+const hashtag = isAr ? SITE.hashtagAr : SITE.hashtagEn;
+---
+
+<div class="hashtag-band border-y border-brand-light/40 bg-white py-7" aria-hidden="true">
+  <div class="hashtag-track">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <span class={i % 2 === 0 ? 'text-electric' : 'text-outline'}>{hashtag}</span>
+    ))}
+  </div>
+</div>

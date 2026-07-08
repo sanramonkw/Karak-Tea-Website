@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSlider from '../components/HeroSlider.astro';
+import SplitSection from '../components/SplitSection.astro';
+import HashtagBand from '../components/HashtagBand.astro';
+import { SITE } from '../data/site';
+
+const sliderText =
+  'A best-selling tea across the Gulf region. Ancient in its ingredients, unique in its flavor, and distinguished in its preparation, our karak tea premixes come in a variety of options to satisfy all tastes and desires. Whether it is sweetened or unsweetened, all flavors can be prepared in less than a minute! Sit back, relax, and enjoy your warm cup of karak tea.';
+
+const slides = [
+  { image: '/images/slide01b.jpg', title: 'Karak Tea', text: sliderText, ctaLabel: 'Shop Now', ctaHref: SITE.shop.en },
+  { image: '/images/slide01a.jpg', title: 'Karak Tea', text: sliderText, ctaLabel: 'Shop Now', ctaHref: 'https://srkw.co/' },
+  { image: '/images/slide01d.jpg', title: 'Karak Tea', text: sliderText, ctaLabel: 'Shop Now', ctaHref: 'https://srkw.co/' },
+];
+---
+
+<BaseLayout
+  title="Home - Karak Tea"
+  description="Welcome to Karak Tea, where we are passionate about providing Karak lovers with the finest ingredients from around the world, hand-selected."
+  lang="en"
+  path="/"
+  alternatePath="/ar/"
+>
+  <div id="top"></div>
+
+  <HeroSlider slides={slides} />
+
+  <SplitSection variant={2} index="01" image="/images/1.webp" imageAlt="A warm cup of Karak Tea" title="Karak Tea">
+    <p>
+      This type of tea is different than any other known conventional teas. Karak is a word that
+      represents the process of repeating the Tea-Boiling process to come up with a strong tea. It
+      is an indian “Urdu” term that was known later on by the people from the Gulf region through
+      intensive business trading with India while Gulf traders journeyed to India to bring various
+      goods. From that time the journey of Karak Tea has begun spreading to the Gulf countries.
+    </p>
+  </SplitSection>
+
+  <SplitSection variant={1} index="02" image="/images/2-eng.webp" imageAlt="Karak Tea premix packs and flavors" title="Karak Tea Product">
+    <ul class="checked-list">
+      <li>
+        Karak Teas are made of the finest <strong>Kenyan tea</strong> enriched with
+        <strong> milk</strong> and <strong>premium sugarcane</strong> extract. It’s optionally
+        complimented with exotic flavors to bring the most refined experience. Our flavors are
+        <strong>cardamom</strong>, <strong>Kashmiri saffron</strong>, <strong>Coffee</strong>,
+        <strong>ginger</strong> and <strong>cinnamon</strong>.
+      </li>
+      <li>
+        The ingredients’ <strong>Taste</strong> and <strong>quality</strong> are well preserved by
+        our premium easy tear packs. Also, it comes in
+        <strong>Dulce Gusto compatible capsules</strong>.
+      </li>
+    </ul>
+  </SplitSection>
+
+  <HashtagBand />
+
+  <SplitSection variant={2} index="03" image="/images/3.webp" imageAlt="Preparing traditional Karak Tea" title="Our Journey">
+    <p>
+      Our journey started by developing a distinguished Karak Tea product that is authentic and can
+      be prepared in a matter of seconds, maintaining the original aroma and the richness of the
+      traditional Karak Tea. Avoiding any preservatives or artificial food coloring, we have
+      succeeded in producing our Karak Tea that has milk calcium, vitamins and beneficial minerals.
+      We have developed more flavors in our long journey and each flavor is a star by its own, we
+      spent years serving love and we consider ourselves at the beginning of our journey as we have
+      lots and lots to provide.
+    </p>
+  </SplitSection>
+
+  <SplitSection variant={1} index="04" image="/images/4-eng.webp" imageAlt="Karak Tea brand products" title="About Us">
+    <ul class="checked-list">
+      <li>
+        Karak Tea, is a registered trademark and its propriety of
+        <strong><a href="https://sanramonkw.com/en/">San Ramon General Trading</a>,</strong>
+        manufactured in <strong>India</strong> by a dedicated Karak Tea production factory
+        “<strong>Aastha Enterprises</strong>”.
+      </li>
+      <li>
+        We pride ourselves on being the <strong>first</strong> choice for Karak Tea lovers
+        worldwide!. we deliver our products domestically and internationally B2B and B2C.
+      </li>
+      <li>
+        Karak Tea instant premixes are<strong> premium product</strong>. “Have it once and we
+        guarantee that it will be the top favorite on your hot-drinks list!”
+      </li>
+    </ul>
+  </SplitSection>
+</BaseLayout>
