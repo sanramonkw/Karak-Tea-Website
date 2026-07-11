@@ -3,6 +3,8 @@
  * Bento product card — interactive tile with gradient-shift hover,
  * lift + tilt, and a reveal-on-hover shop hint.
  */
+import { withBase } from '../utils/paths';
+
 interface Props {
   name: string;
   image: string;
@@ -22,6 +24,6 @@ const ctaLabel = isAr ? 'تسوق الآن' : 'Shop Now';
   class:list={['bento-card', className]}
 >
   <h2>{name}</h2>
-  <img src={image} alt={name} width="550" height="550" loading="lazy" class="mx-auto w-full" />
+  <img src={withBase(image)} alt={name} width="550" height="550" loading="lazy" class="mx-auto w-full" />
   <span class="card-cta" aria-hidden="true">{ctaLabel} &#8599;</span>
 </a>

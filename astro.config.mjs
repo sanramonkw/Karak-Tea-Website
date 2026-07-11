@@ -4,7 +4,9 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://karaktea.com',
+  // site: 'https://karaktea.com',
+  site: 'https://sanramonkw.github.io',
+  base: '/Karak-Tea-Website/',
   integrations: [
     sitemap({
       i18n: {

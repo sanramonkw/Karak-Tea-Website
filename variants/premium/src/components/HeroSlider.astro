@@ -5,6 +5,8 @@
  * treatment is new: layered plum scrims, a champagne leaf veil, serif
  * display title, hairline ghost CTA and line-style pager.
  */
+import { withBase } from '../utils/paths';
+
 interface Slide {
   image: string;
   title: string;
@@ -25,8 +27,8 @@ const { slides } = Astro.props;
           the slider script after window load (they can only ever show via JS) */}
       <div
         class="slide-media"
-        style={i === 0 ? `background-image: url('${slide.image}');` : undefined}
-        data-bg={i === 0 ? undefined : slide.image}
+        style={i === 0 ? `background-image: url('${withBase(slide.image)}');` : undefined}
+        data-bg={i === 0 ? undefined : withBase(slide.image)}
       ></div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="leaf-veil text-champagne" data-parallax aria-hidden="true"></div>

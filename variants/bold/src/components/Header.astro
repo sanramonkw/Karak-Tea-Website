@@ -1,5 +1,6 @@
 ---
 import { NAV_EN, NAV_AR, SITE } from '../data/site';
+import { withBase } from '../utils/paths';
 
 interface Props {
   lang?: 'en' | 'ar';
@@ -11,7 +12,8 @@ const langSwitch = lang === 'ar'
   ? { label: 'EN', href: '/' }
   : { label: 'العربية', href: '/ar/' };
 const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
-const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname.replace(new RegExp(`^${base}`), '') || '/';
 const isHome = currentPath === '/' || currentPath === '/ar/';
 // last nav item is the external "Order Now" — rendered as a filled pill CTA
 const links = nav.filter((item) => !item.external);
@@ -20,16 +22,16 @@ const orderItem = nav.find((item) => item.external);
 
 <header id="site-header">
   <div class="header-shell">
-    <a href={homeHref} title={siteName} rel="home" class="flex shrink-0 items-center gap-2 ps-1">
+    <a href={withBase(homeHref)} title={siteName} rel="home" class="flex shrink-0 items-center gap-2 ps-1">
       <img
-        src="/images/branding/Karak_New.png"
+        src={withBase('/images/branding/Karak_New.png')}
         alt={siteName}
         class="h-auto w-[56px]"
         width="220"
         height="204"
       />
       <img
-        src="/images/branding/logo-text.png"
+        src={withBase('/images/branding/logo-text.png')}
         alt=""
         aria-hidden="true"
         class="hidden h-auto w-[84px] xl:block"
@@ -41,7 +43,7 @@ const orderItem = nav.find((item) => item.external);
         {links.map((item) => (
           <li>
             <a
-              href={item.href}
+              href={item.external ? item.href : withBase(item.href)}
               aria-current={currentPath === item.href && !isHome ? 'page' : undefined}
               class="nav-link"
             >
@@ -51,7 +53,7 @@ const orderItem = nav.find((item) => item.external);
         ))}
         <li>
           <a
-            href={langSwitch.href}
+            href={withBase(langSwitch.href)}
             lang={lang === 'ar' ? 'en' : 'ar'}
             class="nav-link"
           >
@@ -99,13 +101,13 @@ const orderItem = nav.find((item) => item.external);
   >
     &times;
   </button>
-  <img src="/images/branding/Karak_New.png" alt={siteName} class="mb-8 h-16 w-auto self-start" />
+  <img src={withBase('/images/branding/Karak_New.png')} alt={siteName} class="mb-8 h-16 w-auto self-start" />
   <nav aria-label={lang === 'ar' ? 'قائمة الجوال' : 'Mobile navigation'}>
     <ul class="space-y-3">
       {links.map((item) => (
         <li>
           <a
-            href={item.href}
+            href={item.external ? item.href : withBase(item.href)}
             class="inline-block font-[family-name:var(--font-heading)] text-4xl font-bold text-white"
           >
             {item.label}
@@ -126,7 +128,7 @@ const orderItem = nav.find((item) => item.external);
       )}
       <li class="pt-1">
         <a
-          href={langSwitch.href}
+          href={withBase(langSwitch.href)}
           lang={lang === 'ar' ? 'en' : 'ar'}
           class="inline-block font-[family-name:var(--font-heading)] text-2xl font-bold text-brand-light"
         >

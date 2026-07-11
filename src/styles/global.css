@@ -10,21 +10,21 @@
 --------------------------------------------------------------------------- */
 @font-face {
   font-family: "Helvetica Arabic";
-  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  src: url("../assets/fonts/helvetica-arabic.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -144,26 +144,26 @@
 /* #wrap-section.half-background1 — leaves pattern over purple/white split */
 .half-bg-1 {
   background:
-    url("/images/branding/leaves-pattern.png") repeat,
+    url("../assets/images/leaves-pattern.png") repeat,
     linear-gradient(to left, var(--color-brand) 50%, #fff 50%);
   background-position: center;
 }
 /* #wrap-section.half-background2 — leaves pattern over white/light-purple split */
 .half-bg-2 {
   background:
-    url("/images/branding/leaves-pattern.png") repeat,
+    url("../assets/images/leaves-pattern.png") repeat,
     linear-gradient(to left, #fff 50%, var(--color-brand-light) 50%);
   background-position: center;
   color: #282828;
 }
 [dir="rtl"] .half-bg-1 {
   background:
-    url("/images/branding/leaves-pattern.png") repeat,
+    url("../assets/images/leaves-pattern.png") repeat,
     linear-gradient(to right, var(--color-brand) 50%, #fff 50%);
 }
 [dir="rtl"] .half-bg-2 {
   background:
-    url("/images/branding/leaves-pattern.png") repeat,
+    url("../assets/images/leaves-pattern.png") repeat,
     linear-gradient(to right, #fff 50%, var(--color-brand-light) 50%);
 }
 
@@ -183,7 +183,7 @@
   padding: 0;
 }
 .checked-list li {
-  background: url("/images/branding/check-white.png") no-repeat left 5px;
+  background: url("../assets/images/check-white.png") no-repeat left 5px;
   background-size: 24px;
   line-height: 25px;
   padding-left: 40px;
@@ -199,7 +199,7 @@
 .page-hero {
   padding-top: 140px;
   padding-bottom: 20px;
-  background: url("/images/branding/leaves-pattern.png") no-repeat left bottom #fcfcfc;
+  background: url("../assets/images/leaves-pattern.png") no-repeat left bottom #fcfcfc;
 }
 .page-hero h1 {
   font-size: 48px;

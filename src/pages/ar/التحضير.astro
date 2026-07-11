@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
+import { withBase } from '../../utils/paths';
 ---
 
 <BaseLayout
@@ -16,7 +17,7 @@ import PageHero from '../../components/PageHero.astro';
   <section class="py-20">
     <div class="mx-auto max-w-5xl px-4 text-center">
       <img
-        src="/images/Easy-to-prepare-arabic-scaled.webp"
+        src={withBase('/images/Easy-to-prepare-arabic-scaled.webp')}
         alt="خطوات تحضير شاي كرك — سهل التحضير"
         class="mx-auto mb-10 w-full"
       />

@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../utils/paths';
+
 interface Props {
   country: string;
   image: string;
@@ -11,7 +13,7 @@ const { country, image, website, instagram, email, phone } = Astro.props;
 ---
 
 <article class="card-location-luxe">
-  <img src={image} alt={`${country} distributor flag`} width="300" height="202" loading="lazy" />
+  <img src={withBase(image)} alt={`${country} distributor flag`} width="300" height="202" loading="lazy" />
   <p class="mb-3 flex justify-center gap-2">
     {instagram && (
       <a href={instagram} target="_blank" rel="noopener noreferrer" aria-label={`${country} Instagram`} class="icon-circle">

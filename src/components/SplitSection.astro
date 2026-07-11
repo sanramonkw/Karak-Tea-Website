@@ -4,6 +4,8 @@
  * a split-color band (leaves pattern overlay) with image on one side
  * and heading + copy on the other.
  */
+import { withBase } from '../utils/paths';
+
 interface Props {
   variant: 1 | 2; // 1 = purple/white (white text), 2 = white/light purple
   image: string;
@@ -23,7 +25,7 @@ const { variant, image, imageAlt = '', title } = Astro.props;
     {variant === 1 ? (
       <>
         <div class="md:col-span-5 md:px-[10px]">
-          <img src={image} alt={imageAlt} loading="lazy" class="w-full border border-white" />
+          <img src={withBase(image)} alt={imageAlt} loading="lazy" class="w-full border border-white" />
         </div>
         <div class="md:col-span-6 md:col-start-7 md:px-[50px]">
           <h2 class="mb-[10px] mt-[60px] text-[40px] leading-[40px] text-white">{title}</h2>
@@ -43,7 +45,7 @@ const { variant, image, imageAlt = '', title } = Astro.props;
           </div>
         </div>
         <div class="md:col-span-5 md:col-start-8 md:px-[10px]">
-          <img src={image} alt={imageAlt} loading="lazy" class="w-full border border-white" />
+          <img src={withBase(image)} alt={imageAlt} loading="lazy" class="w-full border border-white" />
         </div>
       </>
     )}

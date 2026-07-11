@@ -1,5 +1,6 @@
 ---
 import { NAV_EN, NAV_AR, SITE } from '../data/site';
+import { withBase } from '../utils/paths';
 
 interface Props {
   lang?: 'en' | 'ar';
@@ -11,7 +12,10 @@ const langSwitch = lang === 'ar'
   ? { label: 'EN', href: '/' }
   : { label: 'العربية', href: '/ar/' };
 const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
-const currentPath = Astro.url.pathname;
+// Astro.url.pathname includes the base prefix at runtime; strip it so
+// comparisons against the base-agnostic hrefs above keep working.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname.replace(new RegExp(`^${base}`), '') || '/';
 const isHome = currentPath === '/' || currentPath === '/ar/';
 // Original theme nav link: black, 16px, 'Font-Bold', uppercase; active page purple.
 const navLinkBase =
@@ -26,16 +30,16 @@ const navLinkBase =
   ]}
 >
   <div class="mx-auto flex max-w-7xl items-start justify-between px-4">
-    <a href={homeHref} title={siteName} rel="home" class="flex items-start">
+    <a href={withBase(homeHref)} title={siteName} rel="home" class="flex items-start">
       <img
-        src="/images/branding/Karak_New.png"
+        src={withBase('/images/branding/Karak_New.png')}
         alt={siteName}
         class="logo-main h-auto w-[120px]"
         width="220"
         height="204"
       />
       <img
-        src="/images/branding/logo-text.png"
+        src={withBase('/images/branding/logo-text.png')}
         alt=""
         aria-hidden="true"
         class="logo-text ms-[15px] mt-[22px] hidden h-auto w-[110px] sm:block"
@@ -47,7 +51,7 @@ const navLinkBase =
         {nav.map((item) => (
           <li class="mx-[15px]">
             <a
-              href={item.href}
+              href={item.external ? item.href : withBase(item.href)}
               target={item.external ? '_blank' : undefined}
               rel={item.external ? 'noopener noreferrer' : undefined}
               aria-current={currentPath === item.href ? 'page' : undefined}
@@ -64,7 +68,7 @@ const navLinkBase =
         ))}
         <li class="mx-[15px]">
           <a
-            href={langSwitch.href}
+            href={withBase(langSwitch.href)}
             lang={lang === 'ar' ? 'en' : 'ar'}
             class:list={[navLinkBase, 'text-black']}
           >
@@ -100,13 +104,13 @@ const navLinkBase =
   >
     &times;
   </button>
-  <img src="/images/branding/Karak_New.png" alt={siteName} class="mb-6 h-20 w-auto" />
+  <img src={withBase('/images/branding/Karak_New.png')} alt={siteName} class="mb-6 h-20 w-auto" />
   <nav aria-label={lang === 'ar' ? 'قائمة الجوال' : 'Mobile navigation'}>
     <ul class="space-y-4">
       {nav.map((item) => (
         <li>
           <a
-            href={item.href}
+            href={item.external ? item.href : withBase(item.href)}
             target={item.external ? '_blank' : undefined}
             rel={item.external ? 'noopener noreferrer' : undefined}
             class="font-[family-name:var(--font-heading)] text-2xl font-bold text-brand"
@@ -117,7 +121,7 @@ const navLinkBase =
       ))}
       <li>
         <a
-          href={langSwitch.href}
+          href={withBase(langSwitch.href)}
           lang={lang === 'ar' ? 'en' : 'ar'}
           class="font-[family-name:var(--font-heading)] text-2xl font-bold text-brand-deep"
         >

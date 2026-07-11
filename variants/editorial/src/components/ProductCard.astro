@@ -1,5 +1,7 @@
 ---
 /** Catalogue plate: running numeral (CSS counter), mounted image, small-caps name. */
+import { withBase } from '../utils/paths';
+
 interface Props {
   name: string;
   image: string;
@@ -10,6 +12,6 @@ const { name, image, href } = Astro.props;
 
 <a href={href} target="_blank" rel="noopener noreferrer" class="card-product">
   <span class="plate-no" aria-hidden="true"></span>
-  <img src={image} alt={name} width="550" height="550" loading="lazy" class="w-full" />
+  <img src={withBase(image)} alt={name} width="550" height="550" loading="lazy" class="w-full" />
   <h2>{name}</h2>
 </a>

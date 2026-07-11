@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/paths';
 ---
 
 <BaseLayout
@@ -16,7 +17,7 @@ import PageHero from '../components/PageHero.astro';
   <section class="py-14 md:py-20">
     <div class="mx-auto max-w-4xl px-5 md:px-10">
       <span class="plate mb-12 block"><img
-        src="/images/Easy-to-prepare-English-scaled.webp"
+        src={withBase('/images/Easy-to-prepare-English-scaled.webp')}
         alt="Karak Tea preparation steps — easy to prepare"
         class="w-full"
       /></span>

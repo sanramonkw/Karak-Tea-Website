@@ -5,6 +5,8 @@
  * Same props/content as master; the visual system is new — chapter numeral,
  * eyebrow rule, serif display heading, framed photography, leaf veil.
  */
+import { withBase } from '../utils/paths';
+
 interface Props {
   variant: 1 | 2; // 1 = dark plum chapter, 2 = cream chapter
   image: string;
@@ -29,7 +31,7 @@ const dark = variant === 1;
       ]}
     >
       <figure class:list={['framed', !dark && 'framed-plum']}>
-        <img src={image} alt={imageAlt} loading="lazy" width="800" height="800" />
+        <img src={withBase(image)} alt={imageAlt} loading="lazy" width="800" height="800" />
       </figure>
     </div>
 
