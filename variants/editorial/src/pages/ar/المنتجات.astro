@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { SITE } from '../../data/site';
+import { withBase } from '../../utils/paths';
 
 const shop = SITE.shop.productsTagAr;
 const products = [
@@ -27,7 +28,7 @@ const products = [
   title="المنتجات - شاي كرك"
   description="اكتشف خلطات شاي كرك سريعة التحضير: سادة، هيل، زعفران، زنجبيل، قهوة وقرفة — محلاة أو بدون سكر — بالإضافة إلى آيس كرك وكبسولات دولسي جوستو."
   lang="ar"
-  path="/ar/المنتجات/"
+  path="${withBase('/ar/المنتجات/')}"
   alternatePath="/products/"
 >
   <div id="top"></div>

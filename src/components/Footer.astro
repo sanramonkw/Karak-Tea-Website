@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../data/site';
+import { withBase } from '../utils/paths';
 
 interface Props {
   lang?: 'en' | 'ar';
@@ -38,7 +39,7 @@ const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
 
       <div class="text-center">
         <img
-          src="/images/branding/Karak_New.png"
+          src={withBase('/images/branding/Karak_New.png')}
           alt={siteName}
           class="mx-auto h-20 w-auto"
           width="220"

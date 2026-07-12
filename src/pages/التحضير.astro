@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/paths';
 ---
 
 <BaseLayout
@@ -28,7 +29,7 @@ import PageHero from '../components/PageHero.astro';
             <div class="md:pt-14">
               <div class="media-frame">
                 <img
-                  src="/images/Easy-to-prepare-arabic-scaled.webp"
+                  src={withBase('/images/Easy-to-prepare-arabic-scaled.webp')}
                   alt="خطوات تحضير شاي كرك — سهل التحضير"
                   width="2560"
                   height="1707"

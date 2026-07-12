@@ -12,21 +12,21 @@
 /* --- Brand fonts (self-hosted, from the original WP theme) --------------- */
 @font-face {
   font-family: "Helvetica Arabic";
-  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  src: url("../assets/fonts/helvetica-arabic.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -34,14 +34,14 @@
 /* --- Complementary display serif (latin subset, variable weight) --------- */
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("/fonts/CormorantGaramond-var.woff2") format("woff2");
+  src: url("../assets/fonts/CormorantGaramond-var.woff2") format("woff2");
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Cormorant Garamond";
-  src: url("/fonts/CormorantGaramond-Italic-var.woff2") format("woff2");
+  src: url("../assets/fonts/CormorantGaramond-Italic-var.woff2") format("woff2");
   font-weight: 300 700;
   font-style: italic;
   font-display: swap;
@@ -182,8 +182,8 @@
   inset: -14% 0;
   pointer-events: none;
   background-color: currentColor;
-  -webkit-mask-image: url("/images/branding/leaves-pattern.png");
-  mask-image: url("/images/branding/leaves-pattern.png");
+  -webkit-mask-image: url("../assets/images/leaves-pattern.png");
+  mask-image: url("../assets/images/leaves-pattern.png");
   -webkit-mask-repeat: repeat;
   mask-repeat: repeat;
   -webkit-mask-size: 760px auto;

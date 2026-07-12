@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../data/site';
+import { withBase } from '../utils/paths';
 
 interface Props {
   lang?: 'en' | 'ar';
@@ -17,7 +18,7 @@ const hashtag = lang === 'ar' ? SITE.hashtagAr : SITE.hashtagEn;
   <div class="mx-auto max-w-[1360px] px-5 md:px-10">
     <div class="flex flex-col items-center gap-8 border-b border-hairline py-14 text-center">
       <img
-        src="/images/branding/Karak_New.png"
+        src={withBase('/images/branding/Karak_New.png')}
         alt=""
         aria-hidden="true"
         class="h-14 w-auto"

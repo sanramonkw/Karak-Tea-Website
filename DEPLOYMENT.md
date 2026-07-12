@@ -13,9 +13,67 @@ process in production.**
 - `npm run build` → expect **12 pages** (6 AR at root + 6 EN under `/en/`) plus
   `sitemap-index.xml`, `sitemap-0.xml`, `robots.txt`, `llms.txt`, fonts and
   images. Build must end with `12 page(s) built` and no errors.
-- **No environment variables** are needed — there is no `.env`, no secrets.
+- **No environment variables** are needed for a production build — there is
+  no `.env`, no secrets. **Do not set `DEPLOY_TARGET` for production.** See
+  "GitHub Pages review deploys (`DEPLOY_TARGET=pages`)" below for the one
+  supported env var and when (not) to use it.
 - Local check: `npx astro preview` and click through AR (root) + EN (`/en/`)
   pages.
+
+## GitHub Pages review deploys (`DEPLOY_TARGET=pages`)
+
+Besides the real production deploy (this section covers), the team also
+publishes a **review build** to GitHub Pages
+(`sanramonkw.github.io/Karak-Tea-Website/`) so stakeholders can preview the
+master design *and* the `premium`/`editorial` alternative variants side by
+side, without touching production DNS/hosting.
+
+- `astro.config.mjs` reads `process.env.DEPLOY_TARGET`:
+  - **unset (default, production):** `site: 'https://karaktea.com'`,
+    `base: '/'`. `npm run build` in this mode is what actually ships to
+    karaktea.com — canonicals, hreflang, and every internal link/asset URL
+    are root-relative with no path prefix.
+  - **`DEPLOY_TARGET=pages`:** `site: 'https://sanramonkw.github.io'`,
+    `base: '/Karak-Tea-Website/'`. All internal hrefs and asset `src`/CSS
+    `url()` references that go through the `withBase()` helper
+    (`src/utils/paths.ts`, wrapping `import.meta.env.BASE_URL`) pick up the
+    `/Karak-Tea-Website/` prefix so the site works as a GitHub *project*
+    page. **Canonical URLs and hreflang alternates are deliberately left
+    pointing at `https://karaktea.com` even in this mode** (they're derived
+    from `SITE.url` in `src/data/site.ts`, not from Astro's `site`/`base`) —
+    the review deploy must never claim to be the canonical version of the
+    page.
+  - `variants/premium/astro.config.mjs` and `variants/editorial/astro.config.mjs`
+    are **not** env-driven — they're only ever built for the Pages review
+    site, so their `site`/`base` are hardcoded to
+    `https://sanramonkw.github.io` + `/Karak-Tea-Website/variants/<name>/`.
+- **One-command build + publish:**
+  - `npm run build:all` (`bash scripts/build-all.sh`) — builds the master
+    with `DEPLOY_TARGET=pages`, builds `variants/premium` and
+    `variants/editorial`, and assembles everything into one combined
+    `dist/` (`dist/` = master, `dist/variants/premium/`,
+    `dist/variants/editorial/`). `variants/bold/` no longer exists as a
+    separate build — it *is* the master now.
+  - `npm run deploy:all` (`bash scripts/build-all.sh && bash scripts/publish-dist.sh`)
+    — also pushes the combined `dist/` to the repo's `gh-pages` branch.
+    `publish-dist.sh` is Windows-safe (runs `git add -A` from inside `dist/`
+    instead of shelling out through the `gh-pages` npm package, which can hit
+    `ENAMETOOLONG` on Windows) and touches `.nojekyll` so GitHub Pages serves
+    the `_astro/` (underscore-prefixed) asset directory.
+  - `public/.nojekyll` is committed so **every** build already ships a
+    `.nojekyll` in `dist/`, not just the Pages review one — GitHub Pages is
+    the only host that cares, and it's a no-op zero-byte file everywhere
+    else.
+- **When touching base-path logic:** if you add a new internal `href`/`src`/
+  CSS `url()` in `src/`, route it through `withBase()` (components — see
+  `src/components/Header.astro`, `HeroSlider.astro`, `ProductCard.astro`,
+  `DistributorCard.astro`, `SplitSection.astro`, `Footer.astro`,
+  `src/layouts/BaseLayout.astro` for the existing pattern) or leave it as an
+  absolute URL (external links, `mailto:`, `tel:`) which never needs
+  prefixing. CSS-referenced fonts/images live in `src/assets/` (not
+  `public/`) specifically so Vite rewrites their URLs with the correct
+  base/hash automatically; don't add new self-hosted font/image references
+  under `public/` if they're only ever used from CSS `url()`.
 
 ## URL behavior — Arabic-first (root), English under `/en/`
 
@@ -127,6 +185,12 @@ but treat wiring it as a launch-week task, not a someday task.
 
 ## Pre-launch checklist
 
+0. **Build production with a clean environment — do not set `DEPLOY_TARGET`.**
+   The production build/deploy pipeline must run plain `npm run build` (no
+   `DEPLOY_TARGET` env var). `DEPLOY_TARGET=pages` is only for the GitHub
+   Pages review deploy (see "GitHub Pages review deploys" above) — shipping
+   a `DEPLOY_TARGET=pages` build to karaktea.com would prefix every internal
+   link/asset with `/Karak-Tea-Website/` and 404 the whole site.
 1. **DNS cutover + retire the old origin.** The current WP origin (Kinsta
    behind Cloudflare) has a known vhost mix-up: it intermittently serves
    *other tenants' sites* on karaktea.com URLs. After cutover, verify the old

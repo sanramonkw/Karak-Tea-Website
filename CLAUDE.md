@@ -77,6 +77,32 @@ See **`DEPLOYMENT.md`** (developer guide — read before deploy): pure static
 URLs *and* the previous EN-root/`/ar/`-prefixed URL scheme, encoded-Arabic-URL
 proxy note, analytics re-add, pre-launch checklist and post-launch smoke test.
 
+**Two build modes, one env var — `DEPLOY_TARGET`:**
+
+- **Production** (`npm run build`, no env var set): `site:
+  'https://karaktea.com'`, `base: '/'`. This is the only build that ships to
+  the real domain — never set `DEPLOY_TARGET` for it.
+- **GitHub Pages review deploy** (`DEPLOY_TARGET=pages npm run build`, or
+  `npm run build:all` / `npm run deploy:all`): `site:
+  'https://sanramonkw.github.io'`, `base: '/Karak-Tea-Website/'`, so the site
+  works as a GitHub *project* page at
+  `sanramonkw.github.io/Karak-Tea-Website/`. `scripts/build-all.sh` builds
+  this master plus the `variants/premium` and `variants/editorial`
+  alternative designs (each with its own hardcoded Pages base) into one
+  combined `dist/` for stakeholder review; `scripts/publish-dist.sh` pushes
+  it to the repo's `gh-pages` branch. `variants/bold/` no longer exists as a
+  separate variant build — it *is* the promoted master now.
+- All root-relative internal `href`s and asset `src`/CSS `url()`s go through
+  the `withBase()` helper (`src/utils/paths.ts`, wraps
+  `import.meta.env.BASE_URL`) so they resolve correctly in both modes.
+  Canonical URLs and hreflang alternates are **not** run through `withBase()`
+  — they're built from the fixed `SITE.url` (`https://karaktea.com`) in
+  `src/data/site.ts` so the Pages review deploy never claims to be the
+  canonical version of a page. CSS-referenced fonts/images live in
+  `src/assets/` (not `public/`) so Vite rewrites their URLs with the correct
+  base automatically — follow that pattern for any new self-hosted
+  font/image referenced from CSS `url()`.
+
 ## i18n / RTL architecture — Arabic is the default locale
 
 Mirrors the pattern used on marshmallows.co:

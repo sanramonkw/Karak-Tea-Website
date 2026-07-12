@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/site';
+import { withBase } from '../../utils/paths';
 ---
 
 <BaseLayout
@@ -23,7 +24,7 @@ import { SITE } from '../../data/site';
         class="media-frame"
       >
         <img
-          src="/images/English-scaled.webp"
+          src={withBase('/images/English-scaled.webp')}
           alt="Karak Tea vending machine"
           width="960"
           height="774"

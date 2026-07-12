@@ -6,6 +6,7 @@
  * swaps with the active slide, exactly like the original slider).
  */
 import { SITE } from '../data/site';
+import { withBase } from '../utils/paths';
 
 interface Slide {
   image: string;
@@ -65,7 +66,7 @@ const hashtag = isAr ? SITE.hashtagAr : SITE.hashtagEn;
         {slides.map((slide, i) => (
           <div
             class:list={['hero-slide', { 'is-active': i === 0 }]}
-            style={`background-image: url('${slide.image}');`}
+            style={`background-image: url('${withBase(slide.image)}');`}
           />
         ))}
       </div>

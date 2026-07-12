@@ -7,21 +7,21 @@
 --------------------------------------------------------------------------- */
 @font-face {
   font-family: "Helvetica Arabic";
-  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  src: url("../assets/fonts/helvetica-arabic.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -109,7 +109,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/images/branding/leaves-pattern.png") repeat center;
+  background: url("../assets/images/leaves-pattern.png") repeat center;
   opacity: 0.5;
   pointer-events: none;
 }
@@ -539,7 +539,7 @@ html.no-js [data-reveal] {
   height: 2.2rem;
   border-radius: 0.8rem;
   background:
-    url("/images/branding/check-white.png") no-repeat center / 1.15rem,
+    url("../assets/images/check-white.png") no-repeat center / 1.15rem,
     linear-gradient(135deg, var(--color-brand), var(--color-brand-deep));
   box-shadow: 0 6px 16px rgb(185 24 119 / 0.35);
 }

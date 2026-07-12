@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/site';
+import { withBase } from '../../utils/paths';
 ---
 
 <BaseLayout
@@ -18,7 +19,7 @@ import { SITE } from '../../data/site';
     <div class="mx-auto max-w-5xl px-5 text-center md:px-10">
       <a href={SITE.shop.vendingTagAr} target="_blank" rel="noopener noreferrer" class="framed framed-plum reveal block">
         <img
-          src="/images/Arabic-scaled.webp"
+          src={withBase('/images/Arabic-scaled.webp')}
           alt="آلة توزيع شاي كرك"
           width="960"
           height="774"

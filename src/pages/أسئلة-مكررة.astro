@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import { withBase } from '../utils/paths';
 
 const faqs = [
   {
@@ -41,13 +42,13 @@ const faqs = [
   {
     q: 'ما هي منتجاتكم؟',
     aHtml:
-      'يمكنكم استعراض جميع المنتجات المتاحة من خلال قسم <strong><a href="/المنتجات/"><u>المنتجات</u></a></strong>.',
+      `يمكنكم استعراض جميع المنتجات المتاحة من خلال قسم <strong><a href="${withBase('/المنتجات/')}"><u>المنتجات</u></a></strong>.`,
     aText: 'يمكنكم استعراض جميع المنتجات المتاحة من خلال قسم المنتجات.',
   },
   {
     q: 'ما هي أفضل طريقة لتحضير منتجاتكم؟',
     aHtml:
-      'يمكنكم الاطلاع على أفضل طرق التحضير في قسم <strong><a href="/التحضير/"><u>طريقة التحضير</u></a></strong>.',
+      `يمكنكم الاطلاع على أفضل طرق التحضير في قسم <strong><a href="${withBase('/التحضير/')}"><u>طريقة التحضير</u></a></strong>.`,
     aText: 'يمكنكم الاطلاع على أفضل طرق التحضير في قسم طريقة التحضير.',
   },
 ];

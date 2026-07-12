@@ -9,21 +9,21 @@
 --------------------------------------------------------------------------- */
 @font-face {
   font-family: "Helvetica Arabic";
-  src: url("/fonts/helvetica-arabic.ttf") format("truetype");
+  src: url("../assets/fonts/helvetica-arabic.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Bahij Janna";
-  src: url("/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/Bahij-Janna-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -31,14 +31,14 @@
 /* Newsreader — editorial serif (Latin); Arabic glyphs fall through to Bahij */
 @font-face {
   font-family: "Newsreader";
-  src: url("/fonts/Newsreader-Var.woff2") format("woff2");
+  src: url("../assets/fonts/Newsreader-Var.woff2") format("woff2");
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Newsreader";
-  src: url("/fonts/Newsreader-Italic.woff2") format("woff2");
+  src: url("../assets/fonts/Newsreader-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
