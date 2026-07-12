@@ -79,9 +79,10 @@ const organizationSchema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {import.meta.env.DEPLOY_TARGET === 'pages' && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href={withBase('/favicon.png')} />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    {import.meta.env.DEPLOY_TARGET !== 'pages' && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
     <script is:inline>document.documentElement.classList.remove('no-js');</script>
 
     {/* hreflang alternates — Arabic is the default locale, so x-default always
