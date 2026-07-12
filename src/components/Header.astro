@@ -4,33 +4,27 @@ import { NAV_EN, NAV_AR, SITE } from '../data/site';
 interface Props {
   lang?: 'en' | 'ar';
 }
-const { lang = 'en' } = Astro.props;
+const { lang = 'ar' } = Astro.props;
 const nav = lang === 'ar' ? NAV_AR : NAV_EN;
-const homeHref = lang === 'ar' ? '/ar/' : '/';
+const homeHref = lang === 'ar' ? '/' : '/en/';
 const langSwitch = lang === 'ar'
-  ? { label: 'EN', href: '/' }
-  : { label: 'العربية', href: '/ar/' };
+  ? { label: 'EN', href: '/en/' }
+  : { label: 'العربية', href: '/' };
 const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
 const currentPath = Astro.url.pathname;
-const isHome = currentPath === '/' || currentPath === '/ar/';
-// Original theme nav link: black, 16px, 'Font-Bold', uppercase; active page purple.
-const navLinkBase =
-  'inline-block py-5 font-[family-name:var(--font-heading)] text-[16px] font-bold uppercase';
+const isHome = currentPath === '/' || currentPath === '/en/';
+// last nav item is the external "Order Now" — rendered as a filled pill CTA
+const links = nav.filter((item) => !item.external);
+const orderItem = nav.find((item) => item.external);
 ---
 
-<header
-  id="site-header"
-  class:list={[
-    'fixed top-0 z-50 w-full bg-white py-[10px] transition-all duration-300',
-    !isHome && 'border-b border-[#ededed]',
-  ]}
->
-  <div class="mx-auto flex max-w-7xl items-start justify-between px-4">
-    <a href={homeHref} title={siteName} rel="home" class="flex items-start">
+<header id="site-header">
+  <div class="header-shell">
+    <a href={homeHref} title={siteName} rel="home" class="flex shrink-0 items-center gap-2 ps-1">
       <img
         src="/images/branding/Karak_New.png"
         alt={siteName}
-        class="logo-main h-auto w-[120px]"
+        class="h-auto w-[56px]"
         width="220"
         height="204"
       />
@@ -38,35 +32,28 @@ const navLinkBase =
         src="/images/branding/logo-text.png"
         alt=""
         aria-hidden="true"
-        class="logo-text ms-[15px] mt-[22px] hidden h-auto w-[110px] sm:block"
+        class="hidden h-auto w-[84px] xl:block"
       />
     </a>
 
-    <nav aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'} class="mt-5 hidden lg:block">
-      <ul class="flex items-center">
-        {nav.map((item) => (
-          <li class="mx-[15px]">
+    <nav aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'} class="hidden lg:block">
+      <ul class="flex items-center gap-0.5">
+        {links.map((item) => (
+          <li>
             <a
               href={item.href}
-              target={item.external ? '_blank' : undefined}
-              rel={item.external ? 'noopener noreferrer' : undefined}
-              aria-current={currentPath === item.href ? 'page' : undefined}
-              class:list={[
-                navLinkBase,
-                // quirk kept from the live WP site: the home page shows no
-                // active highlight — only inner pages tint their nav item.
-                currentPath === item.href && !isHome ? 'text-brand' : 'text-black',
-              ]}
+              aria-current={currentPath === item.href && !isHome ? 'page' : undefined}
+              class="nav-link"
             >
               {item.label}
             </a>
           </li>
         ))}
-        <li class="mx-[15px]">
+        <li>
           <a
             href={langSwitch.href}
             lang={lang === 'ar' ? 'en' : 'ar'}
-            class:list={[navLinkBase, 'text-black']}
+            class="nav-link"
           >
             {langSwitch.label}
           </a>
@@ -74,52 +61,74 @@ const navLinkBase =
       </ul>
     </nav>
 
-    <button
-      id="mobile-nav-open"
-      type="button"
-      class="self-center text-3xl text-brand lg:hidden"
-      aria-label={lang === 'ar' ? 'افتح القائمة' : 'Open menu'}
-      aria-controls="mobile-nav"
-      aria-expanded="false"
-    >
-      &#9776;
-    </button>
+    <div class="flex items-center gap-2">
+      {orderItem && (
+        <a
+          href={orderItem.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-order hidden lg:inline-block"
+        >
+          {orderItem.label}
+        </a>
+      )}
+      <button
+        id="mobile-nav-open"
+        type="button"
+        class="pe-2 text-3xl leading-none text-brand lg:hidden"
+        aria-label={lang === 'ar' ? 'افتح القائمة' : 'Open menu'}
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+      >
+        &#9776;
+      </button>
+    </div>
   </div>
 </header>
 
-<!-- mobile overlay nav -->
+<!-- mobile overlay nav — full-screen electric field -->
 <div
   id="mobile-nav"
-  class="fixed inset-0 z-[60] hidden flex-col items-center justify-center gap-2 bg-white/95 text-center backdrop-blur"
+  class="mesh-dark fixed inset-0 z-[60] hidden flex-col justify-center gap-2 px-10 text-start"
 >
   <button
     id="mobile-nav-close"
     type="button"
-    class="absolute top-5 text-4xl text-brand ltr:right-6 rtl:left-6"
+    class="absolute top-6 text-4xl text-white ltr:right-8 rtl:left-8"
     aria-label={lang === 'ar' ? 'أغلق القائمة' : 'Close menu'}
   >
     &times;
   </button>
-  <img src="/images/branding/Karak_New.png" alt={siteName} class="mb-6 h-20 w-auto" />
+  <img src="/images/branding/Karak_New.png" alt={siteName} class="mb-8 h-16 w-auto self-start" />
   <nav aria-label={lang === 'ar' ? 'قائمة الجوال' : 'Mobile navigation'}>
-    <ul class="space-y-4">
-      {nav.map((item) => (
+    <ul class="space-y-3">
+      {links.map((item) => (
         <li>
           <a
             href={item.href}
-            target={item.external ? '_blank' : undefined}
-            rel={item.external ? 'noopener noreferrer' : undefined}
-            class="font-[family-name:var(--font-heading)] text-2xl font-bold text-brand"
+            class="inline-block font-[family-name:var(--font-heading)] text-4xl font-bold text-white"
           >
             {item.label}
           </a>
         </li>
       ))}
-      <li>
+      {orderItem && (
+        <li class="pt-3">
+          <a
+            href={orderItem.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-glow"
+          >
+            {orderItem.label}
+          </a>
+        </li>
+      )}
+      <li class="pt-1">
         <a
           href={langSwitch.href}
           lang={lang === 'ar' ? 'en' : 'ar'}
-          class="font-[family-name:var(--font-heading)] text-2xl font-bold text-brand-deep"
+          class="inline-block font-[family-name:var(--font-heading)] text-2xl font-bold text-brand-light"
         >
           {langSwitch.label}
         </a>
@@ -143,10 +152,13 @@ const navLinkBase =
     openBtn?.setAttribute('aria-expanded', 'false');
   });
 
-  // header shrink on scroll (ported from the WP theme's "shrinked" behavior:
-  // scrollTop > 25 → smaller logo, zero vertical padding, 97% white bg)
+  // deepen the floating pill's shadow once the page scrolls
   const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header?.classList.toggle('shrinked', window.scrollY > 25);
-  });
+  window.addEventListener(
+    'scroll',
+    () => {
+      header?.classList.toggle('scrolled', window.scrollY > 25);
+    },
+    { passive: true },
+  );
 </script>

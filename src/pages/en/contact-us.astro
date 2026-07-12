@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import DistributorCard from '../../components/DistributorCard.astro';
+import { DISTRIBUTORS } from '../../data/distributors';
+import { SITE } from '../../data/site';
+---
+
+<BaseLayout
+  title="Contact us - Karak Tea"
+  description="Contact Karak Tea — headquarters in Kuwait, plus international distributors in the UK, Canada, USA, Egypt, UAE, Bahrain, Qatar, Jordan, Iraq and South Africa."
+  lang="en"
+  path="/en/contact-us/"
+  alternatePath="/اتصل-بنا/"
+>
+  <div id="top"></div>
+  <PageHero title="Contact us" />
+
+  <section class="mesh-light py-20 md:py-24">
+    <div class="mx-auto grid max-w-7xl items-start gap-10 px-5 lg:grid-cols-4">
+      <div class="contact-panel mesh-dark lg:sticky lg:top-28" data-reveal="left">
+        <form class="contact-form" id="contact-form" aria-label="Contact form">
+          <p><input type="text" name="your-name" placeholder="Full Name *" required maxlength="400" /></p>
+          <p><input type="email" name="your-email" placeholder="Email *" required maxlength="400" /></p>
+          <p><input type="tel" name="your-phone" placeholder="Phone *" required maxlength="400" /></p>
+          <p><textarea name="your-message" placeholder="Your message..." rows="6" maxlength="2000"></textarea></p>
+          <p class="text-center"><button type="submit">Submit</button></p>
+        </form>
+      </div>
+
+      <div class="lg:col-span-3" data-reveal>
+        <h2 class="sr-only">Our international distributors</h2>
+        <div class="grid grid-cols-2 gap-5 md:grid-cols-3 xl:grid-cols-4">
+          {DISTRIBUTORS.map((d) => (
+            <DistributorCard {...d} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ email: SITE.email }}>
+    // TODO: wire to a real form backend. Interim: compose an email via mailto.
+    document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = e.target;
+      const subject = encodeURIComponent('Website inquiry from ' + f['your-name'].value);
+      const body = encodeURIComponent(
+        f['your-message'].value + '\n\nPhone: ' + f['your-phone'].value + '\nEmail: ' + f['your-email'].value,
+      );
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</BaseLayout>

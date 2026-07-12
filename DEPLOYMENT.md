@@ -10,33 +10,84 @@ process in production.**
 
 - **Node 20+** (Astro 5 requirement), npm.
 - Install with `npm ci` (lockfile is committed).
-- `npm run build` → expect **12 pages** (6 EN + 6 AR) plus `sitemap-index.xml`,
-  `sitemap-0.xml`, `robots.txt`, `llms.txt`, fonts and images. Build must end
-  with `12 page(s) built` and no errors.
+- `npm run build` → expect **12 pages** (6 AR at root + 6 EN under `/en/`) plus
+  `sitemap-index.xml`, `sitemap-0.xml`, `robots.txt`, `llms.txt`, fonts and
+  images. Build must end with `12 page(s) built` and no errors.
 - **No environment variables** are needed — there is no `.env`, no secrets.
-- Local check: `npx astro preview` and click through EN + AR pages.
+- Local check: `npx astro preview` and click through AR (root) + EN (`/en/`)
+  pages.
 
-## URL behavior
+## URL behavior — Arabic-first (root), English under `/en/`
 
+**2026-07-12: Arabic is now the default locale, served at the site root**
+(mirrors the same pattern used on marshmallows.co). This is a reversal of the
+original build (which had EN at root, AR under `/ar/`) — see "301 redirect
+map" below for what must redirect at the host.
+
+- `/` = Arabic home, `dir="rtl"`. AR inner pages keep their original
+  WordPress Arabic slugs at root: `/المنتجات/`, `/التحضير/`,
+  `/آلات-التوزيع/`, `/أسئلة-مكررة/`, `/اتصل-بنا/`.
+- `/en/` = English home, `dir="ltr"`. EN inner pages: `/en/products/`,
+  `/en/preparation/`, `/en/vending-machine/`, `/en/faqs/`, `/en/contact-us/`.
 - `trailingSlash` is **not configured** in `astro.config.mjs` (default
   `"ignore"`), and the build uses the default `format: 'directory'` — every
-  page is `…/index.html` in a folder. Serve so that `/products/` and
-  `/products` both resolve (default behavior on all mainstream static hosts).
+  page is `…/index.html` in a folder. Serve so that `/المنتجات/` and
+  `/المنتجات` both resolve (default behavior on all mainstream static hosts).
   Canonical URLs in the HTML use trailing slashes — prefer a host-level
   redirect of the non-slash variant to the slash variant if configurable.
 - **Encoded Arabic URLs must pass through untouched.** The AR routes keep the
-  original WordPress slugs, e.g.
-  `/ar/المنتجات/`, `/ar/التحضير/`, `/ar/آلات-التوزيع/`, `/ar/أسئلة-مكررة/`,
-  `/ar/اتصل-بنا/` — on disk these are percent-encoded directory names
-  (`/ar/%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA/…`). If a CDN/proxy
-  (Cloudflare, nginx `proxy_pass`, etc.) sits in front, make sure it does
-  **not** re-encode/double-encode or normalize these paths; request the
-  percent-encoded path exactly as-is. Test all five AR inner pages after
-  deploy — this is the most common static-host breakage for this site.
+  original WordPress slugs, e.g. `/المنتجات/`, `/التحضير/`,
+  `/آلات-التوزيع/`, `/أسئلة-مكررة/`, `/اتصل-بنا/` — on disk these are
+  percent-encoded directory names (`/%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA/…`).
+  If a CDN/proxy (Cloudflare, nginx `proxy_pass`, etc.) sits in front, make
+  sure it does **not** re-encode/double-encode or normalize these paths;
+  request the percent-encoded path exactly as-is. Test all five AR inner
+  pages after deploy — this is the most common static-host breakage for this
+  site.
+
+## 301 redirect map (Bold promotion + Arabic-first cutover, 2026-07-12)
+
+The design was promoted from `variants/bold/` to master, and Arabic became
+the default locale. Anyone who bookmarked/indexed the previous URL scheme
+(EN at root, AR under `/ar/`) needs these 301s at the host/CDN:
+
+| Old URL | New URL |
+|---|---|
+| `/` (was EN home) | `/en/` |
+| `/products/` | `/en/products/` |
+| `/preparation/` | `/en/preparation/` |
+| `/vending-machine/` | `/en/vending-machine/` |
+| `/faqs/` | `/en/faqs/` |
+| `/contact-us/` | `/en/contact-us/` |
+| `/ar/` | `/` |
+| `/ar/المنتجات/` | `/المنتجات/` |
+| `/ar/التحضير/` | `/التحضير/` |
+| `/ar/آلات-التوزيع/` | `/آلات-التوزيع/` |
+| `/ar/أسئلة-مكررة/` | `/أسئلة-مكررة/` |
+| `/ar/اتصل-بنا/` | `/اتصل-بنا/` |
+
+These are in addition to (not instead of) the pre-existing old-WordPress
+fragment redirects below, whose targets also shift because EN moved to
+`/en/`:
+
+- `/home/*` (e.g. `/home/karak-tea/`, `/home/our-journey/`) → `/en/`
+  (content was English; Arabic visitors landing here get the language
+  switcher on `/en/` to reach `/`)
+- `/site-faqs/*` → `/en/faqs/`
+- `/site-products/*` → `/en/products/`
+- `/site-contact/*` → `/en/contact-us/`
+- `/site-footer/*` → `/en/`
+- `/slides/*` → `/en/`
+- Also keep `?p=` / `/feed/`-style WP leftovers 301'ing to `/en/` if the host
+  allows pattern redirects.
+
+Chain carefully: a host that only supports one redirect hop needs the old
+WP-fragment rules rewritten directly to the final `/en/...` targets above
+(do not rely on `/` → `/en/` happening twice).
 
 ## Forms, captcha & email (SMTP) — read before launch
 
-**Current state:** the contact form (EN `/contact-us/`, AR `/ar/اتصل-بنا/`)
+**Current state:** the contact form (AR `/اتصل-بنا/`, EN `/en/contact-us/`)
 submits via a **mailto fallback** — it opens the visitor's mail app; no server
 receives anything and there is **no spam protection**. The WordPress site's
 Contact Form 7 + Google reCAPTCHA did NOT survive the migration (the reCAPTCHA
@@ -82,18 +133,10 @@ but treat wiring it as a launch-week task, not a someday task.
    origin is fully retired/unbound so stale DNS or Cloudflare origin rules
    can't resurrect it. Check `curl -H 'Host: karaktea.com' <old-ip>` returns
    nothing meaningful before releasing.
-2. **301 redirects for old WP URLs.** Real pages map 1:1 (same slugs, EN and
-   AR). Additionally, redirect the WordPress CPT/fragment URLs that were in
-   the old sitemap (they were content fragments, not pages — see CLAUDE.md
-   "Page inventory"):
-   - `/home/*` (e.g. `/home/karak-tea/`, `/home/our-journey/`) → `/`
-   - `/site-faqs/*` → `/faqs/`
-   - `/site-products/*` → `/products/`
-   - `/site-contact/*` → `/contact-us/`
-   - `/site-footer/*` → `/`
-   - `/slides/*` → `/`
-   Also keep `?p=` / `/feed/`-style WP leftovers 301'ing to `/` if the host
-   allows pattern redirects.
+2. **301 redirects — see the full map above** ("301 redirect map (Bold
+   promotion + Arabic-first cutover, 2026-07-12)"): both the pre-existing
+   old-WordPress fragment URLs AND the previous EN-root/`/ar/`-prefixed URL
+   scheme from this rebuild's first release now need redirects.
 3. **Analytics (owner's call).** The WP site ran GA4 `G-T3ZED4Q23J` and GTM
    `GTM-PTC2HN8`. They were deliberately **not** migrated. If the owner wants
    continuity, add the GA4/GTM snippet to
@@ -106,25 +149,34 @@ but treat wiring it as a launch-week task, not a someday task.
    `https://srkw.co/` (kept verbatim from the live site); slide 1 and the
    nav "Order Now" point to thiafa.com. Confirm with the owner whether all
    CTAs should target thiafa.com before or shortly after launch
-   (`src/pages/index.astro` + `src/pages/ar/index.astro`).
+   (`src/pages/index.astro` (AR) + `src/pages/en/index.astro` (EN)).
 6. **Contact form has no backend.** The form currently composes a `mailto:` to
    info@karaktea.com in the browser (interim). WP used Contact Form 7 +
    reCAPTCHA. Wire a form service (Formspree/Basin/Netlify Forms) or a small
    serverless endpoint before or right after launch — see the inline `TODO`
-   in `src/pages/contact-us.astro` and `src/pages/ar/اتصل-بنا.astro`.
+   in `src/pages/اتصل-بنا.astro` (AR) and `src/pages/en/contact-us.astro` (EN).
 
 ## Post-launch smoke test (5 minutes)
 
-- Load `/`, `/products/`, `/preparation/`, `/vending-machine/`, `/faqs/`,
-  `/contact-us/` — and the AR mirrors `/ar/`, `/ar/المنتجات/`, `/ar/التحضير/`,
-  `/ar/آلات-التوزيع/`, `/ar/أسئلة-مكررة/`, `/ar/اتصل-بنا/`. All 200, correct
-  `<title>` ("… - Karak Tea" / "… - شاي كرك"), no tenant-bleed content.
-- Language switch: العربية ↔ EN link on every page lands on the mirrored page.
-- AR pages render RTL (`<html dir="rtl">`), header/nav mirrored.
-- View source on `/` and `/ar/`: `<link rel="canonical">` present and correct,
-  `hreflang` alternates present, `Organization` JSON-LD present (FAQ pages
-  additionally have `FAQPage`, products has `ItemList`).
-- `sitemap-index.xml` and `robots.txt` reachable; favicon loads.
-- Hero slider crossfades and pager dots work; header shrinks on scroll.
+- Load AR (root, default) — `/`, `/المنتجات/`, `/التحضير/`,
+  `/آلات-التوزيع/`, `/أسئلة-مكررة/`, `/اتصل-بنا/` — and EN under `/en/` —
+  `/en/`, `/en/products/`, `/en/preparation/`, `/en/vending-machine/`,
+  `/en/faqs/`, `/en/contact-us/`. All 200, correct `<title>`
+  ("… - شاي كرك" / "… - Karak Tea"), no tenant-bleed content.
+- Language switch: العربية ↔ EN link on every page lands on the mirrored page
+  (root ↔ `/en/`).
+- `/` renders **Bold ("Electric Karak") design in Arabic RTL**
+  (`<html lang="ar" dir="rtl">`), header/nav mirrored, sticky "Order Now" pill
+  on the inline-end side. `/en/` renders the same design LTR
+  (`<html lang="en" dir="ltr">`).
+- View source on `/` and `/en/`: `<link rel="canonical">` present and correct
+  for the new URLs, `hreflang="ar"` / `hreflang="en"` / `hreflang="x-default"`
+  (→ Arabic) alternates present on every page pair, `Organization` JSON-LD
+  present (FAQ pages additionally have `FAQPage`, products has `ItemList`).
+- `sitemap-index.xml` and `robots.txt` reachable; favicon loads. Verify the
+  301 map above is live (spot-check `/ar/` → `/`, `/products/` → `/en/products/`).
+- Hero "electric field" renders (gradient-clipped h1, crossfading photo deck,
+  hashtag marquee); scroll reveals fire; header pill deepens its shadow on
+  scroll; sticky "Order Now" CTA visible on all pages.
 - Submit the contact form once — a mail draft to info@karaktea.com must open
   (until a real form backend is wired).

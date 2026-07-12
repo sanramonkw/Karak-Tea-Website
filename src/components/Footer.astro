@@ -4,32 +4,47 @@ import { SITE } from '../data/site';
 interface Props {
   lang?: 'en' | 'ar';
 }
-const { lang = 'en' } = Astro.props;
+const { lang = 'ar' } = Astro.props;
 const year = new Date().getFullYear();
 const rights = lang === 'ar'
   ? `© ${year} شاي كرك. جميع الحقوق محفوظة.`
   : `© ${year} Karak Tea. All rights reserved.`;
 const hashtag = lang === 'ar' ? SITE.hashtagAr : SITE.hashtagEn;
+const siteName = lang === 'ar' ? SITE.nameAr : SITE.nameEn;
 ---
 
-<footer class="border-t border-white bg-black/[0.03] pt-[30px] pb-5 text-sm">
-  <div class="mx-auto max-w-7xl px-4">
-    <div class="grid gap-6 md:grid-cols-3 md:items-center">
+<footer class="mesh-dark relative overflow-hidden pb-10 pt-20 text-sm text-white">
+  <div class="relative mx-auto max-w-7xl px-5">
+    {/* giant brand hashtag — the footer's oversized type moment */}
+    <p
+      class="mb-14 text-center font-[family-name:var(--font-heading)] text-[clamp(2.2rem,7vw,5.5rem)] font-bold leading-none text-electric-bright"
+    >
+      {hashtag}
+    </p>
+
+    <div class="grid gap-10 md:grid-cols-3 md:items-center">
       <!-- Owner-requested deviation from live (2026-07-06): all footer columns
            center-aligned — the WP original's start/end alignment was a bug. -->
-      <div class="space-y-2 text-center">
-        <p class="text-brand">
-          <svg viewBox="0 0 384 512" class="inline-block h-[20px] w-auto fill-current align-[-3px]" aria-hidden="true"><path d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zM192 400a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 48H304c8.8 0 16 7.2 16 16V384c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16z"/></svg>
-          <a href={`tel:${SITE.phone}`} class="hover:underline">{SITE.phoneDisplay}</a>
+      <div class="space-y-3 text-center">
+        <p>
+          <svg viewBox="0 0 384 512" class="inline-block h-[20px] w-auto fill-brand-light align-[-3px]" aria-hidden="true"><path d="M80 0C44.7 0 16 28.7 16 64V448c0 35.3 28.7 64 64 64H304c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H80zM192 400a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 48H304c8.8 0 16 7.2 16 16V384c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16z"/></svg>
+          <a href={`tel:${SITE.phone}`} class="font-bold text-white hover:underline">{SITE.phoneDisplay}</a>
         </p>
-        <p class="text-brand">
-          <svg viewBox="0 0 512 512" class="inline-block h-[14px] w-auto fill-current" aria-hidden="true"><path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
-          <a href={`mailto:${SITE.email}`} class="hover:underline">{SITE.email}</a>
+        <p>
+          <svg viewBox="0 0 512 512" class="inline-block h-[14px] w-auto fill-brand-light" aria-hidden="true"><path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
+          <a href={`mailto:${SITE.email}`} class="text-white hover:underline">{SITE.email}</a>
         </p>
       </div>
 
       <div class="text-center">
-        <p class="font-[family-name:var(--font-heading)] text-lg font-bold text-brand">{hashtag}</p>
+        <img
+          src="/images/branding/Karak_New.png"
+          alt={siteName}
+          class="mx-auto h-20 w-auto"
+          width="220"
+          height="204"
+          loading="lazy"
+        />
       </div>
 
       <div class="flex justify-center gap-3">
@@ -48,13 +63,15 @@ const hashtag = lang === 'ar' ? SITE.hashtagAr : SITE.hashtagEn;
       </div>
     </div>
 
-    <div class="mt-8 text-center">
-      <p>{rights}</p>
-      <p class="mt-2">
-        <a href="#top" class="inline-block text-brand" aria-label={lang === 'ar' ? 'العودة إلى الأعلى' : 'Back to top'}>
-          <svg viewBox="0 0 384 512" class="mx-auto h-5 w-5 fill-current" aria-hidden="true"><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
-        </a>
-      </p>
+    <div class="mt-14 flex flex-col items-center gap-4 border-t border-white/15 pt-6 md:flex-row md:justify-between">
+      <p class="text-white/85">{rights}</p>
+      <a
+        href="#top"
+        class="icon-circle-lg"
+        aria-label={lang === 'ar' ? 'العودة إلى الأعلى' : 'Back to top'}
+      >
+        <svg viewBox="0 0 384 512" class="h-5 w-5 fill-current" aria-hidden="true"><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
+      </a>
     </div>
   </div>
 </footer>

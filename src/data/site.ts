@@ -30,21 +30,21 @@ export interface NavItem {
 }
 
 export const NAV_EN: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Products', href: '/products/' },
-  { label: 'Preparation', href: '/preparation/' },
-  { label: 'Vending Machine', href: '/vending-machine/' },
-  { label: 'FAQs', href: '/faqs/' },
-  { label: 'Contact us', href: '/contact-us/' },
+  { label: 'Home', href: '/en/' },
+  { label: 'Products', href: '/en/products/' },
+  { label: 'Preparation', href: '/en/preparation/' },
+  { label: 'Vending Machine', href: '/en/vending-machine/' },
+  { label: 'FAQs', href: '/en/faqs/' },
+  { label: 'Contact us', href: '/en/contact-us/' },
   { label: 'Order Now', href: 'https://thiafa.com/en/', external: true },
 ];
 
 export const NAV_AR: NavItem[] = [
-  { label: 'الرئيسية', href: '/ar/' },
-  { label: 'المنتجات', href: '/ar/المنتجات/' },
-  { label: 'التحضير', href: '/ar/التحضير/' },
-  { label: 'آلات التوزيع', href: '/ar/آلات-التوزيع/' },
-  { label: 'أسئلة مكررة', href: '/ar/أسئلة-مكررة/' },
-  { label: 'اتصل بنا', href: '/ar/اتصل-بنا/' },
+  { label: 'الرئيسية', href: '/' },
+  { label: 'المنتجات', href: '/المنتجات/' },
+  { label: 'التحضير', href: '/التحضير/' },
+  { label: 'آلات التوزيع', href: '/آلات-التوزيع/' },
+  { label: 'أسئلة مكررة', href: '/أسئلة-مكررة/' },
+  { label: 'اتصل بنا', href: '/اتصل-بنا/' },
   { label: 'اطلب الان', href: 'https://thiafa.com/ar/', external: true },
 ];

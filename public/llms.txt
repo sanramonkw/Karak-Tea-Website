@@ -3,7 +3,8 @@
 > Karak Tea is a Kuwait-based beverage brand producing premium instant karak tea
 > premixes. Karak Tea is a registered trademark owned by San Ramon General Trading
 > (Kuwait) and manufactured in India by Aastha Enterprises, a dedicated karak tea
-> production factory. The site is bilingual: English (/) and Arabic (/ar/).
+> production factory. The site is bilingual: Arabic is the default locale (/),
+> English lives under /en/.
 
 Karak is strong, milky tea made by repeatedly boiling tea — an Urdu term adopted
 across the Gulf region through historic trade with India. Karak Tea premixes are
@@ -18,7 +19,7 @@ minute, sweetened or unsweetened.
   ICED Karak Tea, and Dolce Gusto compatible capsules
 - Vending machines: karak tea vending machines and refills are also sold
 - Online store (prices and ordering): https://thiafa.com/en/
-- Products page: https://karaktea.com/products/
+- Products page: https://karaktea.com/المنتجات/ (Arabic) / https://karaktea.com/en/products/ (English)
 
 ## Availability
 
@@ -35,14 +36,20 @@ minute, sweetened or unsweetened.
 - Email: info@karaktea.com
 - Instagram: https://www.instagram.com/karakteakw/
 - International distributors (UK, Canada, USA, Egypt, UAE, Bahrain, Qatar,
-  Jordan, Iraq, South Africa): https://karaktea.com/contact-us/
+  Jordan, Iraq, South Africa): https://karaktea.com/اتصل-بنا/ (Arabic) /
+  https://karaktea.com/en/contact-us/ (English)
 
-## Pages
+## Pages (Arabic at root — default — / English under /en/)
 
-- [Home](https://karaktea.com/): brand story, product overview, company journey
-- [Products](https://karaktea.com/products/): all premix flavors and formats
-- [Preparation](https://karaktea.com/preparation/): how to prepare karak tea
-- [Vending Machine](https://karaktea.com/vending-machine/): vending machine offering
-- [FAQs](https://karaktea.com/faqs/): locations, availability, delivery, shipping
-- [Contact us](https://karaktea.com/contact-us/): contact form and distributors
-- Arabic versions of all pages live under https://karaktea.com/ar/
+- [الرئيسية / Home](https://karaktea.com/) · [EN](https://karaktea.com/en/): brand
+  story, product overview, company journey
+- [المنتجات / Products](https://karaktea.com/المنتجات/) ·
+  [EN](https://karaktea.com/en/products/): all premix flavors and formats
+- [التحضير / Preparation](https://karaktea.com/التحضير/) ·
+  [EN](https://karaktea.com/en/preparation/): how to prepare karak tea
+- [آلات التوزيع / Vending Machine](https://karaktea.com/آلات-التوزيع/) ·
+  [EN](https://karaktea.com/en/vending-machine/): vending machine offering
+- [أسئلة مكررة / FAQs](https://karaktea.com/أسئلة-مكررة/) ·
+  [EN](https://karaktea.com/en/faqs/): locations, availability, delivery, shipping
+- [اتصل بنا / Contact us](https://karaktea.com/اتصل-بنا/) ·
+  [EN](https://karaktea.com/en/contact-us/): contact form and distributors

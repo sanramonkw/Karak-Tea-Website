@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Karak Tea - Preparation"
+  description="How to prepare Karak Tea instant premix — easy to prepare in less than a minute. Step-by-step preparation guide and video."
+  lang="en"
+  path="/en/preparation/"
+  alternatePath="/التحضير/"
+>
+  <div id="top"></div>
+  <PageHero title="Preparation" />
+
+  <section class="mesh-light py-20 md:py-28">
+    <div class="mx-auto max-w-6xl px-5">
+      <div class="brew-timeline space-y-20 py-6 md:space-y-28">
+        {/* step 1 — the brew guide */}
+        <div class="relative ps-16 md:ps-0" data-reveal>
+          <span
+            class="brew-node absolute top-0 start-0 md:start-1/2 ltr:md:-translate-x-1/2 rtl:md:translate-x-1/2"
+            aria-hidden="true"
+          >
+            1
+          </span>
+          <div class="md:grid md:grid-cols-2 md:gap-20">
+            <div class="md:pt-14">
+              <div class="media-frame">
+                <img
+                  src="/images/Easy-to-prepare-English-scaled.webp"
+                  alt="Karak Tea preparation steps — easy to prepare"
+                  width="2560"
+                  height="1707"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="hidden md:block"></div>
+          </div>
+        </div>
+
+        {/* step 2 — watch it brewed */}
+        <div class="relative ps-16 md:ps-0" data-reveal>
+          <span
+            class="brew-node absolute top-0 start-0 md:start-1/2 ltr:md:-translate-x-1/2 rtl:md:translate-x-1/2"
+            aria-hidden="true"
+          >
+            2
+          </span>
+          <div class="md:grid md:grid-cols-2 md:gap-20">
+            <div class="hidden md:block"></div>
+            <div class="md:pt-14">
+              <div class="media-frame">
+                <div class="aspect-video w-full overflow-hidden rounded-[1.35rem]">
+                  <iframe
+                    title="YouTube video player"
+                    src="https://www.youtube.com/embed/0DdPepASq1w?si=CeroOMH-d9klONzD"
+                    width="100%"
+                    height="435"
+                    class="h-full w-full"
+                    frameborder="0"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,8 +1,12 @@
 ---
 /**
- * Home hero slider — port of the WP responsiveSlides carousel.
- * Same three background photos, same copy on each slide.
+ * Home hero — "electric field" redesign of the original responsiveSlides
+ * carousel. Same three photos (crossfading in a tilted deck), same verbatim
+ * copy, and all three per-slide CTA destinations preserved (the visible CTA
+ * swaps with the active slide, exactly like the original slider).
  */
+import { SITE } from '../data/site';
+
 interface Slide {
   image: string;
   title: string;
@@ -14,58 +18,78 @@ interface Props {
   slides: Slide[];
 }
 const { slides } = Astro.props;
+const isAr = Astro.url.pathname.startsWith('/ar');
+const hashtag = isAr ? SITE.hashtagAr : SITE.hashtagEn;
 ---
 
-<section class="hero-slider" aria-label={slides[0]?.title}>
-  {slides.map((slide, i) => (
-    <div
-      class:list={['hero-slide', { 'is-active': i === 0 }]}
-      style={`background-image: url('${slide.image}');`}
-    >
-      <div class="mx-auto flex h-full max-w-7xl px-4">
-        <div class="slide-content w-full self-start md:w-1/2">
-          {i === 0 ? <h1>{slide.title}</h1> : <p class="font-[family-name:var(--font-heading)] text-[40px] font-bold leading-tight">{slide.title}</p>}
-          <p class="mb-5">{slide.text}</p>
-          <p>
-            <a class="btn-brand btn-outline-white" href={slide.ctaHref} target="_blank" rel="noopener noreferrer">
-              {slide.ctaLabel}
-            </a>
-          </p>
+<section class="hero-field mesh-dark cut-bottom" aria-label={slides[0]?.title}>
+  {/* giant decorative brand hashtag behind the composition */}
+  <p class="hero-watermark text-outline" aria-hidden="true">{hashtag}</p>
+
+  <div
+    class="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-40 pt-36 md:grid-cols-12 md:pb-40 md:pt-44"
+  >
+    <div class="md:col-span-7">
+      <p class="hero-tag mb-4 font-[family-name:var(--font-heading)] text-sm font-bold uppercase tracking-[0.14em] text-brand-light">
+        {hashtag}
+      </p>
+      <h1 class="display-hero text-electric-bright">{slides[0]?.title}</h1>
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-white/90">{slides[0]?.text}</p>
+
+      <div class="hero-cta-slot mt-9 flex flex-wrap items-center gap-7">
+        {slides.map((slide, i) => (
+          <a
+            class:list={['btn-glow', 'hero-cta', { 'is-active': i === 0 }]}
+            href={slide.ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {slide.ctaLabel}
+          </a>
+        ))}
+        <div class="hero-pager" role="tablist" aria-label="Slides">
+          {slides.map((_, i) => (
+            <button
+              type="button"
+              data-slide={i}
+              class:list={[{ 'is-active': i === 0 }]}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
     </div>
-  ))}
-  <div class="hero-pager" role="tablist" aria-label="Slides">
-    {slides.map((_, i) => (
-      <button type="button" data-slide={i} class:list={[{ 'is-active': i === 0 }]} aria-label={`Slide ${i + 1}`} />
-    ))}
-  </div>
-</section>
 
-<!-- Mobile: slider copy shown as a plain section (matches the original .mobile-only block) -->
-<section class="mx-auto max-w-7xl px-[30px] py-10 md:hidden">
-  <h2 class="mb-3 text-[30px] text-brand">{slides[0]?.title}</h2>
-  <p class="mb-5">{slides[0]?.text}</p>
-  <p>
-    <a class="btn-brand btn-outline-brand" href={slides[0]?.ctaHref} target="_blank" rel="noopener noreferrer">
-      {slides[0]?.ctaLabel}
-    </a>
-  </p>
+    <div class="md:col-span-5">
+      <div class="hero-deck" aria-hidden="true">
+        {slides.map((slide, i) => (
+          <div
+            class:list={['hero-slide', { 'is-active': i === 0 }]}
+            style={`background-image: url('${slide.image}');`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
   const slides = Array.from(document.querySelectorAll<HTMLElement>('.hero-slide'));
   const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.hero-pager button'));
+  const ctas = Array.from(document.querySelectorAll<HTMLAnchorElement>('.hero-cta'));
   let index = 0;
   let timer: ReturnType<typeof setInterval> | undefined;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function show(i: number) {
     index = i % slides.length;
     slides.forEach((s, j) => s.classList.toggle('is-active', j === index));
     dots.forEach((d, j) => d.classList.toggle('is-active', j === index));
+    ctas.forEach((c, j) => c.classList.toggle('is-active', j === index));
   }
   function start() {
-    timer = setInterval(() => show(index + 1), 3600);
+    if (reduceMotion) return; // no auto-rotation for reduced-motion users
+    timer = setInterval(() => show(index + 1), 4500);
   }
   dots.forEach((d, i) =>
     d.addEventListener('click', () => {
