@@ -124,6 +124,14 @@
 .cut-both {
   clip-path: polygon(0 clamp(2rem, 5vw, 4.5rem), 100% 0, 100% calc(100% - clamp(2rem, 5vw, 4.5rem)), 0 100%);
 }
+/* Pull a light section up under the page hero's `cut-bottom` diagonal so the
+   dark→light transition meets edge-to-edge, with no exposed white page
+   background showing through the cut. The clip's top diagonal is the exact
+   mirror of `.cut-bottom`, and the negative margin equals the cut depth. */
+.tuck-under-hero {
+  margin-block-start: calc(-1 * clamp(2rem, 5vw, 4.5rem));
+  clip-path: polygon(0 clamp(2rem, 5vw, 4.5rem), 100% 0, 100% 100%, 0 100%);
+}
 
 /* gradient display text */
 .text-electric {
@@ -862,6 +870,9 @@ html.no-js [data-reveal] {
   height: auto;
   border-radius: 0.9rem;
   margin: 0 0 1.25rem;
+  /* box-shadow: 0 8px 20px rgb(42 11 40 / 0.18); */
+  border: 1px solid rgb(150 53 142 / 0.16);
+  box-shadow: 0 6px 20px rgb(42 11 40 / 0.05);
 }
 
 .icon-circle {
@@ -872,8 +883,8 @@ html.no-js [data-reveal] {
   background: rgb(231 178 214 / 0.3);
   border: 1px solid transparent;
   border-radius: 100%;
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   transition: 0.3s;
 }
 .icon-circle:hover,
@@ -882,8 +893,8 @@ html.no-js [data-reveal] {
   color: #fff;
 }
 .icon-circle svg {
-  width: 16px;
-  height: 16px;
+  width: 13px;
+  height: 13px;
   fill: currentColor;
 }
 

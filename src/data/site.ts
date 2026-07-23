@@ -9,7 +9,7 @@ export const SITE = {
   hashtagAr: '‎#لـكـل_لـحـظـة',
   social: {
     facebook: 'https://www.facebook.com/Karak-Tea-1646050772339040',
-    twitter: 'https://www.twitter.com/karakteaom/',
+    twitter: 'https://x.com/karaktea1',
     instagram: 'https://www.instagram.com/karakteakw/',
     whatsapp: 'https://wa.me/96522204332',
   },

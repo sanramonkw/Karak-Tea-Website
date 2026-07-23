@@ -4,8 +4,15 @@ export interface Distributor {
   image: string;
   website?: string;
   instagram?: string;
+  facebook?: string;
+  /** X (formerly Twitter) profile URL. */
+  twitter?: string;
+  tiktok?: string;
+  /** WhatsApp Channel URL (whatsapp.com/channel/...). */
+  whatsappChannel?: string;
   email?: string;
-  phone: string;
+  /** One number, or several for markets with multiple contact lines. */
+  phone: string | string[];
 }
 
 export const DISTRIBUTORS: Distributor[] = [
@@ -84,5 +91,40 @@ export const DISTRIBUTORS: Distributor[] = [
     instagram: 'https://www.instagram.com/karakteaza/',
     email: 'mo_gardee@yahoo.com',
     phone: '+270118374904',
+  },
+  {
+    country: 'Oman',
+    image: '/images/Oman-Flag-300x202.png',
+    instagram: 'https://www.instagram.com/karakteaom/',
+    whatsappChannel: 'https://whatsapp.com/channel/0029VbDEFXZId7nUHQO0z63V',
+    email: 'Eastcreativity4b@gmail.com',
+    phone: ['+968 78699099', '+968 71193399'],
+  },
+  {
+    country: 'Japan',
+    image: '/images/Japan-Flag-300x202.png',
+    website: 'https://lakshimi.jp/',
+    instagram: 'https://www.instagram.com/lakshimi.kobe/?hl=ja',
+    twitter: 'https://twitter.com/lakshimi_kobe',
+    facebook: 'https://www.facebook.com/lakshimi.tea',
+    email: 'info@lakshimi.jp',
+    phone: '+81 (0) 78-945-7772',
+  },
+  {
+    country: 'Libya',
+    image: '/images/Libya-Flag-300x202.png',
+    website: 'https://minaa-aldawliya.com/',
+    instagram: 'https://www.instagram.com/minaa_aldawliya/',
+    facebook: 'https://www.facebook.com/minaaaldawliyaco',
+    tiktok: 'https://www.tiktok.com/@minaa_aldawliya',
+    email: 'internationalport000@gmail.com',
+    phone: '+218 91 535 1535',
+  },
+  {
+    country: 'Sudan',
+    image: '/images/Sudan-Flag-300x202.png',
+    instagram: 'https://www.instagram.com/karaktea_.sdn',
+    email: 'info@goodsexpress.co.uk',
+    phone: ['+249 91 910 1119', '+249 12 384 3339', '+249 91 239 7349'],
   },
 ];
