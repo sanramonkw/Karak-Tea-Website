@@ -124,13 +124,18 @@
 .cut-both {
   clip-path: polygon(0 clamp(2rem, 5vw, 4.5rem), 100% 0, 100% calc(100% - clamp(2rem, 5vw, 4.5rem)), 0 100%);
 }
-/* Pull a light section up under the page hero's `cut-bottom` diagonal so the
-   dark→light transition meets edge-to-edge, with no exposed white page
-   background showing through the cut. The clip's top diagonal is the exact
-   mirror of `.cut-bottom`, and the negative margin equals the cut depth. */
-.tuck-under-hero {
+/* A light section that directly follows the page hero is pulled up under the
+   hero's `cut-bottom` diagonal so the dark→light transition meets edge-to-edge
+   — no white page background showing through the cut (which otherwise reads as
+   a colour mismatch above the tinted section). Applies to every inner page.
+   The clip's top diagonal is the exact mirror of `.cut-bottom`, and the
+   negative margin equals the cut depth. */
+.page-hero.cut-bottom + .mesh-light {
   margin-block-start: calc(-1 * clamp(2rem, 5vw, 4.5rem));
   clip-path: polygon(0 clamp(2rem, 5vw, 4.5rem), 100% 0, 100% 100%, 0 100%);
+  /* add the cut depth back, plus breathing room, so content clears the
+     diagonal — the negative margin above would otherwise crowd it. */
+  padding-block-start: calc(clamp(2rem, 5vw, 4.5rem) + clamp(4rem, 7vw, 6rem));
 }
 
 /* gradient display text */
