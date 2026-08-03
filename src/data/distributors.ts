@@ -27,7 +27,7 @@ export const DISTRIBUTORS: Distributor[] = [
   {
     country: 'Canada',
     image: '/images/flags-07-300x202.png',
-    website: 'https://www.salembrothers.ca/contact-us',
+    website: 'https://www.salembrothers.ca',
     email: 'sales@salembrotherscanada.com',
     phone: '+962777665297',
   },
