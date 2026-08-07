@@ -111,7 +111,7 @@ the default locale. Anyone who bookmarked/indexed the previous URL scheme
 
 | Old URL | New URL |
 |---|---|
-| `/` (was EN home) | `/en/` |
+| ~~`/` (was EN home)~~ | ~~`/en/`~~ — **do NOT implement, see caution below** |
 | `/products/` | `/en/products/` |
 | `/preparation/` | `/en/preparation/` |
 | `/vending-machine/` | `/en/vending-machine/` |
@@ -123,6 +123,20 @@ the default locale. Anyone who bookmarked/indexed the previous URL scheme
 | `/ar/آلات-التوزيع/` | `/آلات-التوزيع/` |
 | `/ar/أسئلة-مكررة/` | `/أسئلة-مكررة/` |
 | `/ar/اتصل-بنا/` | `/اتصل-بنا/` |
+
+> **Caution on `/` (added 2026-08-07):** the struck-out first row above must
+> **not** be implemented. `/` now serves the **Arabic** homepage directly at
+> 200 (verified live: `<title>الرئيسية - شاي كرك</title>`), which is the whole
+> point of the Arabic-first cutover. A host-level `/` → `/en/` redirect would
+> make English the default for anyone typing the bare domain and would undo
+> the cutover. Only the more specific old-English paths (`/products/`,
+> `/preparation/`, …) get redirected. This matches the equivalent caution in
+> `foodhacks.co/DEPLOYMENT.md`.
+
+**Ready-to-apply config:** `deploy/nginx-redirects.conf` in this repo
+implements everything in this section (plus host canonicalisation and the
+custom 404 wiring). Prefer editing that file over hand-typing rules onto a
+server — this map was lost once already because it existed only as prose here.
 
 These are in addition to (not instead of) the pre-existing old-WordPress
 fragment redirects below, whose targets also shift because EN moved to
